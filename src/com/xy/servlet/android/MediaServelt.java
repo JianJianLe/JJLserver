@@ -37,8 +37,8 @@ public class MediaServelt  extends HttpServlet  {
 		PrintWriter out = response.getWriter();
 		
 		try {
-			String username = request.getParameter("user_name");
-			String password = request.getParameter("password");
+//			String username = request.getParameter("user_name");
+//			String password = request.getParameter("password");
 
 			String resultOKJson =null;
 			JSONArray jsonArray=new JSONArray();
