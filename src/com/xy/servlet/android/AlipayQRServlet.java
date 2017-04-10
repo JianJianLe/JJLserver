@@ -110,7 +110,7 @@ public class AlipayQRServlet extends HttpServlet {
 		JSONObject object = new JSONObject();
 		try {
 			object.put("alipay_order", out_trade_no);
-			object.put("filePath", folderPath+"/"+storeId+".png");
+			object.put("filePath", folderPath+"/alipay"+storeId+".png");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

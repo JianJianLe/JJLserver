@@ -5,18 +5,10 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
     id="WebApp_ID" 
     version="2.5">
-    
-    
   <display-name>JJLserve</display-name>
- 
   <welcome-file-list>
-      <welcome-file>index.jsp</welcome-file> 
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-
-  <!-- <listener> 
-        <listener-class>com.star.MyServletContextListener</listener-class> 
-  </listener> -->
-  
   <servlet>
     <description></description>
     <display-name>loginServlet</display-name>
@@ -27,7 +19,6 @@
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>registerServlet</display-name>
@@ -38,8 +29,6 @@
     <servlet-name>registerServlet</servlet-name>
     <url-pattern>/registerServlet</url-pattern>
   </servlet-mapping>
-
-
   <servlet>
     <description></description>
     <display-name>imageUploadServlet</display-name>
@@ -50,7 +39,6 @@
     <servlet-name>imageUploadServlet</servlet-name>
     <url-pattern>/imageUploadServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>imageDownloadServlet</display-name>
@@ -61,7 +49,6 @@
     <servlet-name>imageDownloadServlet</servlet-name>
     <url-pattern>/imageDownloadServlet</url-pattern>
   </servlet-mapping>
-   
   <servlet>
     <description></description>
     <display-name>mediaServlet</display-name>
@@ -71,8 +58,7 @@
   <servlet-mapping>
     <servlet-name>mediaServlet</servlet-name>
     <url-pattern>/mediaServlet</url-pattern>
-  </servlet-mapping> 
-  
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>uploadFileServlet</display-name>
@@ -82,9 +68,7 @@
   <servlet-mapping>
     <servlet-name>uploadFileServlet</servlet-name>
     <url-pattern>/uploadFileServlet</url-pattern>
-  </servlet-mapping> 
-  
-  
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>nameListServlet</display-name>
@@ -94,9 +78,7 @@
   <servlet-mapping>
     <servlet-name>nameListServlet</servlet-name>
     <url-pattern>/nameListServlet</url-pattern>
-  </servlet-mapping> 
-  
-  
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>personalDetailServlet</display-name>
@@ -107,8 +89,6 @@
     <servlet-name>personalDetailServlet</servlet-name>
     <url-pattern>/personalDetailServlet</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <description></description>
     <display-name>changePasswordServlet</display-name>
@@ -119,7 +99,6 @@
     <servlet-name>changePasswordServlet</servlet-name>
     <url-pattern>/changePasswordServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>videoDetailServlet</display-name>
@@ -130,7 +109,6 @@
     <servlet-name>videoDetailServlet</servlet-name>
     <url-pattern>/videoDetailServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>imageDetailServlet</display-name>
@@ -141,8 +119,6 @@
     <servlet-name>imageDetailServlet</servlet-name>
     <url-pattern>/imageDetailServlet</url-pattern>
   </servlet-mapping>
-
-
   <servlet>
     <description></description>
     <display-name>updateAPKServlet</display-name>
@@ -161,8 +137,6 @@
     <servlet-name>ExceptionQueryServlet</servlet-name>
     <servlet-class>com.xy.servlet.android.ExceptionQueryServlet</servlet-class>
   </servlet>
- 
-
   <servlet-mapping>
     <servlet-name>updateAPKServlet</servlet-name>
     <url-pattern>/updateAPKServlet</url-pattern>
@@ -175,8 +149,6 @@
     <servlet-name>ExceptionQueryServlet</servlet-name>
     <url-pattern>/servlet/ExceptionQueryServlet</url-pattern>
   </servlet-mapping>
-  
- 
   <servlet>
     <description></description>
     <display-name>updateBillServlet</display-name>
@@ -187,8 +159,6 @@
     <servlet-name>updateBillServlet</servlet-name>
     <url-pattern>/updateBillServlet</url-pattern>
   </servlet-mapping>
-  
- 
   <servlet>
     <description></description>
     <display-name>updateExceptionServlet</display-name>
@@ -199,8 +169,6 @@
     <servlet-name>updateExceptionServlet</servlet-name>
     <url-pattern>/updateExceptionServlet</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <description></description>
     <display-name>ShopnameListServlet</display-name>
@@ -211,8 +179,6 @@
     <servlet-name>ShopnameListServlet</servlet-name>
     <url-pattern>/servlet/ShopnameListServlet</url-pattern>
   </servlet-mapping>
-
- 
   <servlet>
     <description></description>
     <display-name>updateCharsServlet</display-name>
@@ -223,43 +189,44 @@
     <servlet-name>updateCharsServlet</servlet-name>
     <url-pattern>/updateCharsServlet</url-pattern>
   </servlet-mapping>
-  
-
-
-	<servlet>
-		<description>This is the description of my J2EE component</description>
-		<display-name>This is the display name of my J2EE component</display-name>
-		<servlet-name>AlipayQRServlet</servlet-name>
-		<servlet-class>com.xy.servlet.android.AlipayQRServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>AlipayQRServlet</servlet-name>
-		<url-pattern>/servlet/AlipayQRServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<description>This is the description of my J2EE component</description>
-		<display-name>This is the display name of my J2EE component</display-name>
-		<servlet-name>AlipayCallBackServlet</servlet-name>
-		<servlet-class>com.xy.servlet.android.AlipayCallBackServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>AlipayCallBackServlet</servlet-name>
-		<url-pattern>/servlet/AlipayCallBackServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<description>This is the description of my J2EE component</description>
-		<display-name>This is the display name of my J2EE component</display-name>
-		<servlet-name>WechatQRCodeServlet</servlet-name>
-		<servlet-class>com.xy.servlet.android.WechatQRCodeServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>WechatQRCodeServlet</servlet-name>
-		<url-pattern>/servlet/WechatQRCodeServlet</url-pattern>
-	</servlet-mapping>
-	
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AlipayQRServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.AlipayQRServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AlipayQRServlet</servlet-name>
+    <url-pattern>/servlet/AlipayQRServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AlipayCallBackServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.AlipayCallBackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AlipayCallBackServlet</servlet-name>
+    <url-pattern>/servlet/AlipayCallBackServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>WechatQRCodeServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.WechatQRCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WechatQRCodeServlet</servlet-name>
+    <url-pattern>/servlet/WechatQRCodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>WechatCallBackServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.WechatCallBackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WechatCallBackServlet</servlet-name>
+    <url-pattern>/servlet/WechatCallBackServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

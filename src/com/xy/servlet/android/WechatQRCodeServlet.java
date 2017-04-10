@@ -51,14 +51,14 @@ public class WechatQRCodeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		WeChatUtils utils = new WeChatUtils();
 		//获取参数
-		String pruduct_id = "100";//(String) request.getParameter("product_id");
-		String body = "简剪乐10元票";//(String) request.getParameter("body");
-		String subject ="";//(String) request.getParameter("subject");
-		String order_price = "0.01";//(String) request.getParameter("order_price");
-		String deviceNo ="192.168.0.1";// request.getParameter("device_no");
+		String pruduct_id = (String) request.getParameter("product_id");;
+		String body = (String) request.getParameter("body");
+		String subject =(String) request.getParameter("subject");
+		String order_price = (String) request.getParameter("order_price");
+		String deviceNo =request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)*100+"";
-		storeId = "1010";// (String) request.getParameter("store_id");
-		String orderNo = System.currentTimeMillis()+""; //request.getParameter("");
+		storeId = (String) request.getParameter("store_id");
+		String orderNo = System.currentTimeMillis()+""; 
 
 		String code = utils.createQRCode(orderNo,body,deviceNo,price);
 		folderPath = "/picture";
@@ -80,7 +80,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject object = new JSONObject();
 		try {
-			object.put("alipay_order", orderNo);
+			object.put("wechat_order", orderNo);
 			object.put("filePath", folderPath+"/wechat"+storeId+".png");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
