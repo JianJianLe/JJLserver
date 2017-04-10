@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
  
 public class BaseDao {
-	// ³éÏó¹«¹²ÊôÐÔ
+	// æŠ½è±¡å…¬å…±å±žæ€§
 	protected Connection connection;
 	protected ResultSet resultSet;
 	protected PreparedStatement statement;
@@ -19,7 +19,7 @@ public class BaseDao {
 	private static String url;
 
 	static {
-		// ¶ÁÈ¡ÊôÐÔÎÄ¼þ
+		//è¯»å–å±žæ€§æ–‡ä»¶
 		Properties properties = new Properties();
 		try {
 			properties.load(BaseDao.class.getClassLoader().getResourceAsStream(
@@ -36,13 +36,13 @@ public class BaseDao {
 
 	}
  	
-	// ½¨Á¢Á¬½Ó
+	//  å»ºç«‹è¿žæŽ¥
 	public Connection getCon() {
 
 		try {
-			// Í¨¹ý·´Éä¼ÓÔØÇý¶¯
+			//é€šè¿‡åå°„åŠ è½½é©±åŠ¨
 			Class.forName(driver);
-			// Í¨¹ýÇý¶¯¹ÜÀíÀà¼ÓÔØÁ¬½Ó
+			// é€šè¿‡é©±åŠ¨ç®¡ç†ç±»åŠ è½½è¿žæŽ¥
 			connection = DriverManager.getConnection(url, user, pwd);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -54,12 +54,12 @@ public class BaseDao {
 		return connection;
 	}
 
-	// Í¨¹ýconnection½¨Á¢proprestatement
+	//é€šè¿‡connectionå»ºç«‹proprestatement
 	public void preExe(String sql, Object[] objects) throws SQLException {
 		statement = connection.prepareStatement(sql);
 		if (objects != null && objects.length > 0) {
 			for (int i = 0; i < objects.length; i++) {
-				// ÉèÖÃ²ÎÊý
+				// è®¾ç½®å‚æ•°
 				statement.setObject(i + 1, objects[i]);
 			}
 		}
@@ -101,7 +101,7 @@ public class BaseDao {
 	}
 
 
-	// ÊÍ·Å×ÊÔ´
+	// é‡Šæ”¾èµ„æº
 	public void closeAll() {
 		try {
 			if (statement != null) {

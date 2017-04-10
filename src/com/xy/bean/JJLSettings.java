@@ -3,13 +3,13 @@ package com.xy.bean;
 public class JJLSettings {
 	
 	private String userid;
-	private String ChildPrice;//¶ùÍ¯µ¥¼Û
-	private String AdultPrice;//³ÉÈËµ¥¼Û
-	private String dicounts;//ÕÛ¿Û
-	private String TimePeriod;//Ê±¼ä¶Î
-	private String MediaType;// ¹ã¸æ²¥·ÅÀàĞÍ£º 1ÎªÍ¼Æ¬,2ÎªÊÓÆµ,3ÎªÍ¼Æ¬ºÍÊÓÆµ 
-	private String ShowText;//ÎÄ×ÖÄÚÈİ
-	private String addTime;//ĞŞ¸ÄÊ±¼ä
+	private String ChildPrice;//å„¿ç«¥å•ä»·
+	private String AdultPrice;//æˆäººå•ä»·
+	private String dicounts;//æŠ˜æ‰£
+	private String TimePeriod;//æ—¶é—´æ®µ
+	private String MediaType;// å¹¿å‘Šæ’­æ”¾ç±»å‹ï¼š 1ä¸ºå›¾ç‰‡,2ä¸ºè§†é¢‘,3ä¸ºå›¾ç‰‡å’Œè§†é¢‘ 
+	private String ShowText;//æ–‡å­—å†…å®¹
+	private String addTime;//ä¿®æ”¹æ—¶é—´
 	
 	public String getUserID(){
 		return userid;

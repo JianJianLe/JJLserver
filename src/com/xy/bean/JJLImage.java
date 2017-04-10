@@ -3,9 +3,9 @@ package com.xy.bean;
 public class JJLImage {
  
 	private String userid;
-	private String name;//Í¼Æ¬Ãû×Ö
-	private String path;//Í¼Æ¬´æ·ÅµÄÂ·¾¶ userid/image/
-	private String addTime;//Ìí¼ÓÍ¼Æ¬Ê±¼ä
+	private String name;//å›¾ç‰‡åå­—
+	private String path;//å›¾ç‰‡å­˜æ”¾çš„è·¯å¾„ userid/image/
+	private String addTime;//æ·»åŠ å›¾ç‰‡æ—¶é—´
  
 	public String getUserID(){
 		return userid;

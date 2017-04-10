@@ -86,11 +86,11 @@ public class AlipayQRServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
-		
+
 		//System.out.println("hahahah");
-		//»ñÈ¡²ÎÊı
+		//è·å–å‚æ•°
 		String pruduct_id = (String) request.getParameter("product_id");
 		String body = (String) request.getParameter("body");
 		String subject =(String) request.getParameter("subject");
@@ -99,10 +99,10 @@ public class AlipayQRServlet extends HttpServlet {
 		String out_trade_no = "No.alipay"+System.currentTimeMillis();
 
 		folderPath = "/picture";
-//		String path = config.getServletContext().getRealPath("/");
-//		path=path.replace("JJLserver\\", "")+"QRCode\\test_store_id\\";
-//		folderPath=path;
-		
+		//		String path = config.getServletContext().getRealPath("/");
+		//		path=path.replace("JJLserver\\", "")+"QRCode\\test_store_id\\";
+		//		folderPath=path;
+
 		test_trade_precreate(out_trade_no, subject, body, order_price,request);
 
 		response.setContentType("text/html; charset=utf-8");
@@ -120,105 +120,99 @@ public class AlipayQRServlet extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-	
+
 	/**
 	 * Initialization of the servlet. <br>
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
 		// Put your code here
-		/** Ò»¶¨ÒªÔÚ´´½¨AlipayTradeServiceÖ®Ç°µ÷ÓÃConfigs.init()ÉèÖÃÄ¬ÈÏ²ÎÊı
-         *  Configs»á¶ÁÈ¡classpathÏÂµÄzfbinfo.propertiesÎÄ¼şÅäÖÃĞÅÏ¢£¬Èç¹ûÕÒ²»µ½¸ÃÎÄ¼şÔòÈ·ÈÏ¸ÃÎÄ¼şÊÇ·ñÔÚclasspathÄ¿Â¼
-         */
-        Configs.init("zfbinfo.properties");
+		/** ä¸€å®šè¦åœ¨åˆ›å»ºAlipayTradeServiceä¹‹å‰è°ƒç”¨Configs.init()è®¾ç½®é»˜è®¤å‚æ•°
+		 *  Configsä¼šè¯»å–classpathä¸‹çš„zfbinfo.propertiesæ–‡ä»¶é…ç½®ä¿¡æ¯ï¼Œå¦‚æœæ‰¾ä¸åˆ°è¯¥æ–‡ä»¶åˆ™ç¡®è®¤è¯¥æ–‡ä»¶æ˜¯å¦åœ¨classpathç›®å½•
+		 */
+		Configs.init("zfbinfo.properties");
 
-        /** Ê¹ÓÃConfigsÌá¹©µÄÄ¬ÈÏ²ÎÊı
-         *  AlipayTradeService¿ÉÒÔÊ¹ÓÃµ¥Àı»òÕßÎª¾²Ì¬³ÉÔ±¶ÔÏó£¬²»ĞèÒª·´¸´new
-         */
-        tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
+		/** ä½¿ç”¨Configsæä¾›çš„é»˜è®¤å‚æ•°
+		 *  AlipayTradeServiceå¯ä»¥ä½¿ç”¨å•ä¾‹æˆ–è€…ä¸ºé™æ€æˆå‘˜å¯¹è±¡ï¼Œä¸éœ€è¦åå¤new
+		 */
+		tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 	}
 
 
-	// ²âÊÔµ±Ãæ¸¶2.0Éú³ÉÖ§¸¶¶şÎ¬Âë
+	// æµ‹è¯•å½“é¢ä»˜2.0ç”Ÿæˆæ”¯ä»˜äºŒç»´ç 
 	public void test_trade_precreate(String out_trade_no,String subject_str,String body_str,String order_price,HttpServletRequest request) {
-		// (±ØÌî) ÉÌ»§ÍøÕ¾¶©µ¥ÏµÍ³ÖĞÎ¨Ò»¶©µ¥ºÅ£¬64¸ö×Ö·ûÒÔÄÚ£¬Ö»ÄÜ°üº¬×ÖÄ¸¡¢Êı×Ö¡¢ÏÂ»®Ïß£¬
-		// Ğè±£Ö¤ÉÌ»§ÏµÍ³¶Ë²»ÄÜÖØ¸´£¬½¨ÒéÍ¨¹ıÊı¾İ¿âsequenceÉú³É£¬
+		// (å¿…å¡«) å•†æˆ·ç½‘ç«™è®¢å•ç³»ç»Ÿä¸­å”¯ä¸€è®¢å•å·ï¼Œ64ä¸ªå­—ç¬¦ä»¥å†…ï¼Œåªèƒ½åŒ…å«å­—æ¯ã€æ•°å­—ã€ä¸‹åˆ’çº¿ï¼Œ
+		// éœ€ä¿è¯å•†æˆ·ç³»ç»Ÿç«¯ä¸èƒ½é‡å¤ï¼Œå»ºè®®é€šè¿‡æ•°æ®åº“sequenceç”Ÿæˆï¼Œ
 		String outTradeNo = out_trade_no;
 
-		// (±ØÌî) ¶©µ¥±êÌâ£¬´ÖÂÔÃèÊöÓÃ»§µÄÖ§¸¶Ä¿µÄ¡£Èç¡°xxxÆ·ÅÆxxxÃÅµêµ±Ãæ¸¶É¨ÂëÏû·Ñ¡±
+		// (å¿…å¡«) è®¢å•æ ‡é¢˜ï¼Œç²—ç•¥æè¿°ç”¨æˆ·çš„æ”¯ä»˜ç›®çš„ã€‚å¦‚â€œxxxå“ç‰Œxxxé—¨åº—å½“é¢ä»˜æ‰«ç æ¶ˆè´¹â€
 		String subject = subject_str;
 
-		// (±ØÌî) ¶©µ¥×Ü½ğ¶î£¬µ¥Î»ÎªÔª£¬²»ÄÜ³¬¹ı1ÒÚÔª
-		// Èç¹ûÍ¬Ê±´«ÈëÁË¡¾´òÕÛ½ğ¶î¡¿,¡¾²»¿É´òÕÛ½ğ¶î¡¿,¡¾¶©µ¥×Ü½ğ¶î¡¿ÈıÕß,Ôò±ØĞëÂú×ãÈçÏÂÌõ¼ş:¡¾¶©µ¥×Ü½ğ¶î¡¿=¡¾´òÕÛ½ğ¶î¡¿+¡¾²»¿É´òÕÛ½ğ¶î¡¿
+		// (å¿…å¡«) è®¢å•æ€»é‡‘é¢ï¼Œå•ä½ä¸ºå…ƒï¼Œä¸èƒ½è¶…è¿‡1äº¿å…ƒ
+		// å¦‚æœåŒæ—¶ä¼ å…¥äº†ã€æ‰“æŠ˜é‡‘é¢ã€‘,ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘,ã€è®¢å•æ€»é‡‘é¢ã€‘ä¸‰è€…,åˆ™å¿…é¡»æ»¡è¶³å¦‚ä¸‹æ¡ä»¶:ã€è®¢å•æ€»é‡‘é¢ã€‘=ã€æ‰“æŠ˜é‡‘é¢ã€‘+ã€ä¸å¯æ‰“æŠ˜é‡‘é¢ã€‘
 		String totalAmount = order_price;
 
-		// (¿ÉÑ¡) ¶©µ¥²»¿É´òÕÛ½ğ¶î£¬¿ÉÒÔÅäºÏÉÌ¼ÒÆ½Ì¨ÅäÖÃÕÛ¿Û»î¶¯£¬Èç¹û¾ÆË®²»²ÎÓë´òÕÛ£¬Ôò½«¶ÔÓ¦½ğ¶îÌîĞ´ÖÁ´Ë×Ö¶Î
-		// Èç¹û¸ÃÖµÎ´´«Èë,µ«´«ÈëÁË¡¾¶©µ¥×Ü½ğ¶î¡¿,¡¾´òÕÛ½ğ¶î¡¿,Ôò¸ÃÖµÄ¬ÈÏÎª¡¾¶©µ¥×Ü½ğ¶î¡¿-¡¾´òÕÛ½ğ¶î¡¿
+		// (å¯é€‰) è®¢å•ä¸å¯æ‰“æŠ˜é‡‘é¢ï¼Œå¯ä»¥é…åˆå•†å®¶å¹³å°é…ç½®æŠ˜æ‰£æ´»åŠ¨ï¼Œå¦‚æœé…’æ°´ä¸å‚ä¸æ‰“æŠ˜ï¼Œåˆ™å°†å¯¹åº”é‡‘é¢å¡«å†™è‡³æ­¤å­—æ®µ
+		// å¦‚æœè¯¥å€¼æœªä¼ å…¥,ä½†ä¼ å…¥äº†ã€è®¢å•æ€»é‡‘é¢ã€‘,ã€æ‰“æŠ˜é‡‘é¢ã€‘,åˆ™è¯¥å€¼é»˜è®¤ä¸ºã€è®¢å•æ€»é‡‘é¢ã€‘-ã€æ‰“æŠ˜é‡‘é¢ã€‘
 		String undiscountableAmount = "0";
 
-		// Âô¼ÒÖ§¸¶±¦ÕËºÅID£¬ÓÃÓÚÖ§³ÖÒ»¸öÇ©Ô¼ÕËºÅÏÂÖ§³Ö´ò¿îµ½²»Í¬µÄÊÕ¿îÕËºÅ£¬(´ò¿îµ½sellerId¶ÔÓ¦µÄÖ§¸¶±¦ÕËºÅ)
-		// Èç¹û¸Ã×Ö¶ÎÎª¿Õ£¬ÔòÄ¬ÈÏÎªÓëÖ§¸¶±¦Ç©Ô¼µÄÉÌ»§µÄPID£¬Ò²¾ÍÊÇappid¶ÔÓ¦µÄPID
+		// å–å®¶æ”¯ä»˜å®è´¦å·IDï¼Œç”¨äºæ”¯æŒä¸€ä¸ªç­¾çº¦è´¦å·ä¸‹æ”¯æŒæ‰“æ¬¾åˆ°ä¸åŒçš„æ”¶æ¬¾è´¦å·ï¼Œ(æ‰“æ¬¾åˆ°sellerIdå¯¹åº”çš„æ”¯ä»˜å®è´¦å·)
+		// å¦‚æœè¯¥å­—æ®µä¸ºç©ºï¼Œåˆ™é»˜è®¤ä¸ºä¸æ”¯ä»˜å®ç­¾çº¦çš„å•†æˆ·çš„PIDï¼Œä¹Ÿå°±æ˜¯appidå¯¹åº”çš„PID
 		String sellerId = "";
 
-		// ¶©µ¥ÃèÊö£¬¿ÉÒÔ¶Ô½»Ò×»òÉÌÆ·½øĞĞÒ»¸öÏêÏ¸µØÃèÊö£¬±ÈÈçÌîĞ´"¹ºÂòÉÌÆ·2¼ş¹²15.00Ôª"
+		// è®¢å•æè¿°ï¼Œå¯ä»¥å¯¹äº¤æ˜“æˆ–å•†å“è¿›è¡Œä¸€ä¸ªè¯¦ç»†åœ°æè¿°ï¼Œæ¯”å¦‚å¡«å†™"è´­ä¹°å•†å“2ä»¶å…±15.00å…ƒ"
 		String body = body_str;
 
-		// ÉÌ»§²Ù×÷Ô±±àºÅ£¬Ìí¼Ó´Ë²ÎÊı¿ÉÒÔÎªÉÌ»§²Ù×÷Ô±×öÏúÊÛÍ³¼Æ
+		// å•†æˆ·æ“ä½œå‘˜ç¼–å·ï¼Œæ·»åŠ æ­¤å‚æ•°å¯ä»¥ä¸ºå•†æˆ·æ“ä½œå‘˜åšé”€å”®ç»Ÿè®¡
 		String operatorId = "test_operator_id";
 
-		//        // (±ØÌî) ÉÌ»§ÃÅµê±àºÅ£¬Í¨¹ıÃÅµêºÅºÍÉÌ¼ÒºóÌ¨¿ÉÒÔÅäÖÃ¾«×¼µ½ÃÅµêµÄÕÛ¿ÛĞÅÏ¢£¬ÏêÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
+		//      // (å¿…å¡«) å•†æˆ·é—¨åº—ç¼–å·ï¼Œé€šè¿‡é—¨åº—å·å’Œå•†å®¶åå°å¯ä»¥é…ç½®ç²¾å‡†åˆ°é—¨åº—çš„æŠ˜æ‰£ä¿¡æ¯ï¼Œè¯¦è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
 		//        storeId = "test_store_id";
 
-		// ÒµÎñÀ©Õ¹²ÎÊı£¬Ä¿Ç°¿ÉÌí¼ÓÓÉÖ§¸¶±¦·ÖÅäµÄÏµÍ³ÉÌ±àºÅ(Í¨¹ısetSysServiceProviderId·½·¨)£¬ÏêÇéÇë×ÉÑ¯Ö§¸¶±¦¼¼ÊõÖ§³Ö
+		// ä¸šåŠ¡æ‰©å±•å‚æ•°ï¼Œç›®å‰å¯æ·»åŠ ç”±æ”¯ä»˜å®åˆ†é…çš„ç³»ç»Ÿå•†ç¼–å·(é€šè¿‡setSysServiceProviderIdæ–¹æ³•)ï¼Œè¯¦æƒ…è¯·å’¨è¯¢æ”¯ä»˜å®æŠ€æœ¯æ”¯æŒ
 		ExtendParams extendParams = new ExtendParams();
 		extendParams.setSysServiceProviderId("2017022305843422");
 
-		// Ö§¸¶³¬Ê±£¬¶¨ÒåÎª120·ÖÖÓ
+		// æ”¯ä»˜è¶…æ—¶ï¼Œå®šä¹‰ä¸º120åˆ†é’Ÿ
 		String timeoutExpress = "120m";
 
-		// ÉÌÆ·Ã÷Ï¸ÁĞ±í£¬ĞèÌîĞ´¹ºÂòÉÌÆ·ÏêÏ¸ĞÅÏ¢£¬
+		// å•†å“æ˜ç»†åˆ—è¡¨ï¼Œéœ€å¡«å†™è´­ä¹°å•†å“è¯¦ç»†ä¿¡æ¯ï¼Œ
 		List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
-		// ´´½¨Ò»¸öÉÌÆ·ĞÅÏ¢£¬²ÎÊıº¬Òå·Ö±ğÎªÉÌÆ·id£¨Ê¹ÓÃ¹ú±ê£©¡¢Ãû³Æ¡¢µ¥¼Û£¨µ¥Î»Îª·Ö£©¡¢ÊıÁ¿£¬Èç¹ûĞèÒªÌí¼ÓÉÌÆ·Àà±ğ£¬Ïê¼ûGoodsDetail
-		GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxxĞ¡Ãæ°ü", 1000, 1);
-		// ´´½¨ºÃÒ»¸öÉÌÆ·ºóÌí¼ÓÖÁÉÌÆ·Ã÷Ï¸ÁĞ±í
+		// åˆ›å»ºä¸€ä¸ªå•†å“ä¿¡æ¯ï¼Œå‚æ•°å«ä¹‰åˆ†åˆ«ä¸ºå•†å“idï¼ˆä½¿ç”¨å›½æ ‡ï¼‰ã€åç§°ã€å•ä»·ï¼ˆå•ä½ä¸ºåˆ†ï¼‰ã€æ•°é‡ï¼Œå¦‚æœéœ€è¦æ·»åŠ å•†å“ç±»åˆ«ï¼Œè¯¦è§GoodsDetail
+		GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "ç®€å‰ªä¹æ”¯ä»˜å®æ”¯ä»˜", 1000, 1);
+		// åˆ›å»ºå¥½ä¸€ä¸ªå•†å“åæ·»åŠ è‡³å•†å“æ˜ç»†åˆ—è¡¨
 		goodsDetailList.add(goods1);
-
-		// ¼ÌĞø´´½¨²¢Ìí¼ÓµÚÒ»ÌõÉÌÆ·ĞÅÏ¢£¬ÓÃ»§¹ºÂòµÄ²úÆ·Îª¡°ºÚÈËÑÀË¢¡±£¬µ¥¼ÛÎª5.00Ôª£¬¹ºÂòÁËÁ½¼ş
-		GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxxÑÀË¢", 500, 2);
-		goodsDetailList.add(goods2);
 
 		String NotifyUrl="http://112.74.38.240:8080/JJLserver/AlipayCallBackServlet";
 		//NotifyUrl="http://192.168.0.111:8080/JJLserver/AlipayCallBackServlet";
-		// ´´½¨É¨ÂëÖ§¸¶ÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
+		// åˆ›å»ºæ‰«ç æ”¯ä»˜è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
 		AlipayTradePrecreateRequestBuilder builder = new AlipayTradePrecreateRequestBuilder()
-		.setSubject(subject).setTotalAmount(totalAmount).setOutTradeNo(outTradeNo)
-		.setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
-		.setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
-		.setTimeoutExpress(timeoutExpress)
-		.setNotifyUrl(NotifyUrl)//Ö§¸¶±¦·şÎñÆ÷Ö÷¶¯Í¨ÖªÉÌ»§·şÎñÆ÷ÀïÖ¸¶¨µÄÒ³ÃæhttpÂ·¾¶,¸ù¾İĞèÒªÉèÖÃ
-		.setGoodsDetailList(goodsDetailList);
+				.setSubject(subject).setTotalAmount(totalAmount).setOutTradeNo(outTradeNo)
+				.setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
+				.setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
+				.setTimeoutExpress(timeoutExpress)
+				.setNotifyUrl(NotifyUrl)//æ”¯ä»˜å®æœåŠ¡å™¨ä¸»åŠ¨é€šçŸ¥å•†æˆ·æœåŠ¡å™¨é‡ŒæŒ‡å®šçš„é¡µé¢httpè·¯å¾„,æ ¹æ®éœ€è¦è®¾ç½®
+				.setGoodsDetailList(goodsDetailList);
 
 		//System.out.println("tradeService:="+ tradeService);
 		AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
-			//                log.info("Ö§¸¶±¦Ô¤ÏÂµ¥³É¹¦: )");
+			//                log.info("æ”¯ä»˜å®é¢„ä¸‹å•æˆåŠŸ: )");
 
 			AlipayTradePrecreateResponse response = result.getResponse();
 			//                dumpResponse(response);
 
-			// ĞèÒªĞŞ¸ÄÎªÔËĞĞ»úÆ÷ÉÏµÄÂ·¾¶
+			// éœ€è¦ä¿®æ”¹ä¸ºè¿è¡Œæœºå™¨ä¸Šçš„è·¯å¾„
 
 
-			File file = new File(request.getRealPath("")+folderPath);
+			File file = new File(request.getRealPath("/")+folderPath);
 			if(!file.exists()){
 				file.mkdirs();
 			}
-			filePath = String.format(request.getRealPath("")+folderPath + "/"+storeId+".png",
+			filePath = String.format(request.getRealPath("/")+folderPath + "/alipay"+storeId+".png",
 					response.getOutTradeNo());
-			
-			System.out.println(filePath);
-			
+
 			file=new File(filePath);
 			if(file.exists()){
 				file.delete();
@@ -229,15 +223,15 @@ public class AlipayQRServlet extends HttpServlet {
 			break;
 
 		case FAILED:
-			System.out.println("Ö§¸¶±¦Ô¤ÏÂµ¥Ê§°Ü!!!");
+			System.out.println("æ”¯ä»˜å®é¢„ä¸‹å•å¤±è´¥!!!");
 			break;
 
 		case UNKNOWN:
-			System.out.println("ÏµÍ³Òì³££¬Ô¤ÏÂµ¥×´Ì¬Î´Öª!!!");
+			System.out.println("ç³»ç»Ÿå¼‚å¸¸ï¼Œé¢„ä¸‹å•çŠ¶æ€æœªçŸ¥!!!");
 			break;
 
 		default:
-			System.out.println("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
+			System.out.println("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
 			break;
 		}
 	}

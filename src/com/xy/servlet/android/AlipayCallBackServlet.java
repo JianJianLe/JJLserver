@@ -116,29 +116,29 @@ public class AlipayCallBackServlet extends HttpServlet {
 	 */
 	public void init() throws ServletException {
 		// Put your code here
-		/** Ò»¶¨ÒªÔÚ´´½¨AlipayTradeServiceÖ®Ç°µ÷ÓÃConfigs.init()ÉèÖÃÄ¬ÈÏ²ÎÊı
-		 *  Configs»á¶ÁÈ¡classpathÏÂµÄzfbinfo.propertiesÎÄ¼şÅäÖÃĞÅÏ¢£¬Èç¹ûÕÒ²»µ½¸ÃÎÄ¼şÔòÈ·ÈÏ¸ÃÎÄ¼şÊÇ·ñÔÚclasspathÄ¿Â¼
+		/** ä¸€å®šè¦åœ¨åˆ›å»ºAlipayTradeServiceä¹‹å‰è°ƒç”¨Configs.init()è®¾ç½®é»˜è®¤å‚æ•°
+		 *  Configsä¼šè¯»å–classpathä¸‹çš„zfbinfo.propertiesæ–‡ä»¶é…ç½®ä¿¡æ¯ï¼Œå¦‚æœæ‰¾ä¸åˆ°è¯¥æ–‡ä»¶åˆ™ç¡®è®¤è¯¥æ–‡ä»¶æ˜¯å¦åœ¨classpathç›®å½•
 		 */
 		Configs.init("zfbinfo.properties");
 
-		/** Ê¹ÓÃConfigsÌá¹©µÄÄ¬ÈÏ²ÎÊı
-		 *  AlipayTradeService¿ÉÒÔÊ¹ÓÃµ¥Àı»òÕßÎª¾²Ì¬³ÉÔ±¶ÔÏó£¬²»ĞèÒª·´¸´new
+		/** ä½¿ç”¨Configsæä¾›çš„é»˜è®¤å‚æ•°
+		 *  AlipayTradeServiceå¯ä»¥ä½¿ç”¨å•ä¾‹æˆ–è€…ä¸ºé™æ€æˆå‘˜å¯¹è±¡ï¼Œä¸éœ€è¦åå¤new
 		 */
 		tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
 	}
 
-	// ²âÊÔµ±Ãæ¸¶2.0²éÑ¯¶©µ¥
+	// æµ‹è¯•å½“é¢ä»˜2.0æŸ¥è¯¢è®¢å•
 	public void test_trade_query(String out_trade_no,HttpServletRequest request) {
-		// (±ØÌî) ÉÌ»§¶©µ¥ºÅ£¬Í¨¹ı´ËÉÌ»§¶©µ¥ºÅ²éÑ¯µ±Ãæ¸¶µÄ½»Ò××´Ì¬
+		// (å¿…å¡«) å•†æˆ·è®¢å•å·ï¼Œé€šè¿‡æ­¤å•†æˆ·è®¢å•å·æŸ¥è¯¢å½“é¢ä»˜çš„äº¤æ˜“çŠ¶æ€
 
-		// ´´½¨²éÑ¯ÇëÇóbuilder£¬ÉèÖÃÇëÇó²ÎÊı
+		// åˆ›å»ºæŸ¥è¯¢è¯·æ±‚builderï¼Œè®¾ç½®è¯·æ±‚å‚æ•°
 		AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
 		.setOutTradeNo(out_trade_no);
 
 		AlipayF2FQueryResult result = tradeService.queryTradeResult(builder);
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
-			log.info("²éÑ¯·µ»Ø¸Ã¶©µ¥Ö§¸¶³É¹¦: )");
+			log.info("æŸ¥è¯¢è¿”å›è¯¥è®¢å•æ”¯ä»˜æˆåŠŸ: )");
 
 			AlipayTradeQueryResponse response = result.getResponse();
 			dumpResponse(response);
@@ -181,22 +181,22 @@ public class AlipayCallBackServlet extends HttpServlet {
 
 		case FAILED:
 			resultCode=0;
-			log.error("²éÑ¯·µ»Ø¸Ã¶©µ¥Ö§¸¶Ê§°Ü»ò±»¹Ø±Õ!!!");
+			log.error("æŸ¥è¯¢è¿”å›è¯¥è®¢å•æ”¯ä»˜å¤±è´¥æˆ–è¢«å…³é—­!!!");
 			break;
 
 		case UNKNOWN:
 			resultCode=0;
-			log.error("ÏµÍ³Òì³££¬¶©µ¥Ö§¸¶×´Ì¬Î´Öª!!!");
+			log.error("ç³»ç»Ÿå¼‚å¸¸ï¼Œè®¢å•æ”¯ä»˜çŠ¶æ€æœªçŸ¥!!!");
 			break;
 
 		default:
 			resultCode=0;
-			log.error("²»Ö§³ÖµÄ½»Ò××´Ì¬£¬½»Ò×·µ»ØÒì³£!!!");
+			log.error("ä¸æ”¯æŒçš„äº¤æ˜“çŠ¶æ€ï¼Œäº¤æ˜“è¿”å›å¼‚å¸¸!!!");
 			break;
 		}
 	}
 
-	// ¼òµ¥´òÓ¡Ó¦´ğ
+	// ç®€å•æ‰“å°åº”ç­”
 	private void dumpResponse(AlipayResponse response) {
 		if (response != null) {
 			log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));

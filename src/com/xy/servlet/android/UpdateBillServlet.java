@@ -3,13 +3,7 @@ package com.xy.servlet.android;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 
-import com.google.gson.Gson;
 import com.xy.bean.JJLBillQuery;
-import com.xy.bean.JJLUser;
 import com.xy.dao.JJLBillDao;
-import com.xy.dao.JJLBillQueryDao;
-import com.xy.dao.JJLUserDao;
 import com.xy.utils.DateTimeUtils;
 
 public class UpdateBillServlet extends HttpServlet {
@@ -111,14 +101,14 @@ public class UpdateBillServlet extends HttpServlet {
 //		user.setAddTime(addtime);
 //		user.setLoginTime(logintime);
 //		
-//		// �жϵ�½
+//		// 判断登陆
 //		try{
 //			
 //			//user = userDao.login(userName, password);
 //			if(userDao.queryUser(userName)){
-//				flag=1;//�û����Ѵ���
+//				flag=1;//用户名已存在
 //			}else{
-//				userid=userDao.addUser(user);//�����û�
+//				userid=userDao.addUser(user);//添加用户
 //				flag=2;
 //			}
 //			
@@ -133,7 +123,7 @@ public class UpdateBillServlet extends HttpServlet {
 //			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
 //			Map<String, Object> mapNO = new HashMap<String, Object>();
 //			
-//			mapNO.put("flag", "1");//����flag=1���ͻ���, ��ʾ���û��Ѵ���
+//			mapNO.put("flag", "1");//发送flag=1到客户端, 表示该用户已存在
 //			listNO.add(mapNO);
 //			String resultNOJson = gson.toJson(mapNO);
 //			out.print(resultNOJson); 
@@ -143,8 +133,8 @@ public class UpdateBillServlet extends HttpServlet {
 //			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
 //			Map<String, Object> mapJson = new HashMap<String, Object>();
 //
-//			mapJson.put("flag", "2"); //����flag=2���ͻ���,��ʾע��ɹ�
-//			mapJson.put("userid", userid); //����flag=2���ͻ���,��ʾע��ɹ�
+//			mapJson.put("flag", "2"); //发送flag=2到客户端,表示注册成功
+//			mapJson.put("userid", userid); //发送flag=2到客户端,表示注册成功
 //			listOK.add(mapJson);
 //			userDao.updateLoginAddTime(userName, addtime);
 //			String resultOKJson = gson.toJson(mapJson);

@@ -3,9 +3,9 @@ package com.xy.bean;
 public class JJLVideo {
 	
 	private String userid;
-	private String name;//ÊÓÆµÎÄ¼şÃû×Ö
-	private String path;// ÊÓÆµ´æ·ÅµÄÂ·¾¶ userid/video/
-	private String addTime;//Ìí¼ÓÊÓÆµÊ±¼ä
+	private String name;//è§†é¢‘æ–‡ä»¶åå­—
+	private String path;// è§†é¢‘å­˜æ”¾çš„è·¯å¾„ userid/video/
+	private String addTime;//æ·»åŠ è§†é¢‘æ—¶é—´
 	
 	public String getUserID(){
 		return userid;

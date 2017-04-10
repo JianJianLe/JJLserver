@@ -3,9 +3,9 @@ package com.xy.bean;
 public class JJLPrinter {
 	
 	private String userid;
-	private String printNO;// 票号、排队号
-	private String printBalance;// 打印余额
-	private String printTime;// 打印时间
+	private String printNO;// 绁ㄥ彿銆佹帓闃熷彿
+	private String printBalance;// 鎵撳嵃浣欓
+	private String printTime;// 鎵撳嵃鏃堕棿
 	
 	public String getUserID(){
 		return userid;

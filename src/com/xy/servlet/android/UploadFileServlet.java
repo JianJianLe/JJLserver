@@ -49,7 +49,7 @@ public class UploadFileServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();//Êä³ö
+		PrintWriter out = response.getWriter();//è¾“å‡º
 		
 		JJLUserDao userDao = new JJLUserDao();
 		JJLVideoDao videoDao=new JJLVideoDao();
@@ -93,11 +93,11 @@ public class UploadFileServlet extends HttpServlet {
 								if(user!=null){
 									userid=user.getUserID();
 									
-									//´æ·ÅÎÄ¼ş
+									//å­˜æ”¾æ–‡ä»¶
 									//-----------
 									String fileDir=path + File.separator + namelist[i];
 									createDir(fileDir);
-									DeleteFiles(fileDir);//É¾³ıËùÓĞÎÄ¼ş for test
+									DeleteFiles(fileDir);//åˆ é™¤æ‰€æœ‰æ–‡ä»¶ for test
 									File file=new File(fileDir+File.separator + fileName);
 									if(!file.exists()){
 										item.write(file);
@@ -117,7 +117,7 @@ public class UploadFileServlet extends HttpServlet {
 									video.setPath("Video/" + namelist[i] + "/");
 									video.setAddTime(dateFormat.format(new Date()));
 									
-									//´æÊı¾İ¿â
+									//å­˜æ•°æ®åº“
 									//-----------------------
 									if(videoDao.queryVideoUserID(userid)){
 										videoDao.updateVideoByUserID(video);
@@ -127,7 +127,7 @@ public class UploadFileServlet extends HttpServlet {
 									}
 									//-----------------------
 								}else{
-									//User=null; Ã»ÓĞÕÒµ½user
+									//User=null; æ²¡æœ‰æ‰¾åˆ°user
 								}
 							}
 						}
@@ -181,21 +181,21 @@ public class UploadFileServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	// ´´½¨Ä¿Â¼
+	// åˆ›å»ºç›®å½•
 	public boolean createDir(String destDirName) {
 			File dir = new File(destDirName);
-			if (dir.exists()) {// ÅĞ¶ÏÄ¿Â¼ÊÇ·ñ´æÔÚ
-				System.out.println("´´½¨Ä¿Â¼Ê§°Ü£¬Ä¿±êÄ¿Â¼ÒÑ´æÔÚ£¡");
+			if (dir.exists()) {// åˆ¤æ–­ç›®å½•æ˜¯å¦å­˜åœ¨
+				System.out.println("åˆ›å»ºç›®å½•å¤±è´¥ï¼Œç›®æ ‡ç›®å½•å·²å­˜åœ¨ï¼");
 				return false;
 			}
-			if (!destDirName.endsWith(File.separator)) {// ½áÎ²ÊÇ·ñÒÔ"/"½áÊø
+			if (!destDirName.endsWith(File.separator)) {// ç»“å°¾æ˜¯å¦ä»¥"/"ç»“æŸ
 				destDirName = destDirName + File.separator;
 			}
-			if (dir.mkdirs()) {// ´´½¨Ä¿±êÄ¿Â¼
-				System.out.println("´´½¨Ä¿Â¼³É¹¦£¡" + destDirName);
+			if (dir.mkdirs()) {// åˆ›å»ºç›®æ ‡ç›®å½•
+				System.out.println("åˆ›å»ºç›®å½•æˆåŠŸï¼" + destDirName);
 				return true;
 			} else {
-				System.out.println("´´½¨Ä¿Â¼Ê§°Ü£¡");
+				System.out.println("åˆ›å»ºç›®å½•å¤±è´¥ï¼");
 				return false;
 			}
 		}

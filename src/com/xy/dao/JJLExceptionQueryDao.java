@@ -10,7 +10,7 @@ import com.xy.utils.ResultSetUtils;
 
 public class JJLExceptionQueryDao extends BaseDao {
 	/**
-	 * 异常查询
+	 * 寮傚父鏌ヨ
 	 * @param shopName
 	 * @param fromDate
 	 * @param toDate
@@ -31,7 +31,7 @@ public class JJLExceptionQueryDao extends BaseDao {
 //		}
 		
 		String sql="";
-		if(shopName.equals("所有店")){
+		if(shopName.equals("鎵�鏈夊簵")){
 			sql = "select * from jjlexception";
 			if (fromDate!=null&&!fromDate.equals("")) {
 				sql =sql + " where addTime between timestamp('" + fromDate+" 00:00:00','YYYY-MM-DD') and";

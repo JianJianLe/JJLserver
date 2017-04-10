@@ -8,11 +8,11 @@ public class JJLBillQuery {
 	private String userid;
 	private String orderNo;
 	private String shopname;//
-	private String payAmount; //¸¶¿î½ğ¶î
+	private String payAmount; //ä»˜æ¬¾é‡‘é¢
 	private String payType;//wechat or alipay or cash
-	private String region;// ËùÔÚµØÇø ¸ñÊ½£º Ê¡·İ_³ÇÊĞ
-	private String DeviceNO;//Éè±¸ºÅ
-	private Timestamp addTime;//Ìí¼ÓÊ±¼ä
+	private String region;// æ‰€åœ¨åœ°åŒº æ ¼å¼ï¼š çœä»½_åŸå¸‚
+	private String DeviceNO;//è®¾å¤‡å·
+	private Timestamp addTime;//æ·»åŠ æ—¶é—´
 	
 	public String getUserID() {
 		return userid;

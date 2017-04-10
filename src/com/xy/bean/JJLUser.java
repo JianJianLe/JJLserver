@@ -2,17 +2,17 @@ package com.xy.bean;
 
 public class JJLUser {
 	
-	private String userid;//Î¨Ò»µÄÓÃ»§ID
-	private String username;//ÓÃ»§Ãû¡¢µêÃû»òÕßÆäËû
+	private String userid;//å”¯ä¸€çš„ç”¨æˆ·ID
+	private String username;//ç”¨æˆ·åã€åº—åæˆ–è€…å…¶ä»–
 	private String password;
 	private String shopname;
-	private String phoneNumber;//ÊÖ»úºÅ
-	private String IDcard;//Éí·İÖ¤ºÅ
-	private String region;// ËùÔÚµØÇø ¸ñÊ½£º Ê¡·İ_³ÇÊĞ
-	private String address;//¾ßÌåµØÖ·
-	private String DeviceNO;//Éè±¸ºÅ
-	private String addTime;//Ìí¼Ó»òĞŞ¸ÄÕË»§Ê±¼ä
-	private String loginTime;//µÇÂ½Ê±¼ä
+	private String phoneNumber;//æ‰‹æœºå·
+	private String IDcard;//èº«ä»½è¯å·
+	private String region;// æ‰€åœ¨åœ°åŒº æ ¼å¼ï¼š çœä»½_åŸå¸‚
+	private String address;//å…·ä½“åœ°å€
+	private String DeviceNO;//è®¾å¤‡å·
+	private String addTime;//æ·»åŠ æˆ–ä¿®æ”¹è´¦æˆ·æ—¶é—´
+	private String loginTime;//ç™»é™†æ—¶é—´
 	
 	public String getUserID(){
 		return userid;

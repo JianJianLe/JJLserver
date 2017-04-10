@@ -18,7 +18,7 @@ import com.xy.bean.JJLUser;
 import com.xy.dao.JJLUserDao;
 
 /**
- * ע��
+ * 注册
  * 
  * @author Administrator
  *
@@ -64,14 +64,14 @@ public class RegisterServlet extends HttpServlet {
 		user.setAddTime(addtime);
 		user.setLoginTime(logintime);
 		
-		// �жϵ�½
+		// 判断登陆
 		try{
 			
 			//user = userDao.login(userName, password);
 			if(userDao.queryUser(userName)){
-				flag=1;//�û����Ѵ���
+				flag=1;//用户名已存在
 			}else{
-				userid=userDao.addUser(user);//�����û�
+				userid=userDao.addUser(user);//添加用户
 				flag=2;
 			}
 			
@@ -86,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
 			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
 			Map<String, Object> mapNO = new HashMap<String, Object>();
 			
-			mapNO.put("flag", "1");//����flag=1���ͻ���, ��ʾ���û��Ѵ���
+			mapNO.put("flag", "1");//发送flag=1到客户端, 表示该用户已存在
 			listNO.add(mapNO);
 			String resultNOJson = gson.toJson(mapNO);
 			out.print(resultNOJson); 
@@ -96,8 +96,8 @@ public class RegisterServlet extends HttpServlet {
 			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
 			Map<String, Object> mapJson = new HashMap<String, Object>();
 
-			mapJson.put("flag", "2"); //����flag=2���ͻ���,��ʾע��ɹ�
-			mapJson.put("userid", userid); //����flag=2���ͻ���,��ʾע��ɹ�
+			mapJson.put("flag", "2"); //发送flag=2到客户端,表示注册成功
+			mapJson.put("userid", userid); //发送flag=2到客户端,表示注册成功
 			mapJson.put("region", user.getRegion());
 			mapJson.put("shopname", user.getShopName());
 			listOK.add(mapJson);

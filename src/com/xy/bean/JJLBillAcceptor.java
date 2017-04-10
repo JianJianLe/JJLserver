@@ -3,8 +3,8 @@ package com.xy.bean;
 public class JJLBillAcceptor {
 	
 	private String userid;
-	private String acceptMoney;//接收金额
-	private String acceptTime;//接收时间
+	private String acceptMoney;//鎺ユ敹閲戦
+	private String acceptTime;//鎺ユ敹鏃堕棿
 	
 	public String getUserID(){
 		return userid;

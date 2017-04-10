@@ -94,12 +94,12 @@ public class UpdateCharsServlet extends HttpServlet{
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		String resultNOJson=null;
 		if(flag){
-			mapJson.put("flag", "1");//Ìí¼Ó³É¹¦
+			mapJson.put("flag", "1");//æ·»åŠ æˆåŠŸ
 			listOK.add(mapJson);
 			resultNOJson = gson.toJson(mapJson);
 			
 		}else{
-			mapJson.put("flag", "0");//ÒÑ´æÔÚ
+			mapJson.put("flag", "0");//å·²å­˜åœ¨
 			listOK.add(mapJson);
 			resultNOJson = gson.toJson(mapJson);
 		}

@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class PayCommonUtil {
 
 	public static SortedMap<Object, Object> xmlConvertToMap(String rxml) {
-		// ½âÎöxml³Émap
+		// è§£æxmlæˆmap
 		Map<String, String> m = new HashMap<String, String>();
 		try {
 			m = XMLUtil.doXMLParse(rxml);
@@ -20,7 +20,7 @@ public class PayCommonUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// ¹ıÂË¿Õ ÉèÖÃ SortedMap
+		// è¿‡æ»¤ç©º è®¾ç½® SortedMap
 		SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
 		Iterator it = m.keySet().iterator();
 		while (it.hasNext()) {
@@ -37,7 +37,7 @@ public class PayCommonUtil {
 	}
 
 	/**
-	 * ÊÇ·ñÇ©ÃûÕıÈ·,¹æÔòÊÇ:°´²ÎÊıÃû³Æa-zÅÅĞò,Óöµ½¿ÕÖµµÄ²ÎÊı²»²Î¼ÓÇ©Ãû¡£
+	 * æ˜¯å¦ç­¾åæ­£ç¡®,è§„åˆ™æ˜¯:æŒ‰å‚æ•°åç§°a-zæ’åº,é‡åˆ°ç©ºå€¼çš„å‚æ•°ä¸å‚åŠ ç­¾åã€‚
 	 * 
 	 * @return boolean
 	 */
@@ -57,7 +57,7 @@ public class PayCommonUtil {
 
 		sb.append("key=" + API_KEY);
 
-		// Ëã³öÕªÒª
+		// ç®—å‡ºæ‘˜è¦
 		String mysign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toLowerCase();
 		String tenpaySign = ((String) packageParams.get("sign")).toLowerCase();
 
@@ -68,11 +68,11 @@ public class PayCommonUtil {
 	/**
 	 * @author
 	 * @date 2016-4-22
-	 * @Description£ºsignÇ©Ãû
+	 * @Descriptionï¼šsignç­¾å
 	 * @param characterEncoding
-	 *            ±àÂë¸ñÊ½
+	 *            ç¼–ç æ ¼å¼
 	 * @param parameters
-	 *            ÇëÇó²ÎÊı
+	 *            è¯·æ±‚å‚æ•°
 	 * @return
 	 */
 	public static String createSign(String characterEncoding, SortedMap<Object, Object> packageParams, String API_KEY) {
@@ -95,9 +95,9 @@ public class PayCommonUtil {
 	/**
 	 * @author
 	 * @date 2016-4-22
-	 * @Description£º½«ÇëÇó²ÎÊı×ª»»Îªxml¸ñÊ½µÄstring
+	 * @Descriptionï¼šå°†è¯·æ±‚å‚æ•°è½¬æ¢ä¸ºxmlæ ¼å¼çš„string
 	 * @param parameters
-	 *            ÇëÇó²ÎÊı
+	 *            è¯·æ±‚å‚æ•°
 	 * @return
 	 */
 	public static String getRequestXml(SortedMap<Object, Object> parameters) {
@@ -120,11 +120,11 @@ public class PayCommonUtil {
 	}
 
 	/**
-	 * È¡³öÒ»¸öÖ¸¶¨³¤¶È´óĞ¡µÄËæ»úÕıÕûÊı.
+	 * å–å‡ºä¸€ä¸ªæŒ‡å®šé•¿åº¦å¤§å°çš„éšæœºæ­£æ•´æ•°.
 	 * 
 	 * @param length
-	 *            int Éè¶¨ËùÈ¡³öËæ»úÊıµÄ³¤¶È¡£lengthĞ¡ÓÚ11
-	 * @return int ·µ»ØÉú³ÉµÄËæ»úÊı¡£
+	 *            int è®¾å®šæ‰€å–å‡ºéšæœºæ•°çš„é•¿åº¦ã€‚lengthå°äº11
+	 * @return int è¿”å›ç”Ÿæˆçš„éšæœºæ•°ã€‚
 	 */
 	public static int buildRandom(int length) {
 		int num = 1;
@@ -139,7 +139,7 @@ public class PayCommonUtil {
 	}
 
 	/**
-	 * »ñÈ¡µ±Ç°Ê±¼ä yyyyMMddHHmmss
+	 * è·å–å½“å‰æ—¶é—´ yyyyMMddHHmmss
 	 * 
 	 * @return String
 	 */
@@ -151,7 +151,7 @@ public class PayCommonUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°Ê±¼ä yyyyMMddHHmmss
+	 * è·å–å½“å‰æ—¶é—´ yyyyMMddHHmmss
 	 * 
 	 * @return String
 	 */

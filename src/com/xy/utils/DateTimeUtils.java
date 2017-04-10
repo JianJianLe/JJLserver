@@ -9,14 +9,14 @@ public class DateTimeUtils {
 	private static SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss"); 
 
 	public static Timestamp getCurrentTime(){
-		Date curDate = new Date(System.currentTimeMillis());//获取当前时间 
+		Date curDate = new Date(System.currentTimeMillis());//鑾峰彇褰撳墠鏃堕棿 
 		String str = formatter.format(curDate);
 		
 		Timestamp timestamp = Timestamp.valueOf(str);
 		return timestamp;
 	}
 	public static String getCurrentTimeStr(){
-		Date curDate = new Date(System.currentTimeMillis());//获取当前时间 
+		Date curDate = new Date(System.currentTimeMillis());//鑾峰彇褰撳墠鏃堕棿 
 		String str =formatter.format(curDate);
 		return str;
 	}

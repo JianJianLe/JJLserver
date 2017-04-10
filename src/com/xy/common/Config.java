@@ -1,23 +1,24 @@
 package com.xy.common;
 
 public class Config {
-	//ÒÔÏÂÏà¹Ø²ÎÊıĞèÒª¸ù¾İ×Ô¼ºÊµ¼ÊÇé¿ö½øĞĞÅäÖÃ
-	public static String WECHAT_APP_ID = "wx8af8d6dbf274f3be";// appid
+	//ä»¥ä¸‹ç›¸å…³å‚æ•°éœ€è¦æ ¹æ®è‡ªå·±å®é™…æƒ…å†µè¿›è¡Œé…ç½®
+	//å…¬ä¼—è´¦å·ID  
+	public static String WECHAT_APP_ID = "wx7286ee3f03b10987";// appid
 
-//	public static String WECHAT_APP_SECRET = "0fb66116e9f46d2d71116b30f0addd85";// appsecret 
-	public static String WECHAT_MCH_ID = "1425797302";// ÄãµÄÉÌÒµºÅ
+	//	public static String WECHAT_APP_SECRET = "0fb66116e9f46d2d71116b30f0addd85";// appsecret 
+	public static String WECHAT_MCH_ID = "1450537702";// ä½ çš„å•†ä¸šå·
 	public static String WECHAT_API_KEY = "0f666116e944466661117777f0addddd";// API key 
 
 	public static String WECHAT_CREATE_IP = "8.8.8.8";// key 
-	public static String WECHAT_UFDODER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";//Í³Ò»ÏÂµ¥½Ó¿Ú 
-//	public static String WECHAT_NOTIFY_URL = "http://192.168.1.104:8080/JJLserver/servlet/WechatCallbackServlet";//»Øµ÷µØÖ·
-	public static String WECHAT_NOTIFY_URL = "http://www.baidu.com";//»Øµ÷µØÖ·
-	
+	public static String WECHAT_UFDODER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";//ç»Ÿä¸€ä¸‹å•æ¥å£ 
+	//	public static String WECHAT_NOTIFY_URL = "http://192.168.1.104:8080/JJLserver/servlet/WechatCallbackServlet";//å›è°ƒåœ°å€
+	public static String WECHAT_NOTIFY_URL = "http://www.baidu.com";//å›è°ƒåœ°å€
+
 	public static String WECHAT_PAY_URL = "weixin://wxpay/bizpayurl?";
-	
-	
+
+
 	//alipay
 
 	public static String ALIPAY_PAY_URL = "weixin://wxpay/bizpayurl?";
-	public static String ALIPAY_NOTIFY_URL = "http://80.20.1.195:8080/wpay/Re_notify";//»Øµ÷µØÖ·
+	public static String ALIPAY_NOTIFY_URL = "http://80.20.1.195:8080/wpay/Re_notify";//å›è°ƒåœ°å€
 }

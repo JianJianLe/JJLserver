@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.xy.bean.JJLUser;
 import com.xy.dao.JJLUserDao;
 /**
- * ��½
+ * 登陆
  * 
  */
 public class LoginServlet extends HttpServlet {
@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String addTime = request.getParameter("logintime");
 		String userid=null;
-		// �жϵ�½
+		// 判断登陆
 		try{
 			
 			user = userDao.login(userName, password);
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
 			Map<String, Object> mapNO = new HashMap<String, Object>();
 			
-			mapNO.put("flag", "0");//����flag=0���ͻ���
+			mapNO.put("flag", "0");//发送flag=0到客户端
 			listNO.add(mapNO);
 			String resultNOJson = gson.toJson(mapNO);
 			out.print(resultNOJson); 
@@ -61,8 +61,8 @@ public class LoginServlet extends HttpServlet {
 			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
 			Map<String, Object> mapJson = new HashMap<String, Object>();
 
-			mapJson.put("flag", "1"); //����flag=1���ͻ���
-			mapJson.put("userid", userid); //����flag=2���ͻ���,��ʾע��ɹ�
+			mapJson.put("flag", "1"); //发送flag=1到客户端
+			mapJson.put("userid", userid); //发送flag=2到客户端,表示注册成功
 			mapJson.put("region", user.getRegion());
 			mapJson.put("shopname", user.getShopName());
 			mapJson.put("deviceno", user.getDeviceNO());

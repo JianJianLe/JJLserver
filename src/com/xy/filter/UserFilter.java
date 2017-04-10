@@ -28,7 +28,7 @@ public class UserFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		// ¹ıÂËÓÃ»§µÄÇëÇó£¬ÅĞ¶ÏÊÇ·ñµÇÂ¼
+		// è¿‡æ»¤ç”¨æˆ·çš„è¯·æ±‚ï¼Œåˆ¤æ–­æ˜¯å¦ç™»å½•
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletRequest.setCharacterEncoding("utf-8");
@@ -36,7 +36,7 @@ public class UserFilter implements Filter {
 		String username = (String) httpServletRequest.getSession()
 				.getAttribute("username");
 		if (username == null) {
-			//Èç¹ûsessionÎª¿Õ£¬·µ»ØÃ»ÓĞµÇÂ½
+			//å¦‚æœsessionä¸ºç©ºï¼Œè¿”å›æ²¡æœ‰ç™»é™†
 			httpServletResponse.getWriter().print("0");
 		}
 		chain.doFilter(httpServletRequest, httpServletResponse);

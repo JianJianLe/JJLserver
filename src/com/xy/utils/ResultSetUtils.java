@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class ResultSetUtils {
 
 	/**
-	 * ½âÎöResultSet ×ª»»³Éjson
+	 * è§£æResultSet è½¬æ¢æˆjson
 	 * 
 	 * @param rs
 	 * @return
@@ -20,15 +20,15 @@ public class ResultSetUtils {
 	 */
 	public static String resultSetToJson(ResultSet rs) throws SQLException,
 			JSONException {
-		// jsonÊı×é
+		// jsonæ•°ç»„
 		JSONArray array = new JSONArray();
-		// »ñÈ¡ÁĞÊı
+		// è·å–åˆ—æ•°
 		ResultSetMetaData metaData = rs.getMetaData();
 		int columnCount = metaData.getColumnCount();
-		// ±éÀúResultSetÖĞµÄÃ¿ÌõÊı¾İ
+		// éå†ResultSetä¸­çš„æ¯æ¡æ•°æ®
 		while (rs.next()) {
 			JSONObject jsonObj = new JSONObject();
-			// ±éÀúÃ¿Ò»ÁĞ
+			// éå†æ¯ä¸€åˆ—
 			for (int i = 1; i <= columnCount; i++) {
 				String columnName = metaData.getColumnLabel(i);
 				String value = rs.getString(columnName);

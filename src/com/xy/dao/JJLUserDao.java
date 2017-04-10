@@ -29,10 +29,10 @@ public class JJLUserDao extends BaseDao {
 	private int userID=0;
 	
 	/**
-	 * ÓÃ»§×¢²á
+	 * ç”¨æˆ·æ³¨å†Œ
 	 * 
 	 * @param user
-	 *            ÓÃ»§ĞÅÏ¢
+	 *            ç”¨æˆ·ä¿¡æ¯
 	 * @return
 	 */
 	public String addUser(JJLUser user){
@@ -68,7 +68,7 @@ public class JJLUserDao extends BaseDao {
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {
-				System.out.println("×¢²á³É¹¦£¬Ìí¼ÓÁË" + row + "ÌõÊı¾İ£¡");
+				System.out.println("æ³¨å†ŒæˆåŠŸï¼Œæ·»åŠ äº†" + row + "æ¡æ•°æ®ï¼");
 				if (resultSet.next()) {
 					userID = resultSet.getInt(1);
 				}
@@ -135,7 +135,7 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * ²éÑ¯ÊÇ·ñÓÃ»§´æÔÚ
+	 * æŸ¥è¯¢æ˜¯å¦ç”¨æˆ·å­˜åœ¨
 	 * 
 	 * @param userName
 	 * @return
@@ -158,12 +158,12 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * ÓÃ»§µÇÂ½
+	 * ç”¨æˆ·ç™»é™†
 	 * 
 	 * @param userName
-	 *            ÓÃ»§Ãû
+	 *            ç”¨æˆ·å
 	 * @param password
-	 *            ÃÜÂë
+	 *            å¯†ç 
 	 * @return
 	 */
 	public JJLUser login(String userName, String password) {
@@ -176,7 +176,7 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * µÇÂ½³É¹¦¸üĞÂµÇÂ½Ê±¼ä
+	 * ç™»é™†æˆåŠŸæ›´æ–°ç™»é™†æ—¶é—´
 	 * 
 	 * @param userName
 	 * @param addTime
@@ -190,7 +190,7 @@ public class JJLUserDao extends BaseDao {
 			Statement ps = connection.createStatement();
 			int row = ps.executeUpdate(sql);
 			if (row > 0) {
-				System.out.println("µÇÂ½³É¹¦£¬¼ÇÂ¼µÇÂ½Ê±¼ä");
+				System.out.println("ç™»é™†æˆåŠŸï¼Œè®°å½•ç™»é™†æ—¶é—´");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -202,7 +202,7 @@ public class JJLUserDao extends BaseDao {
 
 	
 	/**
-	 * ¸ù¾İÓÃ»§Ãû»ñµÃÓÃ»§
+	 * æ ¹æ®ç”¨æˆ·åè·å¾—ç”¨æˆ·
 	 * 
 	 * @param userName
 	 * @return
@@ -239,7 +239,7 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * ĞŞ¸ÄÃÜÂë
+	 * ä¿®æ”¹å¯†ç 
 	 * 
 	 * @param userName
 	 * @param password
@@ -263,7 +263,7 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * ¸ù¾İÓÃ»§ÃûĞŞ¸ÄÃÜÂë
+	 * æ ¹æ®ç”¨æˆ·åä¿®æ”¹å¯†ç 
 	 * 
 	 * @param userName
 	 * @param password
@@ -277,7 +277,7 @@ public class JJLUserDao extends BaseDao {
 			Statement ps = connection.createStatement();
 			int row = ps.executeUpdate(sql);
 			if (row > 0) {
-				System.out.println("ĞŞ¸Ä³É¹¦£¬Ìí¼ÓÁË" + row + "ÌõÊı¾İ£¡");
+				System.out.println("ä¿®æ”¹æˆåŠŸï¼Œæ·»åŠ äº†" + row + "æ¡æ•°æ®ï¼");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -286,7 +286,7 @@ public class JJLUserDao extends BaseDao {
 	}
 	
 	/**
-	 * ¸ù¾İuserid»ñµÃÓÃ»§¶ÔÏó
+	 * æ ¹æ®useridè·å¾—ç”¨æˆ·å¯¹è±¡
 	 * 
 	 * @param userName
 	 * @return
@@ -356,12 +356,12 @@ public class JJLUserDao extends BaseDao {
 		return user;
 	}
 	/**
-	 * ¸üĞÂuserid
+	 * æ›´æ–°userid
 	 * 
-	 * @param tableName±íÃû
-	 * @param userId×Ö¶Î
-	 * @param oldUseridĞè¸üĞÂµÄuserid
-	 * @param newUseridĞÂµÄuserid
+	 * @param tableNameè¡¨å
+	 * @param userIdå­—æ®µ
+	 * @param oldUseridéœ€æ›´æ–°çš„userid
+	 * @param newUseridæ–°çš„userid
 	 * @return
 	 */
 	public boolean updateUserid(String tableName, String userId,
@@ -385,7 +385,7 @@ public class JJLUserDao extends BaseDao {
 	}
 
 	/**
-	 * ÔÚÓÃ»§±í²éÑ¯openidÊÇ·ñ´æÔÚ£¬²¢·µ»Øuserid
+	 * åœ¨ç”¨æˆ·è¡¨æŸ¥è¯¢openidæ˜¯å¦å­˜åœ¨ï¼Œå¹¶è¿”å›userid
 	 * 
 	 * @param openid
 	 * @return
@@ -425,7 +425,7 @@ public class JJLUserDao extends BaseDao {
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§ÃûºÍÃÜÂë²éÑ¯ÓÃ»§ÊÇ·ñ´æÔÚ
+	 * æ ¹æ®ç”¨æˆ·åå’Œå¯†ç æŸ¥è¯¢ç”¨æˆ·æ˜¯å¦å­˜åœ¨
 	 * 
 	 * @param userName
 	 * @param password
@@ -460,7 +460,7 @@ public class JJLUserDao extends BaseDao {
  
 
 	/**
-	 * ½âÎöResultSet ×ª»»³Éjson
+	 * è§£æResultSet è½¬æ¢æˆjson
 	 * 
 	 * @param rs
 	 * @return
@@ -469,15 +469,15 @@ public class JJLUserDao extends BaseDao {
 	 */
 	public String resultSetToJson(ResultSet rs) throws SQLException,
 			JSONException {
-		// jsonÊı×é
+		// jsonæ•°ç»„
 		JSONArray array = new JSONArray();
-		// »ñÈ¡ÁĞÊı
+		// è·å–åˆ—æ•°
 		ResultSetMetaData metaData = rs.getMetaData();
 		int columnCount = metaData.getColumnCount();
-		// ±éÀúResultSetÖĞµÄÃ¿ÌõÊı¾İ
+		// éå†ResultSetä¸­çš„æ¯æ¡æ•°æ®
 		while (rs.next()) {
 			JSONObject jsonObj = new JSONObject();
-			// ±éÀúÃ¿Ò»ÁĞ
+			// éå†æ¯ä¸€åˆ—
 			for (int i = 1; i <= columnCount; i++) {
 				String columnName = metaData.getColumnLabel(i);
 				String value = rs.getString(columnName);
@@ -489,7 +489,7 @@ public class JJLUserDao extends BaseDao {
 	}
 	
 	/**
-	 * ÑéÖ¤°æ±¾
+	 * éªŒè¯ç‰ˆæœ¬
 	 * 
 	 * @return
 	 */

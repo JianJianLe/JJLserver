@@ -30,7 +30,7 @@ public class JJLImageDao extends BaseDao{
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {
-				System.out.println("添加图片，添加了" + row + "条数据！");
+				System.out.println("娣诲姞鍥剧墖锛屾坊鍔犱簡" + row + "鏉℃暟鎹紒");
 			}
 		}catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -92,7 +92,7 @@ public class JJLImageDao extends BaseDao{
 			ps.setString(4, image.getUserID());
 			int row = ps.executeUpdate();
 			if (row > 0) {
-				System.out.println("更新成功，更新Image");
+				System.out.println("鏇存柊鎴愬姛锛屾洿鏂癐mage");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

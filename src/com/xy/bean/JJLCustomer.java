@@ -3,11 +3,11 @@ package com.xy.bean;
 public class JJLCustomer {
 	
 	private String userid;	
-	private String CustomerCategory; //¿Í»§ÀàĞÍ£º ³ÉÈË»ò¶ùÍ¯
-	private String TicketQTY;//¹ºÂòÆ±µÄÊıÁ¿
-	private String TicketPrice;//Æ±µ¥¼Û
-	private String printNO;//ÅÅ¶ÓºÅ
-	private String addTime;//ÂòÆ±Ê±¼ä
+	private String CustomerCategory; //å®¢æˆ·ç±»å‹ï¼š æˆäººæˆ–å„¿ç«¥
+	private String TicketQTY;//è´­ä¹°ç¥¨çš„æ•°é‡
+	private String TicketPrice;//ç¥¨å•ä»·
+	private String printNO;//æ’é˜Ÿå·
+	private String addTime;//ä¹°ç¥¨æ—¶é—´
 	
 	public String getUserID(){
 		return userid;

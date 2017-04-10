@@ -34,7 +34,7 @@ public class VideoDetailServlet extends HttpServlet {
 		
 		String userid = request.getParameter("userid");
 		
-		//获取用户信息
+		//鑾峰彇鐢ㄦ埛淇℃伅
 		video=videoDao.getVideoByUserId(userid);
 		
 		Gson gson = new Gson();

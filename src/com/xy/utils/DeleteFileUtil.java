@@ -5,16 +5,16 @@ import java.io.File;
 public class DeleteFileUtil {
 
 	 /** 
-	  * É¾³ıÎÄ¼ş£¬¿ÉÒÔÊÇÎÄ¼ş»òÎÄ¼ş¼Ğ 
+	  * åˆ é™¤æ–‡ä»¶ï¼Œå¯ä»¥æ˜¯æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹ 
 	  *  
 	  * @param fileName 
-	  *            ÒªÉ¾³ıµÄÎÄ¼şÃû 
-	  * @return É¾³ı³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse 
+	  *            è¦åˆ é™¤çš„æ–‡ä»¶å 
+	  * @return åˆ é™¤æˆåŠŸè¿”å›trueï¼Œå¦åˆ™è¿”å›false 
 	  */  
 	 public static boolean delete(String fileName) {  
 	  File file = new File(fileName);  
 	  if (!file.exists()) {  
-	   System.out.println("É¾³ıÎÄ¼şÊ§°Ü:" + fileName + "²»´æÔÚ£¡");  
+	   System.out.println("åˆ é™¤æ–‡ä»¶å¤±è´¥:" + fileName + "ä¸å­˜åœ¨ï¼");  
 	   return false;  
 	  } else {  
 	   if (file.isFile())  
@@ -25,57 +25,57 @@ public class DeleteFileUtil {
 	 }  
 	  
 	 /** 
-	  * É¾³ıµ¥¸öÎÄ¼ş 
+	  * åˆ é™¤å•ä¸ªæ–‡ä»¶ 
 	  *  
 	  * @param fileName 
-	  *            ÒªÉ¾³ıµÄÎÄ¼şµÄÎÄ¼şÃû 
-	  * @return µ¥¸öÎÄ¼şÉ¾³ı³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse 
+	  *            è¦åˆ é™¤çš„æ–‡ä»¶çš„æ–‡ä»¶å 
+	  * @return å•ä¸ªæ–‡ä»¶åˆ é™¤æˆåŠŸè¿”å›trueï¼Œå¦åˆ™è¿”å›false 
 	  */  
 	 public static boolean deleteFile(String fileName) {  
 	  File file = new File(fileName);  
-	  // Èç¹ûÎÄ¼şÂ·¾¶Ëù¶ÔÓ¦µÄÎÄ¼ş´æÔÚ£¬²¢ÇÒÊÇÒ»¸öÎÄ¼ş£¬ÔòÖ±½ÓÉ¾³ı  
+	  // å¦‚æœæ–‡ä»¶è·¯å¾„æ‰€å¯¹åº”çš„æ–‡ä»¶å­˜åœ¨ï¼Œå¹¶ä¸”æ˜¯ä¸€ä¸ªæ–‡ä»¶ï¼Œåˆ™ç›´æ¥åˆ é™¤  
 	  if (file.exists() && file.isFile()) {  
 	   if (file.delete()) {  
-	    System.out.println("É¾³ıµ¥¸öÎÄ¼ş" + fileName + "³É¹¦£¡");  
+	    System.out.println("åˆ é™¤å•ä¸ªæ–‡ä»¶" + fileName + "æˆåŠŸï¼");  
 	    return true;  
 	   } else {  
-	    System.out.println("É¾³ıµ¥¸öÎÄ¼ş" + fileName + "Ê§°Ü£¡");  
+	    System.out.println("åˆ é™¤å•ä¸ªæ–‡ä»¶" + fileName + "å¤±è´¥ï¼");  
 	    return false;  
 	   }  
 	  } else {  
-	   System.out.println("É¾³ıµ¥¸öÎÄ¼şÊ§°Ü£º" + fileName + "²»´æÔÚ£¡");  
+	   System.out.println("åˆ é™¤å•ä¸ªæ–‡ä»¶å¤±è´¥ï¼š" + fileName + "ä¸å­˜åœ¨ï¼");  
 	   return false;  
 	  }  
 	 }  
 	  
 	 /** 
-	  * É¾³ıÄ¿Â¼¼°Ä¿Â¼ÏÂµÄÎÄ¼ş 
+	  * åˆ é™¤ç›®å½•åŠç›®å½•ä¸‹çš„æ–‡ä»¶ 
 	  *  
 	  * @param dir 
-	  *            ÒªÉ¾³ıµÄÄ¿Â¼µÄÎÄ¼şÂ·¾¶ 
-	  * @return Ä¿Â¼É¾³ı³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse 
+	  *            è¦åˆ é™¤çš„ç›®å½•çš„æ–‡ä»¶è·¯å¾„ 
+	  * @return ç›®å½•åˆ é™¤æˆåŠŸè¿”å›trueï¼Œå¦åˆ™è¿”å›false 
 	  */  
 	 public static boolean deleteDirectory(String dir) {  
-	  // Èç¹ûdir²»ÒÔÎÄ¼ş·Ö¸ô·û½áÎ²£¬×Ô¶¯Ìí¼ÓÎÄ¼ş·Ö¸ô·û  
+	  // å¦‚æœdirä¸ä»¥æ–‡ä»¶åˆ†éš”ç¬¦ç»“å°¾ï¼Œè‡ªåŠ¨æ·»åŠ æ–‡ä»¶åˆ†éš”ç¬¦  
 	  if (!dir.endsWith(File.separator))  
 	   dir = dir + File.separator;  
 	  File dirFile = new File(dir);  
-	  // Èç¹ûdir¶ÔÓ¦µÄÎÄ¼ş²»´æÔÚ£¬»òÕß²»ÊÇÒ»¸öÄ¿Â¼£¬ÔòÍË³ö  
+	  // å¦‚æœdirå¯¹åº”çš„æ–‡ä»¶ä¸å­˜åœ¨ï¼Œæˆ–è€…ä¸æ˜¯ä¸€ä¸ªç›®å½•ï¼Œåˆ™é€€å‡º  
 	  if ((!dirFile.exists()) || (!dirFile.isDirectory())) {  
-	   System.out.println("É¾³ıÄ¿Â¼Ê§°Ü£º" + dir + "²»´æÔÚ£¡");  
+	   System.out.println("åˆ é™¤ç›®å½•å¤±è´¥ï¼š" + dir + "ä¸å­˜åœ¨ï¼");  
 	   return false;  
 	  }  
 	  boolean flag = true;  
-	  // É¾³ıÎÄ¼ş¼ĞÖĞµÄËùÓĞÎÄ¼ş°üÀ¨×ÓÄ¿Â¼  
+	  // åˆ é™¤æ–‡ä»¶å¤¹ä¸­çš„æ‰€æœ‰æ–‡ä»¶åŒ…æ‹¬å­ç›®å½•  
 	  File[] files = dirFile.listFiles();  
 	  for (int i = 0; i < files.length; i++) {  
-	   // É¾³ı×ÓÎÄ¼ş  
+	   // åˆ é™¤å­æ–‡ä»¶  
 	   if (files[i].isFile()) {  
 	    flag = DeleteFileUtil.deleteFile(files[i].getAbsolutePath());  
 	    if (!flag)  
 	     break;  
 	   }  
-	   // É¾³ı×ÓÄ¿Â¼  
+	   // åˆ é™¤å­ç›®å½•  
 	   else if (files[i].isDirectory()) {  
 	    flag = DeleteFileUtil.deleteDirectory(files[i]  
 	      .getAbsolutePath());  
@@ -84,12 +84,12 @@ public class DeleteFileUtil {
 	   }  
 	  }  
 	  if (!flag) {  
-	   System.out.println("É¾³ıÄ¿Â¼Ê§°Ü£¡");  
+	   System.out.println("åˆ é™¤ç›®å½•å¤±è´¥ï¼");  
 	   return false;  
 	  }  
-	  /*// É¾³ıµ±Ç°Ä¿Â¼  
+	  /*// åˆ é™¤å½“å‰ç›®å½•  
 	  if (dirFile.delete()) {  
-	   System.out.println("É¾³ıÄ¿Â¼" + dir + "³É¹¦£¡");  
+	   System.out.println("åˆ é™¤ç›®å½•" + dir + "æˆåŠŸï¼");  
 	   return true;  
 	  } else {  
 	   return false;  

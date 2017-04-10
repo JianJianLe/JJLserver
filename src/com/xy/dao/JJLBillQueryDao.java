@@ -17,14 +17,14 @@ import com.xy.bean.JJLUser;
 import com.xy.utils.DateTimeUtils;
 import com.xy.utils.ResultSetUtils;
 /**
- * 账单查询
+ * 璐﹀崟鏌ヨ
  * @author jat
  *
  */
 public class JJLBillQueryDao extends BaseDao{
 	
 	/**
-	 * 账单查询
+	 * 璐﹀崟鏌ヨ
 	 * @param shopName
 	 * @param fromDate
 	 * @param toDate
@@ -35,7 +35,7 @@ public class JJLBillQueryDao extends BaseDao{
 	public String getBillQueryList(String shopname,String fromDate,String toDate) throws SQLException, JSONException{
 		getCon();
 		String sql="";
-		if(shopname.equals("所有店")){
+		if(shopname.equals("锟斤拷锟叫碉拷")){
 			sql = "select * from jjlbill";
 			if (fromDate!=null&&!fromDate.equals("")) {
 				sql =sql + " where addTime between timestamp('" + fromDate+" 00:00:00','YYYY-MM-DD') and";
@@ -74,7 +74,7 @@ public class JJLBillQueryDao extends BaseDao{
 	
 	
 	/**
-	 * 添加付款信息记录
+	 * 娣诲姞浠樻淇℃伅璁板綍
 	 * 
 	 * @param 
 	 * @return
@@ -108,7 +108,7 @@ public class JJLBillQueryDao extends BaseDao{
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {
-				System.out.println("支付成功，添加了" + row + "条数据！");
+				System.out.println("鏀粯鎴愬姛锛屾坊鍔犱簡" + row + "鏉℃暟鎹紒");
 				if (resultSet.next()) {
 //					userID = resultSet.getInt(1);
 				}

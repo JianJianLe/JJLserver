@@ -2,8 +2,8 @@ package com.xy.utils;
 
 
 /**
- * ÏÂÃæÕâÐ©×¢ÊÍÊÇÏÂÔØÕâ¸öÀàµÄÊ±ºò±¾À´¾ÍÓÐµÄ£¬±¾À´ÒªÉ¾³ýµÄ£¬µ«¿´ÁËÏÂ¾¹È»ÊÇlicense£¬ºðºð£¬
- * ºÃ¶«Î÷£¬ÁôÔÚ×¢ÊÍÀï£¬ÒÔ±¸²»Ê±Ö®ÓÃ£¬´ó¼ÒÓÐÐèÒª¼ÓlicenseµÄ¿ÉÒÔµ½ÏÂÃæµÄÍøÖ·ÕÒÅ¶
+ * ä¸‹é¢è¿™äº›æ³¨é‡Šæ˜¯ä¸‹è½½è¿™ä¸ªç±»çš„æ—¶å€™æœ¬æ¥å°±æœ‰çš„ï¼Œæœ¬æ¥è¦åˆ é™¤çš„ï¼Œä½†çœ‹äº†ä¸‹ç«Ÿç„¶æ˜¯licenseï¼Œå¼å¼ï¼Œ
+ * å¥½ä¸œè¥¿ï¼Œç•™åœ¨æ³¨é‡Šé‡Œï¼Œä»¥å¤‡ä¸æ—¶ä¹‹ç”¨ï¼Œå¤§å®¶æœ‰éœ€è¦åŠ licenseçš„å¯ä»¥åˆ°ä¸‹é¢çš„ç½‘å€æ‰¾å“¦
  */
 
 //EPL, Eclipse Public License, V1.0 or later, http://www.eclipse.org/legal
@@ -24,10 +24,10 @@ package com.xy.utils;
 */
 
 /**
- * Õâ¸öÀàÔÚÉÏÃæ×¢ÊÍµÄÍøÖ·ÖÐÓÐ£¬´ó¼Ò¿ÉÒÔ×ÔÐÐÏÂÔØÏÂ£¬Ò²¿ÉÒÔÖ±½ÓÓÃÕâ¸ö£¬
- * ¹«¿ªµÄBase64CoderÀà£¨²»ÓÃÉî¾¿ËüÊÇÔõÃ´ÊµÏÖµÄ£¬
- * »¹ÊÇÄÇ¾ä»°£¬ÓÐÂÖ×ÓÖ±½ÓÓÃÂÖ×Ó£©£¬ºÃÓÃµÄÒªËÀÈËÁË...
- * Ð¡ÂíÒ²ºÜÎÞ³ÜµÄÒýÓÃÁËÕâ¸öÍøÖ·ÏÂµÄ¶«¶«£¬ºðºð...
+ * è¿™ä¸ªç±»åœ¨ä¸Šé¢æ³¨é‡Šçš„ç½‘å€ä¸­æœ‰ï¼Œå¤§å®¶å¯ä»¥è‡ªè¡Œä¸‹è½½ä¸‹ï¼Œä¹Ÿå¯ä»¥ç›´æŽ¥ç”¨è¿™ä¸ªï¼Œ
+ * å…¬å¼€çš„Base64Coderç±»ï¼ˆä¸ç”¨æ·±ç©¶å®ƒæ˜¯æ€Žä¹ˆå®žçŽ°çš„ï¼Œ
+ * è¿˜æ˜¯é‚£å¥è¯ï¼Œæœ‰è½®å­ç›´æŽ¥ç”¨è½®å­ï¼‰ï¼Œå¥½ç”¨çš„è¦æ­»äººäº†...
+ * å°é©¬ä¹Ÿå¾ˆæ— è€»çš„å¼•ç”¨äº†è¿™ä¸ªç½‘å€ä¸‹çš„ä¸œä¸œï¼Œå¼å¼...
 * @Title: Base64Coder.java
 * @Package com.xiaoma.piccut.demo
 * @Description: TODO

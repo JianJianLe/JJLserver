@@ -3,7 +3,7 @@ package com.xy.bean;
 import java.io.Serializable;
 
 /**
- *	用户实体
+ *	鐢ㄦ埛瀹炰綋
  */
 public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;

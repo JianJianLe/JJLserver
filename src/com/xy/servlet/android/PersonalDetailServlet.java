@@ -33,7 +33,7 @@ public class PersonalDetailServlet extends HttpServlet {
 		
 		String userName = request.getParameter("username");
 		
-		//获取用户列表
+		//鑾峰彇鐢ㄦ埛鍒楄〃
 		user=userDao.getUserByName(userName);
 		
 		Gson gson = new Gson();

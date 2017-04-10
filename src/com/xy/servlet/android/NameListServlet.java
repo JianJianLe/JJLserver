@@ -35,7 +35,7 @@ public class NameListServlet extends HttpServlet  {
 		
 		String userName = request.getParameter("username");
 		
-		//获取用户列表
+		//鑾峰彇鐢ㄦ埛鍒楄〃
 		String shopnamelist=userDao.listShopName();
 		String namelist=userDao.listUserName();
 		//System.out.println("shopnamelist:"+shopnamelist);

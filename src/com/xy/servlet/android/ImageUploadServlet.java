@@ -36,56 +36,56 @@ import com.xy.utils.DeleteFileUtil;
 
 public class ImageUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private String[] namelist;
 	private String nameStr=null;
 	private String userid=null;
 	private List<String> imgNameList= new ArrayList<String>();
-	
+
 	private JJLUserDao userDao = new JJLUserDao();
 	private JJLUser user=null;
 	private JJLImageDao imageDao=new JJLImageDao();
-	
+
 	private String fileDir=null;
 	private JJLImage image=null;
 	private String strName="";
-	
+
 	private ServletConfig config;
-    public void init(ServletConfig config) throws ServletException {
-        this.config = config;
-    }
-    
+	public void init(ServletConfig config) throws ServletException {
+		this.config = config;
+	}
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();//Êä³ö
+		PrintWriter out = response.getWriter();
 
 		int flag=0;
 		boolean isMultipart=ServletFileUpload.isMultipartContent(request);
 		if(isMultipart==true){
 			try{
 				FileItemFactory factory=new DiskFileItemFactory();
-				
+
 				ServletFileUpload upload=new ServletFileUpload(factory);
-				
+
 				List<FileItem> fileItems=upload.parseRequest(request);
 				Iterator<FileItem>iter=fileItems.iterator();
-				
+
 				String path = config.getServletContext().getRealPath("/");
 				path=path.replace("JJLserver\\", "")+"Image\\";
-				
-				 
+
+
 				DeleteFileUtil.deleteDirectory(path);
 				image=new JJLImage();
 				image.setUserID(userid);
 				image.setName("");
 				image.setAddTime("");
 				imageDao.updateImageByUserID(image);
-				
+
 				imgNameList.clear();
 				strName="";
 				while(iter.hasNext()){
@@ -113,18 +113,18 @@ public class ImageUploadServlet extends HttpServlet {
 						}
 					}
 				}
- 
+
 				for(int i=0;i<imgNameList.size();i++){
 					strName=strName + imgNameList.get(i) + ",";
 				}
-				
+
 				strName=strName.substring(0, strName.length()-1);
-				
+
 				namelist=nameStr.split(",");
 				for(int i=0;i<namelist.length;i++){					
 					user=userDao.getUseridByUsername(namelist[i]);
 					if(user!=null){
-						
+
 						//----------
 						fileDir=path + File.separator + namelist[i];
 						createDir(fileDir);
@@ -136,7 +136,7 @@ public class ImageUploadServlet extends HttpServlet {
 							copyFile(srcPath,targetPath);
 						}
 						//----------
-						
+
 						userid=user.getUserID();						
 						image=new JJLImage();
 						image.setUserID(userid);
@@ -144,120 +144,120 @@ public class ImageUploadServlet extends HttpServlet {
 						//System.out.println(strName);
 						image.setPath("Image/" + namelist[i] + "/");
 						image.setAddTime(dateFormat.format(new Date()));
-						
+
 						if(imageDao.queryImageUserID(userid)){							
 							imageDao.updateImageByUserID(image); 
 						}else{
 							imageDao.addImage(image);
 						}
 					}else{
-						//User=null; Ã»ÓĞÕÒµ½user
+						//User=null; æ²¡æœ‰æ‰¾åˆ°user
 					}
 				}
-				
+
 				DeleteFiles(path);
-												
+
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		Gson gson = new Gson();
 		List<Map<String, Object>> listOK=null;
 		Map<String, Object> mapJson =null;
 		String resultOKJson =null;
 		switch(flag)
 		{
-			case 0:
-				listOK = new ArrayList<Map<String, Object>>();
-				mapJson = new HashMap<String, Object>();	
-				mapJson.put("flag", "0");
-				listOK.add(mapJson);
-				resultOKJson= gson.toJson(mapJson);
-				out.print(resultOKJson);
-				break;
-			case 1:
-				listOK = new ArrayList<Map<String, Object>>();
-				mapJson = new HashMap<String, Object>();	
-				mapJson.put("flag", "1");
-				listOK.add(mapJson);
-				resultOKJson= gson.toJson(mapJson);
-				out.print(resultOKJson);
-				break;
-			case 2:
-				listOK = new ArrayList<Map<String, Object>>();
-				mapJson = new HashMap<String, Object>();	
-				mapJson.put("flag", "2");
-				listOK.add(mapJson);
-				resultOKJson= gson.toJson(mapJson);
-				out.print(resultOKJson);
-				break;
+		case 0:
+			listOK = new ArrayList<Map<String, Object>>();
+			mapJson = new HashMap<String, Object>();	
+			mapJson.put("flag", "0");
+			listOK.add(mapJson);
+			resultOKJson= gson.toJson(mapJson);
+			out.print(resultOKJson);
+			break;
+		case 1:
+			listOK = new ArrayList<Map<String, Object>>();
+			mapJson = new HashMap<String, Object>();	
+			mapJson.put("flag", "1");
+			listOK.add(mapJson);
+			resultOKJson= gson.toJson(mapJson);
+			out.print(resultOKJson);
+			break;
+		case 2:
+			listOK = new ArrayList<Map<String, Object>>();
+			mapJson = new HashMap<String, Object>();	
+			mapJson.put("flag", "2");
+			listOK.add(mapJson);
+			resultOKJson= gson.toJson(mapJson);
+			out.print(resultOKJson);
+			break;
 		}
 
 		out.flush();
 		out.close();
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 	private static boolean copyFile(String srcpath,String targetpath)
-	        throws IOException {    
-	    InputStream input = null;    
-	    OutputStream output = null;    
-	    try {
-	    	File source=new File(srcpath);
-	    	File dest=new File(targetpath);
-	    	if(!source.isDirectory()){
+			throws IOException {    
+		InputStream input = null;    
+		OutputStream output = null;    
+		try {
+			File source=new File(srcpath);
+			File dest=new File(targetpath);
+			if(!source.isDirectory()){
 				input = new FileInputStream(source);
 				output = new FileOutputStream(dest);        
 				byte[] buf = new byte[1024];        
 				int bytesRead;        
 				while ((bytesRead = input.read(buf)) > 0) {
-				    output.write(buf, 0, bytesRead);
+					output.write(buf, 0, bytesRead);
 				}
-				
+
 				input.close();
-		        output.close();
-	    	}
-	        return true;
-	        
-	    } catch (Exception e) {
+				output.close();
+			}
+			return true;
+
+		} catch (Exception e) {
 			// TODO: handle exception
-	    	System.out.println(e.getMessage());	    	
+			System.out.println(e.getMessage());	    	
 		}  
-	    return false;
+		return false;
 	}
-	
-	// ´´½¨Ä¿Â¼
+
+	// åˆ›å»ºç›®å½•
 	public boolean createDir(String destDirName) {
-			File dir = new File(destDirName);
-			if (dir.exists()) {// ÅĞ¶ÏÄ¿Â¼ÊÇ·ñ´æÔÚ
-				//System.out.println("´´½¨Ä¿Â¼Ê§°Ü£¬Ä¿±êÄ¿Â¼ÒÑ´æÔÚ£¡");
-				return false;
-			}
-			if (!destDirName.endsWith(File.separator)) {// ½áÎ²ÊÇ·ñÒÔ"/"½áÊø
-				destDirName = destDirName + File.separator;
-			}
-			if (dir.mkdirs()) {// ´´½¨Ä¿±êÄ¿Â¼
-				System.out.println("´´½¨Ä¿Â¼³É¹¦£¡" + destDirName);
-				return true;
-			} else {
-				//System.out.println("´´½¨Ä¿Â¼Ê§°Ü£¡");
-				return false;
-			}
+		File dir = new File(destDirName);
+		if (dir.exists()) {// åˆ¤æ–­ç›®å½•æ˜¯å¦å­˜åœ¨
+			//System.out.println("åˆ›å»ºç›®å½•å¤±è´¥ï¼Œç›®æ ‡ç›®å½•å·²å­˜åœ¨ï¼");
+			return false;
 		}
-	
+		if (!destDirName.endsWith(File.separator)) {// ç»“å°¾æ˜¯å¦ä»¥"/"ç»“æŸ
+			destDirName = destDirName + File.separator;
+		}
+		if (dir.mkdirs()) {// åˆ›å»ºç›®æ ‡ç›®å½•
+			System.out.println("åˆ›å»ºç›®å½•æˆåŠŸï¼" + destDirName);
+			return true;
+		} else {
+			//System.out.println("åˆ›å»ºç›®å½•å¤±è´¥ï¼");
+			return false;
+		}
+	}
+
 	private void DeleteFile(String path){
 		File file=new File(path);
 		if(file.exists()){
 			file.delete();
 		}
 	}
-	
+
 	private void DeleteFiles(String path ){
 		//==========
 		File mfile=new File(path);

@@ -4,10 +4,10 @@ public class JJLException {
 
 	private String userid;
 	private String shopname;//
-	private String region;// ËùÔÚµØÇø ¸ñÊ½£º Ê¡·İ_³ÇÊĞ
-	private String DeviceNO;//Éè±¸ºÅ
-	private String ExceptionContent;//Òì³£ÄÚÈİ
-	private String addTime;//Ìí¼ÓÍ¼Æ¬Ê±¼ä
+	private String region;// æ‰€åœ¨åœ°åŒº æ ¼å¼ï¼š çœä»½_åŸå¸‚
+	private String DeviceNO;//è®¾å¤‡å·
+	private String ExceptionContent;//å¼‚å¸¸å†…å®¹
+	private String addTime;//æ·»åŠ å›¾ç‰‡æ—¶é—´
  
 	public String getUserID(){
 		return userid;

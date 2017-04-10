@@ -4,7 +4,7 @@ public class JJLPayment {
 	
 	private String userid;
 	private String payType;//wechat or alipay
-	private String payAmount;//¸¶¿î½ğ¶î
+	private String payAmount;//ä»˜æ¬¾é‡‘é¢
 	private String addTime;
 
 	public String getUserID(){
