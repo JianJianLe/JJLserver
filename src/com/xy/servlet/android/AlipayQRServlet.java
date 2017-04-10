@@ -98,7 +98,7 @@ public class AlipayQRServlet extends HttpServlet {
 		storeId =(String) request.getParameter("store_id");
 		String out_trade_no = "No.alipay"+System.currentTimeMillis();
 
-		folderPath = "\\picture";
+		folderPath = "/picture";
 //		String path = config.getServletContext().getRealPath("/");
 //		path=path.replace("JJLserver\\", "")+"QRCode\\test_store_id\\";
 //		folderPath=path;
@@ -110,7 +110,7 @@ public class AlipayQRServlet extends HttpServlet {
 		JSONObject object = new JSONObject();
 		try {
 			object.put("alipay_order", out_trade_no);
-			object.put("filePath", folderPath+"\\"+storeId+".png");
+			object.put("filePath", folderPath+"/"+storeId+".png");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -210,12 +210,14 @@ public class AlipayQRServlet extends HttpServlet {
 			// 需要修改为运行机器上的路径
 
 
-			File file = new File(request.getRealPath("/")+folderPath);
+			File file = new File(request.getRealPath("")+folderPath);
 			if(!file.exists()){
 				file.mkdirs();
 			}
-			filePath = String.format(request.getRealPath("/")+folderPath + "/"+storeId+".png",
+			filePath = String.format(request.getRealPath("")+folderPath + "/"+storeId+".png",
 					response.getOutTradeNo());
+			
+			System.out.println(filePath);
 			
 			file=new File(filePath);
 			if(file.exists()){
