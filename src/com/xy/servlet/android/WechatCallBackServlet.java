@@ -2,6 +2,7 @@ package com.xy.servlet.android;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
@@ -11,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
 
 import com.xy.bean.JJLBillQuery;
 import com.xy.common.Config;
@@ -61,18 +64,31 @@ public class WechatCallBackServlet extends HttpServlet {
 		String result = query(out_trade_no);
 		if (result.equals("SUCCESS")) {
 			JJLBillQuery query = new JJLBillQuery();
+			try {
+				String daoResult = dao.getQuery(out_trade_no);
+				if (daoResult.equals("[]")) {
+					String deviceno=request.getParameter("deviceNo");
+					String shopname=request.getParameter("shopName");
+					query.setOrderNo(out_trade_no);
+					query.setPayAmount(request.getParameter("payAmount"));
+					query.setAddTime(DateTimeUtils.getCurrentTime());
+					query.setDeviceNO(deviceno);
+					query.setPayType("alipay");
+					query.setShopname(shopname);
+					query.setRegion(request.getParameter("region"));
+					query.setUserID(request.getParameter("user_id"));
+					dao.saveJJLBill(query);
+				}else {
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			String deviceno=request.getParameter("deviceNo");
-			String shopname=request.getParameter("shopName");
-			query.setOrderNo(out_trade_no);
-			query.setPayAmount(request.getParameter("payAmount"));
-			query.setAddTime(DateTimeUtils.getCurrentTime());
-			query.setDeviceNO(deviceno);
-			query.setPayType("alipay");
-			query.setShopname(shopname);
-			query.setRegion(request.getParameter("region"));
-			query.setUserID(request.getParameter("user_id"));
-			dao.saveJJLBill(query);
 			
 			payResult = true;
 		}else {

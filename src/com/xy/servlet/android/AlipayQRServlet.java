@@ -23,7 +23,6 @@ import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.utils.ZxingUtils;
-import com.mysql.jdbc.log.Log;
 
 
 
@@ -93,9 +92,9 @@ public class AlipayQRServlet extends HttpServlet {
 		//获取参数
 		String pruduct_id = (String) request.getParameter("product_id");
 		String body = (String) request.getParameter("body");
-		String subject =(String) request.getParameter("subject");
-		String order_price =(String) request.getParameter("order_price");
-		storeId =(String) request.getParameter("store_id");
+		String subject = (String) request.getParameter("subject");
+		String order_price = (String) request.getParameter("order_price");
+		storeId = (String) request.getParameter("store_id");
 		String out_trade_no = "No.alipay"+System.currentTimeMillis();
 
 		folderPath = "/picture";
@@ -111,6 +110,7 @@ public class AlipayQRServlet extends HttpServlet {
 		try {
 			object.put("alipay_order", out_trade_no);
 			object.put("filePath", folderPath+"/alipay"+storeId+".png");
+			System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

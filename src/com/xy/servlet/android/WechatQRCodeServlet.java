@@ -55,7 +55,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String body = (String) request.getParameter("body");
 		String subject =(String) request.getParameter("subject");
 		String order_price = (String) request.getParameter("order_price");
-		String deviceNo =request.getRemoteAddr();
+		String deviceNo = request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)*100+"";
 		storeId = (String) request.getParameter("store_id");
 		String orderNo = System.currentTimeMillis()+""; 
