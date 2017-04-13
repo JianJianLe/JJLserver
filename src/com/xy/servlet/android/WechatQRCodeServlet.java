@@ -60,7 +60,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String price = Double.parseDouble(order_price)*100+"";
 		System.out.println(order_price+" "+price);
 		storeId = (String) request.getParameter("store_id");
-		String orderNo = "No.wechat"+System.currentTimeMillis()+""; 
+		String orderNo = System.currentTimeMillis()+""; 
 
 		String code = utils.createQRCode(orderNo,body,deviceNo,price);
 		folderPath = "/picture";
