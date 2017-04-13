@@ -49,6 +49,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		WeChatUtils utils = new WeChatUtils();
 		//获取参数
 		String pruduct_id = (String) request.getParameter("product_id");;
@@ -59,7 +60,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String price = Double.parseDouble(order_price)*100+"";
 		System.out.println(order_price+" "+price);
 		storeId = (String) request.getParameter("store_id");
-		String orderNo = System.currentTimeMillis()+""; 
+		String orderNo = "No.wechat"+System.currentTimeMillis()+""; 
 
 		String code = utils.createQRCode(orderNo,body,deviceNo,price);
 		folderPath = "/picture";

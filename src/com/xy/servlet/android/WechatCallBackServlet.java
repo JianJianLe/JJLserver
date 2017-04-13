@@ -56,6 +56,7 @@ public class WechatCallBackServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
 		if (out_trade_no==null||out_trade_no.equals("")) {
@@ -78,7 +79,7 @@ public class WechatCallBackServlet extends HttpServlet {
 					query.setPayAmount(request.getParameter("payAmount"));
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
-					query.setPayType("alipay");
+					query.setPayType("wechat");
 					query.setShopname(shopname);
 					query.setRegion(request.getParameter("region"));
 					query.setUserID(request.getParameter("user_id"));
