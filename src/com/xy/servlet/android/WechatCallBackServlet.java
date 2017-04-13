@@ -58,11 +58,16 @@ public class WechatCallBackServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
-		
+		if (out_trade_no==null||out_trade_no.equals("")) {
+			out.print(false);
+			out.flush();
+			out.close();
+			return;
+		}
 		JJLBillQueryDao dao = new JJLBillQueryDao();
 		
 		String result = query(out_trade_no);
-		if (result.equals("SUCCESS")) {
+		if ("SUCCESS".equals(result)) {
 			JJLBillQuery query = new JJLBillQuery();
 			try {
 				String daoResult = dao.getQuery(out_trade_no);

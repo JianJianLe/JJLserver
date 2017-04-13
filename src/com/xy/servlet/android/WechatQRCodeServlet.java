@@ -57,6 +57,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String order_price = (String) request.getParameter("order_price");
 		String deviceNo = request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)*100+"";
+		System.out.println(order_price+" "+price);
 		storeId = (String) request.getParameter("store_id");
 		String orderNo = System.currentTimeMillis()+""; 
 
@@ -82,6 +83,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		try {
 			object.put("wechat_order", orderNo);
 			object.put("filePath", folderPath+"/wechat"+storeId+".png");
+			System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

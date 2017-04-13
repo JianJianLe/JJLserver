@@ -52,7 +52,8 @@ public class WeChatUtils {
 			e.printStackTrace();
 		}//商品描述  
 		unifiedOrderRequest.setOut_trade_no(orderNO);//商户订单号 
-		unifiedOrderRequest.setTotal_fee("1");  //金额需要扩大100倍:1代表支付时是0.01 
+		price = (int)Double.parseDouble(price)+"";
+		unifiedOrderRequest.setTotal_fee(price);  //金额需要扩大100倍:1代表支付时是0.01 
 		unifiedOrderRequest.setSpbill_create_ip("192.168.0.1");//终端IP 
 		unifiedOrderRequest.setNotify_url("xxxxxxxxxxxxxx");//通知地址 
 		unifiedOrderRequest.setTrade_type("NATIVE");//JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付  

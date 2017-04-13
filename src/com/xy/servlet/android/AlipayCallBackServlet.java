@@ -69,6 +69,13 @@ public class AlipayCallBackServlet extends HttpServlet {
 
 		out_trade_no = request.getParameter("alipay_order");
 		
+		if (out_trade_no==null||out_trade_no.equals("")) {
+			out.print(false);
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		//System.out.println(out_trade_no);
 
 		test_trade_query(out_trade_no,request);
