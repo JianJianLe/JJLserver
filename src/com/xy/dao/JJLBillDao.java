@@ -27,8 +27,9 @@ public class JJLBillDao extends BaseDao {
 				                       + "payType,"
 				                       + "region,"
 				                       + "DeviceNO,"
+				                       + "ticketType,"
 				                       + "addTime) "
-				                       + "values(?,?,?,?,?,?,?,?)";
+				                       + "values(?,?,?,?,?,?,?,?,?)";
 		try{
 			connection = getCon();
 			ps = connection.prepareStatement(sql,
@@ -40,8 +41,8 @@ public class JJLBillDao extends BaseDao {
 			ps.setString(5, bill.getPayType());
 			ps.setString(6, bill.getRegion());
 			ps.setString(7, bill.getDeviceNO());
-			//ps.setTimestamp(8, Timestamp.valueOf(bill.getAddTime()));
-			ps.setTimestamp(8, bill.getAddTime());
+			ps.setString(8, bill.getTicketType());
+			ps.setTimestamp(9, bill.getAddTime());
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {

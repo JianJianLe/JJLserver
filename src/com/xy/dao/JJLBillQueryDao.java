@@ -89,8 +89,9 @@ public class JJLBillQueryDao extends BaseDao{
 				                       + "payType,"
 				                       + "region,"
 				                       + "DeviceNO,"
+				                       + "ticketType,"
 				                       + "addTime) "
-				                       + "values(?,?,?,?,?,?,?,?)";
+				                       + "values(?,?,?,?,?,?,?,?,?)";
 		try{
 			//new String(u_name.getBytes("GBK"), "ISO8859_1")
 			//str[0] = new String(rs.getString(1).getBytes("ISO8859_1"), "GBK");
@@ -104,7 +105,8 @@ public class JJLBillQueryDao extends BaseDao{
 			ps.setString(5, billQuery.getPayType());
 			ps.setString(6, billQuery.getRegion());
 			ps.setString(7, billQuery.getDeviceNO());
-			ps.setTimestamp(8, billQuery.getAddTime());
+			ps.setString(8, billQuery.getTicketType());
+			ps.setTimestamp(9, billQuery.getAddTime());
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {

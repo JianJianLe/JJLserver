@@ -61,6 +61,7 @@ public class UpdateBillServlet extends HttpServlet {
 		String payType=request.getParameter("payType");
 		String region=request.getParameter("region");
 		String DeviceNo=request.getParameter("deviceno");
+		String ticketType=request.getParameter("ticketType");
 		//String addtime=request.getParameter("addtime");
 		
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -71,6 +72,8 @@ public class UpdateBillServlet extends HttpServlet {
 		bill.setPayType(payType);
 		bill.setRegion(region);
 		bill.setDeviceNO(DeviceNo);
+		bill.setTicketType(ticketType);
+		
 		bill.setAddTime(DateTimeUtils.getCurrentTime());
 		bill.setOrderNo("NO.cash"+System.currentTimeMillis());
 		

@@ -224,6 +224,7 @@ public class JJLUserDao extends BaseDao {
 				user.setUserName(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setShopName(resultSet.getString("shopname"));
+				user.setAuthority(resultSet.getString("authority"));
 				user.setIDcard(resultSet.getString("IDcard"));
 				user.setPhoneNumber(resultSet.getString("phoneNumber"));
 				user.setRegion(resultSet.getString("region"));

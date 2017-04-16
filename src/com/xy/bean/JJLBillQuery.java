@@ -12,13 +12,12 @@ public class JJLBillQuery {
 	private String payType;//wechat or alipay or cash
 	private String region;// 所在地区 格式： 省份_城市
 	private String DeviceNO;//设备号
+	private String ticketType;//票类型
 	private Timestamp addTime;//添加时间
 	
 	public String getUserID() {
 		return userid;
 	}
-
-
 
 	public void setUserID(String userid) {
 		this.userid = userid;
@@ -92,11 +91,17 @@ public class JJLBillQuery {
 
 
 
-	public void setDeviceNO(String deviceNO) {
-		DeviceNO = deviceNO;
+	public void setDeviceNO(String DeviceNO) {
+		this.DeviceNO = DeviceNO;
 	}
-
-
+	
+	public String getTicketType(){
+		return ticketType;
+	}
+	
+	public void setTicketType(String ticketType){
+		this.ticketType=ticketType;
+	}
 
 	public Timestamp getAddTime() {
 		return addTime;
@@ -114,6 +119,6 @@ public class JJLBillQuery {
 	public String toString(){
 		return "JJLException [userid=" + userid +", shopname=" + shopname + ", payAmount=" +payAmount
 				+ ", payType="+ payType +", region=" + region + 
-				", DeviceNo="+ DeviceNO+ ", addTime" + addTime + "]";
+				", DeviceNo="+ DeviceNO+ ", ticketType="+ticketType+ ", addTime=" + addTime + "]";
 	}
 }

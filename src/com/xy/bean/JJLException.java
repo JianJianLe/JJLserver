@@ -61,6 +61,6 @@ public class JJLException {
 	public String toString(){
 		return "JJLException [userid=" + userid +", shopname=" + shopname +
 				", region=" + region + ", DeviceNo="+ DeviceNO+ ", ExceptionContent="+ExceptionContent +
-				", addTime" + addTime + "]";
+				", addTime=" + addTime + "]";
 	}
 }
