@@ -35,7 +35,7 @@ public class JJLBillQueryDao extends BaseDao{
 	public String getBillQueryList(String shopname,String fromDate,String toDate) throws SQLException, JSONException{
 		getCon();
 		String sql="";
-		if(shopname.equals("���е�")){
+		if(shopname.equals("所有店")){
 			sql = "select * from jjlbill";
 			if (fromDate!=null&&!fromDate.equals("")) {
 				sql =sql + " where addTime between timestamp('" + fromDate+" 00:00:00','YYYY-MM-DD') and";

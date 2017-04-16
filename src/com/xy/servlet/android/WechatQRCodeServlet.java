@@ -50,6 +50,9 @@ public class WechatQRCodeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		WeChatUtils utils = new WeChatUtils();
 		//获取参数
 		String pruduct_id = (String) request.getParameter("product_id");;
@@ -58,7 +61,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String order_price = (String) request.getParameter("order_price");
 		String deviceNo = request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)*100+"";
-		System.out.println(order_price+" "+price);
+		//System.out.println(order_price+" "+price);
 		storeId = (String) request.getParameter("store_id");
 		String orderNo = System.currentTimeMillis()+""; 
 
@@ -70,7 +73,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 				file.mkdirs();
 			}
 			filePath = request.getRealPath("/")+folderPath + "/wechat"+storeId+".png";
-			System.out.println(filePath);
+			//System.out.println(filePath);
 			file=new File(filePath);
 			if(file.exists()){
 				file.delete();
@@ -84,7 +87,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		try {
 			object.put("wechat_order", orderNo);
 			object.put("filePath", folderPath+"/wechat"+storeId+".png");
-			System.out.println(object.toString());
+			//System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

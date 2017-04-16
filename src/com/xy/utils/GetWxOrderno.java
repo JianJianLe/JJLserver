@@ -37,7 +37,7 @@ public class GetWxOrderno {
 			HttpResponse response = httpclient.execute(httpost);
 			String jsonStr = EntityUtils
 					.toString(response.getEntity(), "UTF-8");
-			System.out.println(jsonStr);
+			//System.out.println(jsonStr);
 			map = doXMLParse(jsonStr);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
