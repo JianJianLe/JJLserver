@@ -6,6 +6,7 @@ public class JJLUser {
 	private String username;//用户名、店名或者其他
 	private String password;
 	private String shopname;
+	private String authority;//权限
 	private String phoneNumber;//手机号
 	private String IDcard;//身份证号
 	private String region;// 所在地区 格式： 省份_城市
@@ -45,6 +46,14 @@ public class JJLUser {
 	
 	public String getShopName(){
 		return shopname;
+	}
+	
+	public void setAuthority(String authority){
+		this.authority=authority;
+	}
+	
+	public String getAutority(){
+		return authority;
 	}
 	
 	public String getPhoneNumber(){

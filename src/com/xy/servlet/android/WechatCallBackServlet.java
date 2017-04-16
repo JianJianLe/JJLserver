@@ -78,13 +78,16 @@ public class WechatCallBackServlet extends HttpServlet {
 				if (daoResult.equals("[]")) {
 					String deviceno=request.getParameter("deviceNo");
 					String shopname=request.getParameter("shopName");
+					String region=request.getParameter("region");
+					shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
+					region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
 					query.setPayAmount(request.getParameter("payAmount"));
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
 					query.setPayType("wechat");
 					query.setShopname(shopname);
-					query.setRegion(request.getParameter("region"));
+					query.setRegion(region);
 					query.setUserID(request.getParameter("user_id"));
 					dao.saveJJLBill(query);
 				}else {

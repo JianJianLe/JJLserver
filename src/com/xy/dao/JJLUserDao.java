@@ -41,6 +41,7 @@ public class JJLUserDao extends BaseDao {
 		String sql = "insert into jjluser(username,"
 				                       + "password,"
 				                       + "shopname,"
+				                       + "authority,"
 				                       + "phonenumber,"
 				                       + "IDcard,"
 				                       + "region,"
@@ -48,7 +49,7 @@ public class JJLUserDao extends BaseDao {
 				                       + "DeviceNO,"
 				                       + "addTime,"
 				                       + "loginTime) "
-				                       + "values(?,?,?,?,?,?,?,?,?,?)";
+				                       + "values(?,?,?,?,?,?,?,?,?,?,?)";
 		try{
 			//new String(u_name.getBytes("GBK"), "ISO8859_1")
 			//str[0] = new String(rs.getString(1).getBytes("ISO8859_1"), "GBK");
@@ -58,13 +59,14 @@ public class JJLUserDao extends BaseDao {
 			ps.setString(1,user.getUserName());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getShopName());
-			ps.setString(4, user.getPhoneNumber());
-			ps.setString(5, user.getIDcard());
-			ps.setString(6, user.getRegion());
-			ps.setString(7, user.getAddress());
-			ps.setString(8, user.getDeviceNO());
-			ps.setString(9, user.getAddTime());
-			ps.setTimestamp(10, Timestamp.valueOf(user.getLoginTime()));
+			ps.setString(4, user.getAutority());
+			ps.setString(5, user.getPhoneNumber());
+			ps.setString(6, user.getIDcard());
+			ps.setString(7, user.getRegion());
+			ps.setString(8, user.getAddress());
+			ps.setString(9, user.getDeviceNO());
+			ps.setString(10, user.getAddTime());
+			ps.setTimestamp(11, Timestamp.valueOf(user.getLoginTime()));
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {

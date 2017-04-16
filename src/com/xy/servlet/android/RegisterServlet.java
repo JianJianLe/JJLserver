@@ -57,6 +57,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setPassword(password);
 		user.setShopName(shopname);
 		user.setPhoneNumber(phoneNumber);
+		user.setAuthority("4");
 		user.setIDcard(id);
 		user.setRegion(region);
 		user.setAddress(address);
