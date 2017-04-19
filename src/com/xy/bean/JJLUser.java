@@ -116,7 +116,8 @@ public class JJLUser {
 	@Override
 	public String toString(){
 		return "JJLUser [userid=" + userid +", username=" + username +
-				", password=" + password + ",shopname="+ shopname + ", phoneNumber=" + phoneNumber +
+				", password=" + password + ",shopname="+ shopname + ", authority=" + authority +
+				", phoneNumber=" + phoneNumber +
 				", IDcard=" + IDcard +", region=" + region +
 				", address=" + address +", DeviceNO=" + DeviceNO + 
 				", addTime=" + addTime + ", loginTime=" + loginTime + "]";
