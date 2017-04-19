@@ -229,4 +229,15 @@
     <servlet-name>WechatCallBackServlet</servlet-name>
     <url-pattern>/servlet/WechatCallBackServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateAuthorityServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.UpdateAuthorityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAuthorityServlet</servlet-name>
+    <url-pattern>/servlet/UpdateAuthorityServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

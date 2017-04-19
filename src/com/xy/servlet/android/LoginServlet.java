@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
 			mapJson.put("region", user.getRegion());
 			mapJson.put("shopname", user.getShopName());
 			mapJson.put("deviceno", user.getDeviceNO());
+			mapJson.put("authority", user.getAutority());
 			listOK.add(mapJson);
 			userDao.updateLoginAddTime(userName, addTime);
 			String resultOKJson = gson.toJson(mapJson);
