@@ -116,6 +116,28 @@ public class JJLUserDao extends BaseDao {
 		
 	}
 	
+	public String listRegion(){
+		String result = "";
+		getCon();
+		String sql = "select region from jjluser";
+		resultSet = execQuery(sql, new Object[] {});
+		try {
+			preExe(sql, null);
+			resultSet = statement.executeQuery();
+			result = resultSetToJson(resultSet);
+			if (result.equals("[]")) {
+				return result = "";
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} catch (JSONException e) {
+			System.out.println(e.getMessage());
+		}
+		closeAll();
+		return result;
+		
+	}
+	
 	public String listShopName(){
 		String result = "";
 		getCon();
@@ -481,6 +503,21 @@ public class JJLUserDao extends BaseDao {
 		String result = ResultSetUtils.resultSetToJson(resultSet);
 		return result;
 	}
+	/**
+	 * 根据地区获取
+	 * @param region
+	 * @return
+	 * @throws SQLException
+	 * @throws JSONException
+	 */
+	public String getShopnameList(String region) throws SQLException, JSONException{
+		getCon();
+		String sql = "select shopname from jjluser where region='"+region+"'";
+		resultSet = execQuery(sql, new Object[] {});
+		String result = ResultSetUtils.resultSetToJson(resultSet);
+		return result;
+	}
+	
 	/**
 	 * 根据用户名和密码查询用户是否存在
 	 * 
