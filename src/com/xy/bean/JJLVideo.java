@@ -42,6 +42,6 @@ public class JJLVideo {
 	@Override
 	public String toString(){
 		return "JJLVideo [userid=" + userid +", name=" + name +
-				", path=" + path + ", addTime" + addTime + "]";
+				", path=" + path + ", addTime=" + addTime + "]";
 	}
 }

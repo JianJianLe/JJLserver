@@ -42,6 +42,6 @@ public class JJLImage {
 	@Override
 	public String toString(){
 		return "JJLImage [userid=" + userid +", name=" + name +
-				", path=" + path + ", addTime" + addTime + "]";
+				", path=" + path + ", addTime=" + addTime + "]";
 	}
 }

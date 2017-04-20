@@ -380,6 +380,25 @@ public class JJLUserDao extends BaseDao {
 		closeAll();
 		return user;
 	}
+	
+	//2017-04-18
+	public boolean updateUserAuthority(String shopname, String authority){
+		boolean flag=false;
+		Connection connection;
+		String sql = "UPDATE JJLuser SET  authority = '"
+				+ authority + "' WHERE shopname = '" + shopname + "'";
+		try {
+			connection = getCon();
+			Statement ps = connection.createStatement();
+			int row = ps.executeUpdate(sql);
+			flag=true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+		}
+		closeAll();
+		return flag;
+	}
 	/**
 	 * 更新userid
 	 * 
