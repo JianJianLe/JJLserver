@@ -229,4 +229,24 @@
     <servlet-name>WechatCallBackServlet</servlet-name>
     <url-pattern>/servlet/WechatCallBackServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RegionListServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.RegionListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegionListServlet</servlet-name>
+    <url-pattern>/servlet/RegionListServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetShopNameListServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.GetShopNameListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetShopNameListServlet</servlet-name>
+    <url-pattern>/servlet/GetShopNameListServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
