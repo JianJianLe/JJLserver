@@ -21,6 +21,8 @@ import com.xy.bean.JJLUser;
 import com.xy.bean.JJLVideo;
 import com.xy.utils.ResultSetUtils;
 
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+
  
  
 
@@ -186,7 +188,7 @@ public class JJLUserDao extends BaseDao {
 	public void updateLoginAddTime(String userName, String loginTime) {
 		Connection connection;
 		String sql = "UPDATE jjluser set loginTime = '" + loginTime
-				+ "' WHERE username = '" + userName + "'";
+				+ "' WHERE username = '" + userName + "';";
 		try {
 			connection = getCon();
 			Statement ps = connection.createStatement();
@@ -274,7 +276,7 @@ public class JJLUserDao extends BaseDao {
 	public void setUserNewPassword(String userName, String password) {
 		Connection connection;
 		String sql = "UPDATE jjluser set password = '" + password
-				+ "' WHERE username = '" + userName + "'";
+				+ "' WHERE username = '" + userName + "';";
 		try {
 			connection = getCon();
 			Statement ps = connection.createStatement();
@@ -360,23 +362,49 @@ public class JJLUserDao extends BaseDao {
 	}
 	
 	//2017-04-18
-	public boolean updateUserAuthority(String shopname, String authority){
+	public boolean updateUserAuthority(String username, String authority){
 		boolean flag=false;
-		Connection connection;
-		String sql = "UPDATE JJLuser SET  authority = '"
-				+ authority + "' WHERE shopname = '" + shopname + "'";
-		try {
+		Connection connection=null;
+		Statement st=null;
+		PreparedStatement ps=null;
+		String sql = "update jjluser set authority='"+authority+"' where username=?";
+		try{
 			connection = getCon();
-			Statement ps = connection.createStatement();
-			int row = ps.executeUpdate(sql);
-			flag=true;
-		} catch (SQLException e) {
+			ps=connection.prepareStatement(sql);
+			System.out.println(sql);
+			ps.setString(1,username);
+			int rs=ps.executeUpdate();
+			if(rs>0){
+				flag=true;
+			}else{
+				flag=false;
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
 			System.out.println(e.getMessage());
 			flag=false;
+		}finally{
+			try{
+				if(ps!=null){
+					ps.close();
+					ps=null;
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try{
+				if(connection!=null){
+					connection.close();
+					connection=null;
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
-		closeAll();
+		
 		return flag;
 	}
+ 
 	/**
 	 * 更新userid
 	 * 
@@ -391,7 +419,7 @@ public class JJLUserDao extends BaseDao {
 		boolean result = true;
 		Connection connection;
 		String sql = "UPDATE " + tableName + " SET " + userId + " = '"
-				+ newUserid + "' WHERE " + userId + " = '" + oldUserid + "'";
+				+ newUserid + "' WHERE " + userId + " = '" + oldUserid + "';";
 		try {
 			connection = getCon();
 			Statement ps = connection.createStatement();
@@ -446,6 +474,13 @@ public class JJLUserDao extends BaseDao {
 		return result;
 	}
 	
+	public String queryAllUser() throws SQLException,JSONException{
+		getCon();
+		String sql = "select * from jjluser";
+		resultSet = execQuery(sql, new Object[] {});
+		String result = ResultSetUtils.resultSetToJson(resultSet);
+		return result;
+	}
 	/**
 	 * 根据用户名和密码查询用户是否存在
 	 * 
