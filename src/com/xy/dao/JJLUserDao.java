@@ -393,7 +393,7 @@ public class JJLUserDao extends BaseDao {
 		try{
 			connection = getCon();
 			ps=connection.prepareStatement(sql);
-			System.out.println(sql);
+			//System.out.println(sql);
 			ps.setString(1,username);
 			int rs=ps.executeUpdate();
 			if(rs>0){

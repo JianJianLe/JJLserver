@@ -16,9 +16,12 @@ import com.google.gson.Gson;
 import com.xy.bean.JJLUser;
 import com.xy.dao.JJLUserDao;
 
-public class PersonalDetailServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
- 
+public class UpdateAuthorityServlet extends HttpServlet{
+	
+private static final long serialVersionUID = 1L;
+	
+	private int flag=0;
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
@@ -27,41 +30,50 @@ public class PersonalDetailServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 				
 		JJLUserDao userDao = new JJLUserDao();
-		JJLUser user=null;
 		
 		PrintWriter out = response.getWriter();
 		
-		String userName = request.getParameter("username");
+		String username= request.getParameter("username");
+		String authority=request.getParameter("authority");
 		
-		//获取用户列表
-		user=userDao.getUserByName(userName);
+		
+		// 判断登陆
+		try{
+			if(userDao.updateUserAuthority(username, authority)){
+				flag=2;
+			}else{
+				flag=1;
+			}
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
 		
 		Gson gson = new Gson();
-		if(user==null){
+		switch(flag){
+		case 1:
 			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
 			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
+			
+			mapNO.put("flag", "1");//表示修改失败
 			listNO.add(mapNO);
 			String resultNOJson = gson.toJson(mapNO);
 			out.print(resultNOJson); 
-		}
-		else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			mapNO.put("id",user.getIDcard());
-			mapNO.put("username", user.getUserName());
-			mapNO.put("shopname",user.getShopName());			
-			mapNO.put("phoneNo",user.getPhoneNumber());
-			mapNO.put("region",user.getRegion());
-			mapNO.put("address",user.getAddress());
-			mapNO.put("deviceNo",user.getDeviceNO());
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}
+			break;
+			
+		case 2:
+			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
+			Map<String, Object> mapJson = new HashMap<String, Object>();
 
- 
+			mapJson.put("flag", "2"); //表示修改权限成功
+			listOK.add(mapJson);
+			String resultOKJson = gson.toJson(mapJson);
+			out.print(resultOKJson);
+			
+			break;
+		}
+		
 		out.flush();
 		out.close();
 	}
@@ -70,4 +82,5 @@ public class PersonalDetailServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
