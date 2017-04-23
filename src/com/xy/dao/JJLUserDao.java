@@ -512,8 +512,9 @@ public class JJLUserDao extends BaseDao {
 	 */
 	public String getShopnameList(String region) throws SQLException, JSONException{
 		getCon();
-		String sql = "select shopname from jjluser where region='"+region+"'";
-		resultSet = execQuery(sql, new Object[] {});
+		String sql = "select shopname from jjluser where region=?";
+		System.out.println(sql);
+		resultSet = execQuery(sql, new Object[] {region});
 		String result = ResultSetUtils.resultSetToJson(resultSet);
 		return result;
 	}

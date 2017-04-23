@@ -47,6 +47,7 @@ public class GetShopNameListServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		String region = request.getParameter("region");
+		System.out.println(region);
 		PrintWriter out = response.getWriter();
 		JJLUserDao dao = new JJLUserDao();
 		String result = "1";
@@ -59,7 +60,7 @@ public class GetShopNameListServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//System.out.println(result);
+		System.out.println(result);
 		out.print(result);
 		out.flush();
 		out.close();
