@@ -284,4 +284,15 @@
     <servlet-name>DeleteUserServlet</servlet-name>
     <url-pattern>/servlet/DeleteUserServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CheckUserServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.CheckUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckUserServlet</servlet-name>
+    <url-pattern>/servlet/CheckUserServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

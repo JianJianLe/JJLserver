@@ -102,6 +102,8 @@ public class JJLUserDao extends BaseDao {
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1,username);
 			int row = ps.executeUpdate();
+			//flag=true;
+			System.out.println("deleteUser row="+row);
 			if(row>0){
 				flag=true;
 			}
