@@ -89,20 +89,16 @@ public class UpdateCharsServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		Gson gson = new Gson();
-		List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
+		Gson gson = new Gson(); 
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		String resultNOJson=null;
 		if(flag){
-			mapJson.put("flag", "1");//添加成功
-			listOK.add(mapJson);
-			resultNOJson = gson.toJson(mapJson);
+			mapJson.put("flag", "1");//添加成功  
 			
 		}else{
-			mapJson.put("flag", "0");//已存在
-			listOK.add(mapJson);
-			resultNOJson = gson.toJson(mapJson);
+			mapJson.put("flag", "0");//已存在  
 		}
+		resultNOJson = gson.toJson(mapJson);
 		out.print(resultNOJson);
 		out.flush();
 		out.close();

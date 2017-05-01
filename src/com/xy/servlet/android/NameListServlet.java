@@ -29,35 +29,29 @@ public class NameListServlet extends HttpServlet  {
 		response.setCharacterEncoding("utf-8");
 				
 		JJLUserDao userDao = new JJLUserDao();
-		JJLUser user=null;
+		//JJLUser user=null;
 		
 		PrintWriter out = response.getWriter();
 		
-		String userName = request.getParameter("username");
+		//String userName = request.getParameter("username");
 		
 		//获取用户列表
 		String shopnamelist=userDao.listShopName();
-		String namelist=userDao.listUserName();
-		//System.out.println("shopnamelist:"+shopnamelist);
+		String namelist=userDao.listUserName(); 
+		
+		
 		Gson gson = new Gson();
-		if(namelist==""){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			mapNO.put("namelist",namelist);
-			mapNO.put("shopnamelist", shopnamelist);
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(namelist==""){ 
+			map.put("flag", "0");  
+		}else{ 
+			map.put("flag", "1");
+			map.put("namelist",namelist);
+			map.put("shopnamelist", shopnamelist); 
 		}
- 
+
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}

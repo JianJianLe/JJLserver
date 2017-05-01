@@ -90,7 +90,29 @@ public class JJLUserDao extends BaseDao {
 		}
  
 	}
-
+	
+	public boolean deleteUser(String username){
+		boolean flag=false;
+		Connection connection;
+		PreparedStatement ps;
+		String sql = "delete from jjluser where username=?";
+		try{
+			connection = getCon();
+			ps = connection.prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1,username);
+			int row = ps.executeUpdate();
+			if(row>0){
+				flag=true;
+			}
+			ps.close();
+			connection.close();
+		}catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println(e);
+		} 
+		return flag;
+	}
 	
 	
 	

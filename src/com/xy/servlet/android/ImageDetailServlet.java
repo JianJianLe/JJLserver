@@ -34,30 +34,21 @@ public class ImageDetailServlet extends HttpServlet{
 		
 		String userid = request.getParameter("userid");
 		
-		//获取用户信息
+		 
 		image=imageDao.getImageByUserId(userid);
 		
 		Gson gson = new Gson();
-		
-		if(image==null){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			mapNO.put("imagename",image.getName());
-			mapNO.put("imagepath", image.getPath());
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(image==null){ 
+			map.put("flag", "0");  
+		}else{ 
+			map.put("flag", "1");
+			map.put("imagename",image.getName());
+			map.put("imagepath", image.getPath()); 
 		}
  
- 
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}

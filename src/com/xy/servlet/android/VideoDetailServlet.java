@@ -38,27 +38,17 @@ public class VideoDetailServlet extends HttpServlet {
 		video=videoDao.getVideoByUserId(userid);
 		
 		Gson gson = new Gson();
-		
-		if(video==null){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			mapNO.put("videoname",video.getName());
-			mapNO.put("videopath", video.getPath());
-//			System.out.println("videoname:"+video.getName());
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(video==null){ 
+			map.put("flag", "0");  
+		}else{ 
+			map.put("flag", "1");
+			map.put("videoname",video.getName());
+			map.put("videopath", video.getPath()); 
 		}
- 
- 
+		 
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}

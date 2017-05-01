@@ -34,25 +34,22 @@ public class ChangePasswordServlet extends HttpServlet{
 		String userName = request.getParameter("username");
 		String oldpassword=request.getParameter("oldpassword");
 		String newpassword=request.getParameter("newpassword");
-		//获取用户列表
+		 
 		boolean flag;
 		flag=userDao.changPassword(userName,oldpassword,newpassword);
 		
 		Gson gson = new Gson();
-		if(flag==false){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(flag==false){ 
+			
+			map.put("flag", "0"); 
+			String resultNOJson = gson.toJson(map);
 			out.print(resultNOJson); 
 		}
-		else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
+		else{ 
+			map.put("flag", "1"); 
+			String resultNOJson = gson.toJson(map);
 			out.print(resultNOJson); 
 		}
 

@@ -55,7 +55,7 @@ public class ExceptionQueryServlet extends HttpServlet {
 		String from_date = (String) request.getParameter("from_date");
 		String to_date = (String) request.getParameter("to_date");
 		String shopname = (String) request.getParameter("shopname");
-		//shopname = new String(shopname.getBytes("ISO-8859-1"), "UTF-8");//2017-02-27
+		shopname = new String(shopname.getBytes("ISO-8859-1"), "UTF-8");//2017-02-27
 		
 		try {
 			result = dao.getExceptionList(shopname, from_date, to_date);

@@ -51,29 +51,20 @@ private static final long serialVersionUID = 1L;
 		
 		
 		Gson gson = new Gson();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		switch(flag){
-		case 1:
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			
-			mapNO.put("flag", "1");//表示修改失败
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		case 1: 
+			map.put("flag", "1");//表示修改失败 
 			break;
 			
-		case 2:
-			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapJson = new HashMap<String, Object>();
-
-			mapJson.put("flag", "2"); //表示修改权限成功
-			listOK.add(mapJson);
-			String resultOKJson = gson.toJson(mapJson);
-			out.print(resultOKJson);
-			
+		case 2: 
+			map.put("flag", "2"); //表示修改权限成功  
 			break;
 		}
-		
+
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}

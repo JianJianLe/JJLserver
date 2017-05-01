@@ -162,38 +162,23 @@ public class ImageUploadServlet extends HttpServlet {
 			}
 		}
 
-		Gson gson = new Gson();
-		List<Map<String, Object>> listOK=null;
-		Map<String, Object> mapJson =null;
+		Gson gson = new Gson(); 
+		Map<String, Object> mapJson =new HashMap<String, Object>();
 		String resultOKJson =null;
 		switch(flag)
 		{
-		case 0:
-			listOK = new ArrayList<Map<String, Object>>();
-			mapJson = new HashMap<String, Object>();	
-			mapJson.put("flag", "0");
-			listOK.add(mapJson);
-			resultOKJson= gson.toJson(mapJson);
-			out.print(resultOKJson);
+		case 0:  	
+			mapJson.put("flag", "0");  
 			break;
-		case 1:
-			listOK = new ArrayList<Map<String, Object>>();
-			mapJson = new HashMap<String, Object>();	
-			mapJson.put("flag", "1");
-			listOK.add(mapJson);
-			resultOKJson= gson.toJson(mapJson);
-			out.print(resultOKJson);
+		case 1:  	
+			mapJson.put("flag", "1");  
 			break;
-		case 2:
-			listOK = new ArrayList<Map<String, Object>>();
-			mapJson = new HashMap<String, Object>();	
-			mapJson.put("flag", "2");
-			listOK.add(mapJson);
-			resultOKJson= gson.toJson(mapJson);
-			out.print(resultOKJson);
+		case 2:  
+			mapJson.put("flag", "2");  
 			break;
 		}
-
+		resultOKJson= gson.toJson(mapJson);
+		out.print(resultOKJson);
 		out.flush();
 		out.close();
 

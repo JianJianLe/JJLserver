@@ -46,33 +46,22 @@ public class LoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		Gson gson = new Gson();
+		//List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if (user == null) {
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			
-			mapNO.put("flag", "0");//发送flag=0到客户端
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-			
-		} else {
-
-			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapJson = new HashMap<String, Object>();
-
-			mapJson.put("flag", "1"); //发送flag=1到客户端
-			mapJson.put("userid", userid); //发送flag=2到客户端,表示注册成功
-			mapJson.put("region", user.getRegion());
-			mapJson.put("shopname", user.getShopName());
-			mapJson.put("deviceno", user.getDeviceNO());
-			mapJson.put("authority", user.getAutority());
-			listOK.add(mapJson);
-			userDao.updateLoginAddTime(userName, addTime);
-			String resultOKJson = gson.toJson(mapJson);
-			out.print(resultOKJson);
-			//System.out.println(resultOKJson);
+		if (user == null) { 
+			map.put("flag", "0");//发送flag=0到客户端 
+		} else { 
+			map.put("flag", "1"); //发送flag=1到客户端
+			map.put("userid", userid); //发送flag=2到客户端,表示注册成功
+			map.put("region", user.getRegion());
+			map.put("shopname", user.getShopName());
+			map.put("deviceno", user.getDeviceNO());
+			map.put("authority", user.getAutority());
+			userDao.updateLoginAddTime(userName, addTime); 
 		}
+		String resultOKJson = gson.toJson(map);
+		out.print(resultOKJson); 
 		out.flush();
 		out.close();
 	}

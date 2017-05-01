@@ -3,6 +3,11 @@ package com.xy.servlet.android;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,24 +16,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 
-import com.xy.dao.JJLBillQueryDao;
+import com.google.gson.Gson;
+import com.xy.bean.JJLBillQuery;
+import com.xy.bean.JJLUser;
+import com.xy.dao.JJLUserDao;
+import com.xy.utils.DateTimeUtils;
 
-public class BillQueryServlet extends HttpServlet {
-
+public class DeleteUserServlet extends HttpServlet {
 	/**
 	 * Constructor of the object.
 	 */
-	public BillQueryServlet() {
+	public DeleteUserServlet() {
+		// TODO Auto-generated constructor stub
 		super();
 	}
-
+	
 	/**
 	 * Destruction of the servlet. <br>
 	 */
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
-	} 
+	}
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -42,32 +51,38 @@ public class BillQueryServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		
-		PrintWriter out = response.getWriter();
-		JJLBillQueryDao dao = new JJLBillQueryDao();
-		String result = null;
-		String ret = request.getRequestURI();
-		//System.out.println(ret+" 123");
-		String from_date = (String) request.getParameter("from_date");
-		String to_date = (String) request.getParameter("to_date");
-		String shopname = (String) request.getParameter("shopname");
-		shopname = new String(shopname.getBytes("ISO-8859-1"), "UTF-8");//2017-02-27
+		PrintWriter out = response.getWriter();		
+		JJLUserDao dao = new JJLUserDao();
+		
+		String username=request.getParameter("username");
+		 
+		boolean flag = false;
 		try {
-			result = dao.getBillQueryList(shopname, from_date, to_date);
-		} catch (SQLException e) {
+			flag = dao.deleteUser(username);
+		
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
-		out.print(result);
+		 
+		Gson gson = new Gson();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(flag){
+			map.put("flag", "1");
+		}else{
+			map.put("flag", "0");
+		}
+		String resultJson=gson.toJson(map);
+		out.print(resultJson);
 		out.flush();
 		out.close();
+ 
 	}
 
 	/**
@@ -94,5 +109,4 @@ public class BillQueryServlet extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 }

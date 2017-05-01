@@ -82,34 +82,23 @@ public class RegisterServlet extends HttpServlet {
 		
 		
 		Gson gson = new Gson();
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
 		switch(flag){
-		case 1:
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			
-			mapNO.put("flag", "1");//发送flag=1到客户端, 表示该用户已存在
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		case 1: 
+			mapJson.put("flag", "1");//发送flag=1到客户端, 表示该用户已存在  
 			break;
 			
-		case 2:
-			List<Map<String, Object>> listOK = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapJson = new HashMap<String, Object>();
-
+		case 2: 
 			mapJson.put("flag", "2"); //发送flag=2到客户端,表示注册成功
 			mapJson.put("userid", userid); //发送flag=2到客户端,表示注册成功
 			mapJson.put("region", user.getRegion());
-			mapJson.put("shopname", user.getShopName());
-			listOK.add(mapJson);
+			mapJson.put("shopname", user.getShopName()); 
 			userDao.updateLoginAddTime(userName, addtime);
-			String resultOKJson = gson.toJson(mapJson);
-			out.print(resultOKJson);
-			//System.out.println(resultOKJson);
-			
 			break;
-		}
-		
+		} 
+		String resultOKJson = gson.toJson(mapJson);
+		out.print(resultOKJson); 
 		out.flush();
 		out.close();
 	}

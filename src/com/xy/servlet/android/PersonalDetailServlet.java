@@ -37,31 +37,24 @@ public class PersonalDetailServlet extends HttpServlet {
 		user=userDao.getUserByName(userName);
 		
 		Gson gson = new Gson();
-		if(user==null){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(user==null){ 
+			map.put("flag", "0");  
 		}
-		else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			mapNO.put("id",user.getIDcard());
-			mapNO.put("username", user.getUserName());
-			mapNO.put("shopname",user.getShopName());			
-			mapNO.put("phoneNo",user.getPhoneNumber());
-			mapNO.put("region",user.getRegion());
-			mapNO.put("address",user.getAddress());
-			mapNO.put("deviceNo",user.getDeviceNO());
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
+		else{ 
+			map.put("flag", "1");
+			map.put("id",user.getIDcard());
+			map.put("username", user.getUserName());
+			map.put("shopname",user.getShopName());			
+			map.put("phoneNo",user.getPhoneNumber());
+			map.put("region",user.getRegion());
+			map.put("address",user.getAddress());
+			map.put("deviceNo",user.getDeviceNO()); 
 		}
 
- 
+
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}

@@ -37,24 +37,18 @@ public class UpdateAPKServlet extends HttpServlet {
 		String path = config.getServletContext().getRealPath("/");
 		path=path.replace("JJLserver\\", "")+"APK\\";
 		
-		Gson gson = new Gson();
-		File file=new File(path);
-		if(file.exists()){
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "1");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}else{
-			List<Map<String, Object>> listNO = new ArrayList<Map<String, Object>>();
-			Map<String, Object> mapNO = new HashMap<String, Object>();
-			mapNO.put("flag", "0");
-			listNO.add(mapNO);
-			String resultNOJson = gson.toJson(mapNO);
-			out.print(resultNOJson); 
-		}
+		Gson gson = new Gson(); 
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		File file=new File(path);
+		if(file.exists()){ 
+			map.put("flag", "1");  
+		}else{ 
+			map.put("flag", "0"); 
+			
+		}
+		String resultNOJson = gson.toJson(map);
+		out.print(resultNOJson); 
 		out.flush();
 		out.close();
 	}
