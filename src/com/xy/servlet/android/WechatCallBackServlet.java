@@ -79,12 +79,14 @@ public class WechatCallBackServlet extends HttpServlet {
 					String deviceno=request.getParameter("deviceNo");
 					String shopname=request.getParameter("shopName");
 					String region=request.getParameter("region");
-					shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
-					region=new String(region.getBytes("iso-8859-1"),"utf-8");
+					String ticketType=request.getParameter("ticketType");
+					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
+					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
 					query.setPayAmount(request.getParameter("payAmount"));
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
+					query.setTicketType(ticketType);
 					query.setPayType("wechat");
 					query.setShopname(shopname);
 					query.setRegion(region);

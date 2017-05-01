@@ -63,8 +63,8 @@ public class AlipayCallBackServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		//response.setContentType("text/html");
 		response.setContentType("text/html; charset=utf-8");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
 		out_trade_no = request.getParameter("alipay_order");
@@ -167,12 +167,15 @@ public class AlipayCallBackServlet extends HttpServlet {
 					String deviceno=request.getParameter("deviceNo");
 					String shopname=request.getParameter("shopName");
 					String region=request.getParameter("region");
-					shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
-					region=new String(region.getBytes("iso-8859-1"),"utf-8");
+					String ticketType=request.getParameter("ticketType");
+					
+					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
+					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
 					query.setPayAmount(request.getParameter("payAmount"));
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
+					query.setTicketType(ticketType);
 					query.setPayType("alipay");
 					query.setShopname(shopname);
 					query.setRegion(region);

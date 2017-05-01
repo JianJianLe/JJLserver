@@ -76,7 +76,7 @@ public class UploadFileServlet extends HttpServlet {
 					if(item.isFormField()){
 						String name=item.getFieldName();
 						String value=item.getString();						
-						value=new String(value.getBytes("iso-8859-1"),"utf-8");
+						//value=new String(value.getBytes("iso-8859-1"),"utf-8");
 						System.out.println(name+ "," + value);
 						tempstr=value;
 					}
