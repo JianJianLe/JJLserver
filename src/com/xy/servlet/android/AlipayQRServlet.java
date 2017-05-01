@@ -184,7 +184,7 @@ public class AlipayQRServlet extends HttpServlet {
 		goodsDetailList.add(goods1);
 
 		String NotifyUrl="http://112.74.38.240:8080/JJLserver/AlipayCallBackServlet";
-		//NotifyUrl="http://192.168.0.111:8080/JJLserver/AlipayCallBackServlet";
+		//NotifyUrl="http://192.168.0.106:8080/JJLserver/AlipayCallBackServlet";
 		// 创建扫码支付请求builder，设置请求参数
 		AlipayTradePrecreateRequestBuilder builder = new AlipayTradePrecreateRequestBuilder()
 				.setSubject(subject).setTotalAmount(totalAmount).setOutTradeNo(outTradeNo)
