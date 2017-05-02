@@ -76,7 +76,7 @@ public class ImageUploadServlet extends HttpServlet {
 				Iterator<FileItem>iter=fileItems.iterator();
 
 				String path = config.getServletContext().getRealPath("/");
-				path=path.replace("JJLserver\\", "")+"Image\\";
+				path=path+"Image";
 
 
 				DeleteFileUtil.deleteDirectory(path);
@@ -101,7 +101,7 @@ public class ImageUploadServlet extends HttpServlet {
 						String fileName=item.getName();
 						if(fileName!=null){
 							imgNameList.add(fileName);
-							File file=new File(path+item.getName());
+							File file=new File(path +File.separator+item.getName());
 							if(!file.exists()){
 								item.write(file);
 								System.out.println("Success!");
@@ -142,7 +142,7 @@ public class ImageUploadServlet extends HttpServlet {
 						image.setUserID(userid);
 						image.setName(strName);
 						//System.out.println(strName);
-						image.setPath("Image/" + namelist[i] + "/");
+						image.setPath("JJLserver/Image/" + namelist[i] + "/");
 						image.setAddTime(dateFormat.format(new Date()));
 
 						if(imageDao.queryImageUserID(userid)){							

@@ -64,19 +64,15 @@ public class UploadFileServlet extends HttpServlet {
 				ServletFileUpload upload=new ServletFileUpload(factory);
 				
 				List<FileItem> fileItems=upload.parseRequest(request);
-				Iterator<FileItem>iter=fileItems.iterator();
-				
-				//C:\websoft\Tomcat7\webapps\Image
-				//String path="C:\\websoft\\Tomcat7\\webapps\\Video\\";
+				Iterator<FileItem>iter=fileItems.iterator(); 
 				String path = config.getServletContext().getRealPath("/");
-				path=path.replace("JJLserver\\", "")+"Video\\";
-				
+				path=path+"Video"; 
 				while(iter.hasNext()){
 					FileItem item=(FileItem)iter.next();
 					if(item.isFormField()){
 						String name=item.getFieldName();
 						String value=item.getString();						
-						//value=new String(value.getBytes("iso-8859-1"),"utf-8");
+						value=new String(value.getBytes("iso-8859-1"),"utf-8");
 						System.out.println(name+ "," + value);
 						tempstr=value;
 					}
@@ -114,7 +110,7 @@ public class UploadFileServlet extends HttpServlet {
 									video=new JJLVideo();
 									video.setUserID(userid);
 									video.setName(fileName);
-									video.setPath("Video/" + namelist[i] + "/");
+									video.setPath("JJLserver/Video/" + namelist[i] + "/");
 									video.setAddTime(dateFormat.format(new Date()));
 									
 									//存数据库

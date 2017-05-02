@@ -51,15 +51,15 @@ public class MediaServelt  extends HttpServlet  {
 			//String ImagePath="C:\\websoft\\Tomcat7\\webapps\\Image\\";
 			//String VideoPath="C:\\websoft\\Tomcat7\\webapps\\Video\\";
 			String ImagePath = config.getServletContext().getRealPath("/");
-			ImagePath=ImagePath.replace("JJLserver\\", "")+"Image\\";
+			ImagePath=ImagePath+"Image";
 			String VideoPath = config.getServletContext().getRealPath("/");
-			VideoPath=VideoPath.replace("JJLserver\\", "")+"Video\\";
+			VideoPath=VideoPath +"Video";
 			
 			//--------
 			File file=new File(ImagePath);
 			String ImageName[]=file.list();
 			for(int i=0;i<ImageName.length;++i){
-				json1.put("i" + i, "/Image/" + ImageName[i]);	
+				json1.put("i" + i, "JJLserver/Image/" + ImageName[i]);	
 			}
 			jsonImage.put("image", json1.toString());
 			jsonArray.put(jsonImage);
@@ -68,7 +68,7 @@ public class MediaServelt  extends HttpServlet  {
 			file=new File(VideoPath);
 			String VideoName[]=file.list();
 			for(int i=0;i<VideoName.length;++i){
-				json2.put("v"+i, "/Video/" + VideoName[i]);	
+				json2.put("v"+i, "JJLserver/Video/" + VideoName[i]);	
 			}
 			jsonVideo.put("video", json2.toString());
 			jsonArray.put(jsonVideo);
