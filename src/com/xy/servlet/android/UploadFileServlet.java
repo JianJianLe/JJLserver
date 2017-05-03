@@ -66,7 +66,9 @@ public class UploadFileServlet extends HttpServlet {
 				List<FileItem> fileItems=upload.parseRequest(request);
 				Iterator<FileItem>iter=fileItems.iterator(); 
 				String path = config.getServletContext().getRealPath("/");
-				path=path+"Video"; 
+				//path=path.replace("JJLserver", "Video");
+				path=path+"Video";
+				
 				while(iter.hasNext()){
 					FileItem item=(FileItem)iter.next();
 					if(item.isFormField()){
@@ -91,6 +93,7 @@ public class UploadFileServlet extends HttpServlet {
 									
 									//存放文件
 									//-----------
+									//String fileDir=path  + namelist[i];
 									String fileDir=path + File.separator + namelist[i];
 									createDir(fileDir);
 									DeleteFiles(fileDir);//删除所有文件 for test

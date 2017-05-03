@@ -77,9 +77,14 @@ public class ImageUploadServlet extends HttpServlet {
 
 				String path = config.getServletContext().getRealPath("/");
 				path=path+"Image";
-
-
-				DeleteFileUtil.deleteDirectory(path);
+				//path=path.replace("JJLserver", "Image");
+				 
+				File mfile=new File(path);
+				if(!mfile.exists()){
+					mfile.mkdirs();
+				}else{
+					DeleteFileUtil.deleteDirectory(path);//删除文件夹中的单个文件
+				}
 				image=new JJLImage();
 				image.setUserID(userid);
 				image.setName("");
@@ -126,7 +131,8 @@ public class ImageUploadServlet extends HttpServlet {
 					if(user!=null){
 
 						//----------
-						fileDir=path + File.separator + namelist[i];
+						//fileDir=path + namelist[i];
+						fileDir=path + File.separator +namelist[i];
 						createDir(fileDir);
 						File srcFile=new File(path);
 						File[] files=srcFile.listFiles();
@@ -142,7 +148,7 @@ public class ImageUploadServlet extends HttpServlet {
 						image.setUserID(userid);
 						image.setName(strName);
 						//System.out.println(strName);
-						image.setPath("JJLserver/Image/" + namelist[i] + "/");
+						image.setPath("Image/" + namelist[i] + "/");
 						image.setAddTime(dateFormat.format(new Date()));
 
 						if(imageDao.queryImageUserID(userid)){							
