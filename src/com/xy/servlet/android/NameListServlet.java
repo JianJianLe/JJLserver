@@ -49,6 +49,9 @@ public class NameListServlet extends HttpServlet  {
 			map.put("namelist",namelist);
 			map.put("shopnamelist", shopnamelist); 
 		}
+		
+		System.out.println(namelist);
+		System.out.println(shopnamelist);
 
 		String resultNOJson = gson.toJson(map);
 		out.print(resultNOJson); 
