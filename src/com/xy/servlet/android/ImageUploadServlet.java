@@ -148,7 +148,7 @@ public class ImageUploadServlet extends HttpServlet {
 						image.setUserID(userid);
 						image.setName(strName);
 						//System.out.println(strName);
-						image.setPath("Image/" + namelist[i] + "/");
+						image.setPath("JJLserver/Image/" + namelist[i] + "/");
 						image.setAddTime(dateFormat.format(new Date()));
 
 						if(imageDao.queryImageUserID(userid)){							
