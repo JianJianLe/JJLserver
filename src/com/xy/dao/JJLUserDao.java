@@ -143,7 +143,7 @@ public class JJLUserDao extends BaseDao {
 	public String listRegion(){
 		String result = "";
 		getCon();
-		String sql = "select region from jjluser";
+		String sql = "select DISTINCT region from jjluser";
 		resultSet = execQuery(sql, new Object[] {});
 		try {
 			preExe(sql, null);
