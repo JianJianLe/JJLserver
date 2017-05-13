@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xy.bean.JJLBillQuery;
 import com.xy.dao.JJLBillQueryDao;
 
@@ -50,9 +54,14 @@ public class SaveOrderServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String list = request.getParameter("OrderList");
 		Gson gson = new Gson();
-		List<JJLBillQuery> orderList;
+		List<JJLBillQuery> orderList = null;
 		
-		orderList = (List<JJLBillQuery>) gson.fromJson(list, JJLBillQuery.class);
+		try {
+			orderList = (List<JJLBillQuery>) new JSONArray(list);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (orderList != null && orderList.size() >0) {
 			for (int i = 0; i < orderList.size(); i++) {
