@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class JJLBillQuery {
 
+	private int id;
 	private String userid;
 	private String orderNo;
 	private String shopname;//
@@ -15,6 +16,15 @@ public class JJLBillQuery {
 	private String ticketType;//票类型
 	private Timestamp addTime;//添加时间
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getUserID() {
 		return userid;
 	}
