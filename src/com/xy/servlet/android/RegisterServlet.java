@@ -71,6 +71,8 @@ public class RegisterServlet extends HttpServlet {
 			//user = userDao.login(userName, password);
 			if(userDao.queryUser(userName)){
 				flag=1;//用户名已存在
+			}else if(userDao.queryUserByDeviceNO(deviceno)){
+				flag=3;//设备号已存在
 			}else{
 				userid=userDao.addUser(user);//添加用户
 				flag=2;
@@ -96,11 +98,15 @@ public class RegisterServlet extends HttpServlet {
 			mapJson.put("shopname", user.getShopName()); 
 			userDao.updateLoginAddTime(userName, addtime);
 			break;
+		case 3:
+			mapJson.put("flag", "3");
+			break;
 		} 
 		String resultOKJson = gson.toJson(mapJson);
 		out.print(resultOKJson); 
 		out.flush();
 		out.close();
+		user=null;
 	}
 
 	protected void doPost(HttpServletRequest request,

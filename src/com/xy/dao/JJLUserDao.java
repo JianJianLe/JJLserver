@@ -206,7 +206,24 @@ public class JJLUserDao extends BaseDao {
 		closeAll();
 		return flag;
 	}
-
+	
+	
+	public boolean queryUserByDeviceNO(String DeviceNO) {
+		boolean flag=false;
+		getCon();
+		String sql = "select * from jjluser where DeviceNO=?";
+		resultSet = execQuery(sql, new Object[] { DeviceNO });
+		try {
+			if (resultSet.next()) {
+				flag=true;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+		}
+		closeAll();
+		return flag;
+	}
 	/**
 	 * 用户登陆
 	 * 
