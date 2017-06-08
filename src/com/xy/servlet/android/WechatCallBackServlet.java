@@ -23,6 +23,8 @@ import com.xy.utils.GetWxOrderno;
 import com.xy.utils.RequestHandler;
 import com.xy.utils.TenpayUtil;
 
+import net.sf.json.JSONObject;
+
 /**
  * Servlet implementation class WechatCallBackServlet
  */
@@ -32,6 +34,8 @@ public class WechatCallBackServlet extends HttpServlet {
 	String out_trade_no = "";
 
 	private boolean payResult = false;
+	
+	private static String amount;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,7 +63,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+		System.out.println("wechat pulling");
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
 		if (out_trade_no==null||out_trade_no.equals("")) {
@@ -83,7 +87,7 @@ public class WechatCallBackServlet extends HttpServlet {
 					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
 					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
-					query.setPayAmount(request.getParameter("payAmount"));
+					query.setPayAmount(amount);
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
 					query.setTicketType(ticketType);
@@ -108,8 +112,12 @@ public class WechatCallBackServlet extends HttpServlet {
 		}else {
 			payResult = false;
 		}
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", payResult);
+		jsonObject.put("payAmount", amount);
 
-		out.print(payResult);
+		out.print(jsonObject.toString());
 		out.flush();
 		out.close();
 	}
@@ -144,7 +152,11 @@ public class WechatCallBackServlet extends HttpServlet {
 				+ "</xml>";
 		//		log.info(xmlParam);
 		map=GetWxOrderno.doXML(url, xmlParam);
+		System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
+		if (result.equals("SUCCESS")) {
+			amount = (int)map.get("total_fee")*0.01+"" ;
+		}
 		return result;
 	}
 

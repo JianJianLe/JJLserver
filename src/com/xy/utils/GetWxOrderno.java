@@ -33,10 +33,10 @@ public class GetWxOrderno {
 		HttpPost httpost = HttpClientConnectionManager.getPostMethod(url);
 		Map map=new HashMap();
 		try {
-			httpost.setEntity(new StringEntity(xmlParam, "UTF-8"));
+			httpost.setEntity(new StringEntity(xmlParam, "GBK"));
 			HttpResponse response = httpclient.execute(httpost);
 			String jsonStr = EntityUtils
-					.toString(response.getEntity(), "UTF-8");
+					.toString(response.getEntity(), "GBK");
 			//System.out.println(jsonStr);
 			map = doXMLParse(jsonStr);
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class GetWxOrderno {
 		}
 
 		Map m = new HashMap();
-		InputStream in = String2Inputstream(strxml);
+		InputStream in = new ByteArrayInputStream(strxml.getBytes());
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(in);
 		Element root = doc.getRootElement();

@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.domain.TradeFundBill;
@@ -34,7 +35,9 @@ public class AlipayCallBackServlet extends HttpServlet {
 	private int resultCode = -1;
 	private AlipayTradeService tradeService;
 	private String out_trade_no;
+	private String amount = "0";
 	private boolean payResult = false;
+	String daoResult;
 	/**
 	 * Constructor of the object.
 	 */
@@ -67,7 +70,9 @@ public class AlipayCallBackServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
+		System.out.println("alipay pulling");
 		out_trade_no = request.getParameter("alipay_order");
+		amount = request.getParameter("payAmount");
 		
 		if (out_trade_no==null||out_trade_no.equals("")) {
 			out.print(false);
@@ -80,12 +85,13 @@ public class AlipayCallBackServlet extends HttpServlet {
 
 		test_trade_query(out_trade_no,request);
 		JJLBillQueryDao dao = new JJLBillQueryDao();
-		String daoResult;
 		try {
 			daoResult = dao.getQuery(out_trade_no);
 			if (daoResult.equals("[]")) {
 				payResult = false;
 			}else {
+				JSONObject jsonObject = new JSONObject(daoResult);
+				amount = (String) jsonObject.get("payAmount");
 				payResult= true;
 			}
 		} catch (SQLException e) {
@@ -95,7 +101,17 @@ public class AlipayCallBackServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.print(payResult);
+		
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("payAmount", amount);
+			jsonObject.put("result", payResult);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.print(jsonObject.toString());
 		out.flush();
 		out.close();
 	}
@@ -172,7 +188,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
 					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
-					query.setPayAmount(request.getParameter("payAmount"));
+					query.setPayAmount(amount);
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
 					query.setTicketType(ticketType);
@@ -219,6 +235,9 @@ public class AlipayCallBackServlet extends HttpServlet {
 			if (StringUtils.isNotEmpty(response.getSubCode())) {
 				log.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(),
 						response.getSubMsg()));
+				if (response.getSubCode().equals("total_amount")) {
+					amount = response.getSubMsg();
+				}
 			}
 			log.info("body:" + response.getBody());
 		}
