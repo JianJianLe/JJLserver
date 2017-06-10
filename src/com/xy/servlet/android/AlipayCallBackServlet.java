@@ -86,20 +86,23 @@ public class AlipayCallBackServlet extends HttpServlet {
 		test_trade_query(out_trade_no,request);
 		JJLBillQueryDao dao = new JJLBillQueryDao();
 		try {
-			daoResult = dao.getQuery(out_trade_no);
-			if (daoResult.equals("[]")) {
+			String result= dao.getPayAmount(out_trade_no);
+			if (result==null) {
 				payResult = "0";
 			}else {
-				JSONObject jsonObject = new JSONObject(daoResult);
-				amount = (String) jsonObject.get("payAmount");
+//				System.out.println(daoResult); 
+//				JSONObject jsonObject = new JSONObject(daoResult);
+//				amount = (String) jsonObject.get("payAmount");
+				amount=result;
 				payResult= "1";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		
 		JSONObject jsonObject = new JSONObject();

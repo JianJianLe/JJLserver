@@ -72,6 +72,18 @@ public class JJLBillQueryDao extends BaseDao{
 		return result;
 	}
 	
+	public String getPayAmount(String orderNo) throws SQLException, JSONException{
+		getCon();
+		String sql = "select payAmount from jjlbill where orderNo='"+orderNo+"'";
+		resultSet = execQuery(sql, new Object[]{});
+		//String result =resultSet.getString("payAmount");
+		String result=null;
+		if(resultSet.next()){
+			result=resultSet.getString(1);
+		}
+		closeAll();
+		return result;
+	}
 	
 	/**
 	 * 添加付款信息记录
