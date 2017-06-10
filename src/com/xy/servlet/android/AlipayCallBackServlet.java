@@ -36,7 +36,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 	private AlipayTradeService tradeService;
 	private String out_trade_no;
 	private String amount = "0";
-	private boolean payResult = false;
+	private String payResult = "0";
 	String daoResult;
 	/**
 	 * Constructor of the object.
@@ -88,11 +88,11 @@ public class AlipayCallBackServlet extends HttpServlet {
 		try {
 			daoResult = dao.getQuery(out_trade_no);
 			if (daoResult.equals("[]")) {
-				payResult = false;
+				payResult = "0";
 			}else {
 				JSONObject jsonObject = new JSONObject(daoResult);
 				amount = (String) jsonObject.get("payAmount");
-				payResult= true;
+				payResult= "1";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

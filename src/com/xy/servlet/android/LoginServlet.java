@@ -45,8 +45,8 @@ public class LoginServlet extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 		Gson gson = new Gson();
-		//List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (user == null) { 

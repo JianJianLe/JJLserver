@@ -33,7 +33,7 @@ public class WechatCallBackServlet extends HttpServlet {
 	
 	String out_trade_no = "";
 
-	private boolean payResult = false;
+	private String payResult = "0";
 	
 	private static String amount;
 
@@ -108,9 +108,9 @@ public class WechatCallBackServlet extends HttpServlet {
 			}
 			
 			
-			payResult = true;
+			payResult = "1";
 		}else {
-			payResult = false;
+			payResult = "0";
 		}
 		
 		JSONObject jsonObject = new JSONObject();
@@ -141,20 +141,22 @@ public class WechatCallBackServlet extends HttpServlet {
 		packageParams.put("mch_id", mch_id);
 		packageParams.put("nonce_str", nonce_str);
 		packageParams.put("out_trade_no", out_trade_no);
-		RequestHandler reqHandler = new RequestHandler(
-				null, null);
+		RequestHandler reqHandler = new RequestHandler(null, null);
 		reqHandler.init(appid, appsecret, pkey);
 		String sign = reqHandler.createSign(packageParams);
-		String xmlParam = "<xml>" + "<appid>" + appid + "</appid>" + "<mch_id>"
-				+ mch_id + "</mch_id>" + "<nonce_str>" + nonce_str
-				+ "</nonce_str>" + "<sign><![CDATA[" + sign + "]]></sign>"
-				+ "<out_trade_no>" + out_trade_no + "</out_trade_no>"
-				+ "</xml>";
-		//		log.info(xmlParam);
+		String xmlParam = "<xml>" + 
+						"<appid>" + appid + "</appid>" + 
+						"<mch_id>"+ mch_id + "</mch_id>" + 
+						"<nonce_str>" + nonce_str+ "</nonce_str>" + 
+						"<sign><![CDATA[" + sign + "]]></sign>"+ 
+						"<out_trade_no>" + out_trade_no + "</out_trade_no>"+ 
+						"</xml>";
+		 
+		System.out.println(xmlParam);
 		map=GetWxOrderno.doXML(url, xmlParam);
 		System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
-		if (result.equals("SUCCESS")) {
+		if (result!=null && result.equals("SUCCESS")) {
 			amount = (int)map.get("total_fee")*0.01+"" ;
 		}
 		return result;
