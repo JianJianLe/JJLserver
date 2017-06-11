@@ -70,7 +70,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
-		System.out.println("alipay pulling");
+		//System.out.println("alipay pulling");
 		out_trade_no = request.getParameter("alipay_order");
 		amount = request.getParameter("payAmount");
 		

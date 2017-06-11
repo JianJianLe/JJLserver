@@ -63,7 +63,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		System.out.println("wechat pulling");
+		//System.out.println("wechat pulling");
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
 		if (out_trade_no==null||out_trade_no.equals("")) {
@@ -152,9 +152,9 @@ public class WechatCallBackServlet extends HttpServlet {
 						"<out_trade_no>" + out_trade_no + "</out_trade_no>"+ 
 						"</xml>";
 		 
-		System.out.println(xmlParam);
+		//System.out.println(xmlParam);
 		map=GetWxOrderno.doXML(url, xmlParam);
-		System.out.println(map.toString());
+		//System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
 		if (result!=null && result.equals("SUCCESS")) {
 			amount = (int)map.get("total_fee")*0.01+"" ;

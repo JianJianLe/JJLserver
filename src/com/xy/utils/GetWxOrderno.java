@@ -33,10 +33,10 @@ public class GetWxOrderno {
 		HttpPost httpost = HttpClientConnectionManager.getPostMethod(url);
 		Map map=new HashMap();
 		try {
-			httpost.setEntity(new StringEntity(xmlParam, "GBK"));
+			httpost.setEntity(new StringEntity(xmlParam, "utf8"));
 			HttpResponse response = httpclient.execute(httpost);
 			String jsonStr = EntityUtils
-					.toString(response.getEntity(), "GBK");
+					.toString(response.getEntity(), "utf8");
 			//System.out.println(jsonStr);
 			map = doXMLParse(jsonStr);
 		} catch (Exception e) {
