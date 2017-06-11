@@ -101,10 +101,10 @@ public class WechatCallBackServlet extends HttpServlet {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e);
 			}
 			
 			
@@ -158,6 +158,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		String result =(String) map.get("trade_state");
 		if (result!=null && result.equals("SUCCESS")) {
 			amount = (int)map.get("total_fee")*0.01+"" ;
+			System.out.println("amount="+amount);
 		}
 		return result;
 	}
