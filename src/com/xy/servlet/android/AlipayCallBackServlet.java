@@ -68,55 +68,52 @@ public class AlipayCallBackServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
 
-		//System.out.println("alipay pulling");
+		PrintWriter out = response.getWriter();
+		System.out.println("alipay pulling");
 		out_trade_no = request.getParameter("alipay_order");
 		amount = request.getParameter("payAmount");
 		
 		if (out_trade_no==null||out_trade_no.equals("")) {
-			out.print(false);
+			JSONObject jsonObject = new JSONObject();
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", 0);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(jsonObject.toString());
+			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		//System.out.println(out_trade_no);
-
-		test_trade_query(out_trade_no,request);
-		JJLBillQueryDao dao = new JJLBillQueryDao();
-		try {
-			String result= dao.getPayAmount(out_trade_no);
-			if (result==null) {
-				payResult = "0";
-			}else {
-//				System.out.println(daoResult); 
-//				JSONObject jsonObject = new JSONObject(daoResult);
-//				amount = (String) jsonObject.get("payAmount");
-				amount=result;
-				payResult= "1";
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-		}
+//
+		test_trade_query(out_trade_no,request,response);
+//		JJLBillQueryDao dao = new JJLBillQueryDao();
+//		try {
+//			String result= dao.getPayAmount(out_trade_no);
+//			if (result==null) {
+//				payResult = "0";
+//			}else {
+////				System.out.println(daoResult); 
+////				JSONObject jsonObject = new JSONObject(daoResult);
+////				amount = (String) jsonObject.get("payAmount");
+//				amount=result;
+//				payResult= "1";
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println(e);
+//			
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println(e);
+//		}
 		
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put("payAmount", amount);
-			jsonObject.put("result", payResult);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		out.print(jsonObject.toString());
-		out.flush();
-		out.close();
 	}
 
 	/**
@@ -154,23 +151,25 @@ public class AlipayCallBackServlet extends HttpServlet {
 	}
 
 	// 测试当面付2.0查询订单
-	public void test_trade_query(String out_trade_no,HttpServletRequest request) {
+	public void test_trade_query(String out_trade_no,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// (必填) 商户订单号，通过此商户订单号查询当面付的交易状态
 
+		PrintWriter out = response.getWriter();
 		// 创建查询请求builder，设置请求参数
 		AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
 		.setOutTradeNo(out_trade_no);
 
 		AlipayF2FQueryResult result = tradeService.queryTradeResult(builder);
+		JSONObject jsonObject = new JSONObject();
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
 			log.info("查询返回该订单支付成功: )");
 
-			AlipayTradeQueryResponse response = result.getResponse();
-			dumpResponse(response);
+			AlipayTradeQueryResponse alipayResponse = result.getResponse();
+			dumpResponse(alipayResponse);
 			//                log.info(response.getTradeStatus());
-			if (Utils.isListNotEmpty(response.getFundBillList())) {
-				for (TradeFundBill bill : response.getFundBillList()) {
+			if (Utils.isListNotEmpty(alipayResponse.getFundBillList())) {
+				for (TradeFundBill bill : alipayResponse.getFundBillList()) {
 					//                        log.info(bill.getFundChannel() + ":" + bill.getAmount());
 				}
 			}
@@ -211,21 +210,69 @@ public class AlipayCallBackServlet extends HttpServlet {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
 			}
+			payResult="1";
 			resultCode=1;
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", payResult);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("alipay"+jsonObject.toString());
+			out.print(jsonObject.toString());
+			out.flush();
+			out.close();
 			break;
 
 		case FAILED:
-			resultCode=0;
+			payResult="0";
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", payResult);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("alipay"+jsonObject.toString());
+			out.print(jsonObject.toString());
+			out.flush();
+			out.close();
 			log.error("查询返回该订单支付失败或被关闭!!!");
 			break;
 
 		case UNKNOWN:
-			resultCode=0;
+			payResult="0";
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", payResult);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("alipay"+jsonObject.toString());
+			out.print(jsonObject.toString());
+			out.flush();
+			out.close();
 			log.error("系统异常，订单支付状态未知!!!");
 			break;
 
 		default:
-			resultCode=0;
+			payResult="0";
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", payResult);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("alipay"+jsonObject.toString());
+			out.print(jsonObject.toString());
+			out.flush();
+			out.close();
 			log.error("不支持的交易状态，交易返回异常!!!");
 			break;
 		}
