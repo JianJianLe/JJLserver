@@ -63,7 +63,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		//System.out.println("wechat pulling");
+		System.out.println("wechat pulling");
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
 		if (out_trade_no==null||out_trade_no.equals("")) {
@@ -72,9 +72,50 @@ public class WechatCallBackServlet extends HttpServlet {
 			out.close();
 			return;
 		}
-		JJLBillQueryDao dao = new JJLBillQueryDao();
 		
-		String result = query(out_trade_no);
+		query(out_trade_no,request,response);
+	}
+
+	public void query(String out_trade_no,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		JJLBillQueryDao dao = new JJLBillQueryDao();
+		String appid = Config.WECHAT_APP_ID;
+		String appsecret = "";
+		String mch_id = Config.WECHAT_MCH_ID;//邮件里给的
+		String pkey = Config.WECHAT_API_KEY;//商户平台里自己设的密钥
+		String url="https://api.mch.weixin.qq.com/pay/orderquery";
+		String currTime = TenpayUtil.getCurrTime();
+		// 8位日期
+		String strTime = currTime.substring(8, currTime.length());
+		// 四位随机数
+		String strRandom = TenpayUtil.buildRandom(4) + "";
+		// 10位序列号,可以自行调整。
+		String nonce_str = strTime + strRandom;
+		Map map=new HashMap();
+		SortedMap<String, String> packageParams = new TreeMap<String, String>();
+		packageParams.put("appid", appid);
+		packageParams.put("mch_id", mch_id);
+		packageParams.put("nonce_str", nonce_str);
+		packageParams.put("out_trade_no", out_trade_no);
+		RequestHandler reqHandler = new RequestHandler(null, null);
+		reqHandler.init(appid, appsecret, pkey);
+		String sign = reqHandler.createSign(packageParams);
+		String xmlParam = "<xml>" + 
+						"<appid>" + appid + "</appid>" + 
+						"<mch_id>"+ mch_id + "</mch_id>" + 
+						"<nonce_str>" + nonce_str+ "</nonce_str>" + 
+						"<sign><![CDATA[" + sign + "]]></sign>"+ 
+						"<out_trade_no>" + out_trade_no + "</out_trade_no>"+ 
+						"</xml>";
+		 
+		//System.out.println(xmlParam);
+		map=GetWxOrderno.doXML(url, xmlParam);
+		System.out.println(map.toString());
+		String result =(String) map.get("trade_state");
+		if (result!=null && result.equals("SUCCESS")) {
+			amount = (int)map.get("total_fee")+"" ;
+			System.out.println("amount="+amount);
+		}
 		if ("SUCCESS".equals(result)) {
 			JJLBillQuery query = new JJLBillQuery();
 			try {
@@ -116,51 +157,10 @@ public class WechatCallBackServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", payResult);
 		jsonObject.put("payAmount", amount);
-
+		System.out.println("wechat"+jsonObject.toString());
 		out.print(jsonObject.toString());
 		out.flush();
 		out.close();
-	}
-
-	public static String query(String out_trade_no) {
-		String appid = Config.WECHAT_APP_ID;
-		String appsecret = "";
-		String mch_id = Config.WECHAT_MCH_ID;//邮件里给的
-		String pkey = Config.WECHAT_API_KEY;//商户平台里自己设的密钥
-		String url="https://api.mch.weixin.qq.com/pay/orderquery";
-		String currTime = TenpayUtil.getCurrTime();
-		// 8位日期
-		String strTime = currTime.substring(8, currTime.length());
-		// 四位随机数
-		String strRandom = TenpayUtil.buildRandom(4) + "";
-		// 10位序列号,可以自行调整。
-		String nonce_str = strTime + strRandom;
-		Map map=new HashMap();
-		SortedMap<String, String> packageParams = new TreeMap<String, String>();
-		packageParams.put("appid", appid);
-		packageParams.put("mch_id", mch_id);
-		packageParams.put("nonce_str", nonce_str);
-		packageParams.put("out_trade_no", out_trade_no);
-		RequestHandler reqHandler = new RequestHandler(null, null);
-		reqHandler.init(appid, appsecret, pkey);
-		String sign = reqHandler.createSign(packageParams);
-		String xmlParam = "<xml>" + 
-						"<appid>" + appid + "</appid>" + 
-						"<mch_id>"+ mch_id + "</mch_id>" + 
-						"<nonce_str>" + nonce_str+ "</nonce_str>" + 
-						"<sign><![CDATA[" + sign + "]]></sign>"+ 
-						"<out_trade_no>" + out_trade_no + "</out_trade_no>"+ 
-						"</xml>";
-		 
-		//System.out.println(xmlParam);
-		map=GetWxOrderno.doXML(url, xmlParam);
-		//System.out.println(map.toString());
-		String result =(String) map.get("trade_state");
-		if (result!=null && result.equals("SUCCESS")) {
-			amount = (int)map.get("total_fee")*0.01+"" ;
-			System.out.println("amount="+amount);
-		}
-		return result;
 	}
 
 }
