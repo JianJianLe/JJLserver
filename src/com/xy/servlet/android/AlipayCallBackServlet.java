@@ -75,7 +75,16 @@ public class AlipayCallBackServlet extends HttpServlet {
 		amount = request.getParameter("payAmount");
 		
 		if (out_trade_no==null||out_trade_no.equals("")) {
-			out.print(false);
+			JSONObject jsonObject = new JSONObject();
+			try {
+				jsonObject.put("payAmount", amount);
+				jsonObject.put("result", 0);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(jsonObject.toString());
+			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
 			return;

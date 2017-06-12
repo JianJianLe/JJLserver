@@ -35,7 +35,7 @@ public class WechatCallBackServlet extends HttpServlet {
 
 	private String payResult = "0";
 	
-	private static String amount;
+	private static String amount = "0";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
