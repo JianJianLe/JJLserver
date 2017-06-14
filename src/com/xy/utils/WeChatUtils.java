@@ -53,6 +53,7 @@ public class WeChatUtils {
 		}//商品描述  
 		unifiedOrderRequest.setOut_trade_no(orderNO);//商户订单号 
 		price = (int)Double.parseDouble(price)+"";
+		//System.out.println("price="+price);
 		unifiedOrderRequest.setTotal_fee(price);  //金额需要扩大100倍:1代表支付时是0.01 
 		unifiedOrderRequest.setSpbill_create_ip("192.168.0.1");//终端IP 
 		unifiedOrderRequest.setNotify_url("xxxxxxxxxxxxxx");//通知地址 
@@ -95,7 +96,7 @@ public class WeChatUtils {
 			//将请求返回的内容通过xStream转换为UnifiedOrderRespose对象 
 			xStream.alias("xml", UnifiedOrderRespose.class);  
 			UnifiedOrderRespose unifiedOrderRespose = (UnifiedOrderRespose) xStream.fromXML(sb.toString());  
-
+			//System.out.println(unifiedOrderRespose.toString());
 			//根据微信文档return_code 和result_code都为SUCCESS的时候才会返回code_url   
 			if(null!=unifiedOrderRespose   
 					&& "SUCCESS".equals(unifiedOrderRespose.getReturn_code())   

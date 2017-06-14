@@ -113,9 +113,10 @@ public class WechatCallBackServlet extends HttpServlet {
 		System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
 		if (result!=null && result.equals("SUCCESS")) {
-			amount = (int)map.get("total_fee")+"" ;
-			System.out.println("amount="+amount);
+			amount = map.get("total_fee")+"" ;
+			//System.out.println("amount="+amount);
 		}
+		
 		if ("SUCCESS".equals(result)) {
 			JJLBillQuery query = new JJLBillQuery();
 			try {
@@ -157,7 +158,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", payResult);
 		jsonObject.put("payAmount", amount);
-		System.out.println("wechat"+jsonObject.toString());
+		//System.out.println("wechat"+jsonObject.toString());
 		out.print(jsonObject.toString());
 		out.flush();
 		out.close();
