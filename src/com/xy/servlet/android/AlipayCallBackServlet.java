@@ -219,7 +219,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("alipay"+jsonObject.toString());
+			//System.out.println("alipay"+jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
@@ -235,7 +235,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			System.out.println("alipay"+jsonObject.toString());
+			//System.out.println("alipay"+jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
@@ -256,7 +256,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
-			log.error("系统异常，订单支付状态未知!!!");
+			//log.error("系统异常，订单支付状态未知!!!");
 			break;
 
 		default:
@@ -269,7 +269,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			System.out.println("alipay"+jsonObject.toString());
+			//System.out.println("alipay"+jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
