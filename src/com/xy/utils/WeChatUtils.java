@@ -52,7 +52,8 @@ public class WeChatUtils {
 			e.printStackTrace();
 		}//商品描述  
 		unifiedOrderRequest.setOut_trade_no(orderNO);//商户订单号 
-		price = (int)Double.parseDouble(price)+"";
+		price = (int)Double.parseDouble(price)+"";  
+		//price = (int)Double.parseDouble(price)*100+""; //金额需要扩大100倍:1代表支付时是0.01 
 		//System.out.println("price="+price);
 		unifiedOrderRequest.setTotal_fee(price);  //金额需要扩大100倍:1代表支付时是0.01 
 		unifiedOrderRequest.setSpbill_create_ip("192.168.0.1");//终端IP 
@@ -159,12 +160,7 @@ public class WeChatUtils {
 		return sign;  
 	}  
 	
-	/** 
-     * ���ɶ�ά��(QRCode)ͼƬ 
-     * @param content �洢���� 
-     * @param imgPath ͼƬ·�� 
-     * @param imgType ͼƬ���� 
-     */  
+	   
     public void encoderQRCode(String content, String imgPath, String imgType) {  
         this.encoderQRCode(content, imgPath, imgType, 7);  
     } 
@@ -180,9 +176,9 @@ public class WeChatUtils {
         try {  
             BufferedImage bufImg = this.qRCodeCommon(content, imgType, size);  
               
-            File imgFile = new File(imgPath);  
-            // ���ɶ�ά��QRCodeͼƬ  
+            File imgFile = new File(imgPath);   
             ImageIO.write(bufImg, imgType, imgFile);  
+            
         } catch (Exception e) {  
             e.printStackTrace();  
         }  

@@ -29,5 +29,13 @@ public class DateTimeUtils {
 	public static String getTimeStr(){
 		return formatter.format(new Date());		
 	}
-
+	
+	public static void delay(int second){
+		try{   
+			Thread.currentThread();
+			Thread.sleep(second);//毫秒   
+		}catch(Exception e){
+			System.out.println(e);
+		}  
+	}
 }

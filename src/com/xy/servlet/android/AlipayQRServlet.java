@@ -23,6 +23,7 @@ import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.utils.ZxingUtils;
+import com.xy.utils.DateTimeUtils;
 
 
 
@@ -110,12 +111,14 @@ public class AlipayQRServlet extends HttpServlet {
 		try {
 			object.put("alipay_order", out_trade_no);
 			object.put("filePath", folderPath+"/alipay"+storeId+".png");
-			System.out.println(object.toString());
+			//System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		System.out.println("send to app:"+object.toString());
+		
 		out.print(object);
 		out.flush();
 		out.close();
@@ -151,7 +154,7 @@ public class AlipayQRServlet extends HttpServlet {
 		// (必填) 订单总金额，单位为元，不能超过1亿元
 		// 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】
 		String totalAmount = order_price;
-
+		System.out.println("-----order_price in alipay: "+order_price);
 		// (可选) 订单不可打折金额，可以配合商家平台配置折扣活动，如果酒水不参与打折，则将对应金额填写至此字段
 		// 如果该值未传入,但传入了【订单总金额】,【打折金额】,则该值默认为【订单总金额】-【打折金额】
 		String undiscountableAmount = "0";
@@ -216,10 +219,13 @@ public class AlipayQRServlet extends HttpServlet {
 			file=new File(filePath);
 			if(file.exists()){
 				file.delete();
+				System.out.println("Alipay QR delete!");
 			}
 			//                log.info("filePath:" + filePath);
 			//                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, request.getRealPath("/")+filePath);
-			ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+			File myQR=ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+			//DateTimeUtils.delay(500);
+			
 			break;
 
 		case FAILED:
@@ -236,5 +242,6 @@ public class AlipayQRServlet extends HttpServlet {
 		}
 	}
 
+	 
 
 }

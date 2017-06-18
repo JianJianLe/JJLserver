@@ -3,6 +3,8 @@ package com.xy.servlet.android;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,10 +25,11 @@ import com.alipay.demo.trade.model.builder.AlipayTradeQueryRequestBuilder;
 import com.alipay.demo.trade.model.result.AlipayF2FQueryResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
-import com.alipay.demo.trade.utils.Utils;
+import com.alipay.demo.trade.utils.Utils; 
 import com.xy.bean.JJLBillQuery;
 import com.xy.dao.JJLBillQueryDao;
 import com.xy.utils.DateTimeUtils;
+ 
 
 public class AlipayCallBackServlet extends HttpServlet {
 
@@ -70,7 +73,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 
 		PrintWriter out = response.getWriter();
-		System.out.println("alipay pulling");
+		//System.out.println("alipay pulling");
 		out_trade_no = request.getParameter("alipay_order");
 		amount = request.getParameter("payAmount");
 		
@@ -83,7 +86,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(jsonObject.toString());
+			//System.out.println(jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
@@ -163,16 +166,18 @@ public class AlipayCallBackServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		switch (result.getTradeStatus()) {
 		case SUCCESS:
-			log.info("查询返回该订单支付成功: )");
-
+			//log.info("查询返回该订单支付成功");
+			System.out.println("查询返回该订单支付成功");
 			AlipayTradeQueryResponse alipayResponse = result.getResponse();
 			dumpResponse(alipayResponse);
-			//                log.info(response.getTradeStatus());
-			if (Utils.isListNotEmpty(alipayResponse.getFundBillList())) {
-				for (TradeFundBill bill : alipayResponse.getFundBillList()) {
-					//                        log.info(bill.getFundChannel() + ":" + bill.getAmount());
-				}
-			}
+			
+			//log.info(response.getTradeStatus());
+//			if (Utils.isListNotEmpty(alipayResponse.getFundBillList())) {
+//				for (TradeFundBill bill : alipayResponse.getFundBillList()) {
+//					//log.info(bill.getFundChannel() + ":" + bill.getAmount());
+//				}
+//			}
+			
 			JJLBillQueryDao dao = new JJLBillQueryDao();
 			String daoResult;
 			
@@ -219,7 +224,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//System.out.println("alipay"+jsonObject.toString());
+			System.out.println("---alipay return:"+jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
@@ -239,7 +244,8 @@ public class AlipayCallBackServlet extends HttpServlet {
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
-			log.error("查询返回该订单支付失败或被关闭!!!");
+			//log.error("查询返回该订单支付失败或被关闭!!!");
+			//System.out.println("查询返回该订单支付失败或被关闭!!!");
 			break;
 
 		case UNKNOWN:
@@ -252,11 +258,12 @@ public class AlipayCallBackServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			System.out.println("alipay"+jsonObject.toString());
+			//System.out.println("alipay"+jsonObject.toString());
 			out.print(jsonObject.toString());
 			out.flush();
 			out.close();
 			//log.error("系统异常，订单支付状态未知!!!");
+			System.out.println("系统异常，订单支付状态未知!!!");
 			break;
 
 		default:
@@ -274,6 +281,7 @@ public class AlipayCallBackServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			log.error("不支持的交易状态，交易返回异常!!!");
+			System.out.println("不支持的交易状态，交易返回异常!!!");
 			break;
 		}
 	}
@@ -281,15 +289,16 @@ public class AlipayCallBackServlet extends HttpServlet {
 	// 简单打印应答
 	private void dumpResponse(AlipayResponse response) {
 		if (response != null) {
-			log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
-			if (StringUtils.isNotEmpty(response.getSubCode())) {
-				log.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(),
-						response.getSubMsg()));
-				if (response.getSubCode().equals("total_amount")) {
-					amount = response.getSubMsg();
-				}
+			String responseStr=response.getBody(); 
+			try{
+				JSONObject object=new JSONObject(responseStr); 
+				String tempStr=object.getString("alipay_trade_query_response");
+				object=new JSONObject(tempStr);
+				amount=object.getString("total_amount"); 
+			}catch (JSONException e) {
+				// TODO: handle exception
+				System.out.println(e);
 			}
-			log.info("body:" + response.getBody());
 		}
 	}
 

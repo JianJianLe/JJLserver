@@ -63,7 +63,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		System.out.println("wechat pulling");
+		//System.out.println("wechat pulling");
 		PrintWriter out = response.getWriter();
 		out_trade_no = request.getParameter("wechat_order");
 		if (out_trade_no==null||out_trade_no.equals("")) {
@@ -110,11 +110,11 @@ public class WechatCallBackServlet extends HttpServlet {
 		 
 		//System.out.println(xmlParam);
 		map=GetWxOrderno.doXML(url, xmlParam);
-		System.out.println(map.toString());
+		//System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
 		if (result!=null && result.equals("SUCCESS")) {
 			amount = map.get("total_fee")+"" ;
-			//System.out.println("amount="+amount);
+			System.out.println(" amount="+amount);
 		}
 		
 		if ("SUCCESS".equals(result)) {
@@ -158,7 +158,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", payResult);
 		jsonObject.put("payAmount", amount);
-		//System.out.println("wechat"+jsonObject.toString());
+		//System.out.println("---wechat return:"+jsonObject.toString());
 		out.print(jsonObject.toString());
 		out.flush();
 		out.close();

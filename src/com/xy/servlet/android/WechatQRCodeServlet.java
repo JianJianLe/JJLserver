@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.xy.utils.DateTimeUtils;
 import com.xy.utils.WeChatUtils;
 import com.xy.utils.WechatConfig;
 
@@ -60,9 +61,8 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String subject =(String) request.getParameter("subject");
 		String order_price = (String) request.getParameter("order_price");
 		String deviceNo = request.getRemoteAddr();
-		String price = Double.parseDouble(order_price)*100+"";
-		//String price = Double.parseDouble(order_price)+"";//testing
-		//System.out.println(order_price+" "+price);
+		String price = Double.parseDouble(order_price)+"";
+		System.out.println("-----order_price in wechat: "+price);
 		storeId = (String) request.getParameter("store_id");
 		String orderNo = System.currentTimeMillis()+""; 
 
@@ -78,8 +78,10 @@ public class WechatQRCodeServlet extends HttpServlet {
 			file=new File(filePath);
 			if(file.exists()){
 				file.delete();
+				System.out.println("Wechat QR delete!");
 			}
 			utils.encoderQRCode(code, filePath, "png");
+			//DateTimeUtils.delay(500); 
 		}
 
 		response.setContentType("text/html; charset=utf-8");
@@ -93,7 +95,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(object.toString());
+		System.out.println("send to app:"+object.toString());
 		out.print(object);
 		out.flush();
 		out.close();
