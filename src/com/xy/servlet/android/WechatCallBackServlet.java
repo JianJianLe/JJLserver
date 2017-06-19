@@ -113,8 +113,16 @@ public class WechatCallBackServlet extends HttpServlet {
 		//System.out.println(map.toString());
 		String result =(String) map.get("trade_state");
 		if (result!=null && result.equals("SUCCESS")) {
-			amount = map.get("total_fee")+"" ;
-			System.out.println(" amount="+amount);
+			
+			amount =map.get("total_fee")+"" ;
+			
+			try{
+				amount=Integer.parseInt(amount) * 0.01 + "";// 需缩小100倍，100表示1元
+				System.out.println(" amount="+amount);
+			}catch (NumberFormatException e) {
+				// TODO: handle exception
+				System.out.println(e);
+			}
 		}
 		
 		if ("SUCCESS".equals(result)) {
