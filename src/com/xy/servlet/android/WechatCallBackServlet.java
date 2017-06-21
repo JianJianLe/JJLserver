@@ -137,7 +137,7 @@ public class WechatCallBackServlet extends HttpServlet {
 					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
 					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);
-					query.setPayAmount(amount);
+					query.setPayAmount(setAmount(amount));
 					query.setAddTime(DateTimeUtils.getCurrentTime());
 					query.setDeviceNO(deviceno);
 					query.setTicketType(ticketType);
@@ -172,4 +172,12 @@ public class WechatCallBackServlet extends HttpServlet {
 		out.close();
 	}
 
+	private String setAmount(String amount){
+		int i=amount.indexOf(".");
+		if(i>-1){
+			return amount.substring(0, i);
+		}else{
+			return amount;
+		}
+	}
 }
