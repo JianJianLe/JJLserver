@@ -225,7 +225,7 @@ public class AlipayQRServlet extends HttpServlet {
 			//                log.info("filePath:" + filePath);
 			//                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, request.getRealPath("/")+filePath);
 			File myQR=ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
-			//DateTimeUtils.delay(500);
+			DateTimeUtils.delay(2000);
 			
 			break;
 

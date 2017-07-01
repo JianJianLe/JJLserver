@@ -81,7 +81,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 				System.out.println("Wechat QR delete!");
 			}
 			utils.encoderQRCode(code, filePath, "png");
-			//DateTimeUtils.delay(500); 
+			DateTimeUtils.delay(2000); 
 		}
 
 		response.setContentType("text/html; charset=utf-8");
