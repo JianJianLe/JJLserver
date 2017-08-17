@@ -14,7 +14,6 @@ public class PayConfigDao extends BaseDao {
 
 	/**
 	 * 添加配置信息
-	 * 
 	 * @param payConfig
 	 * @return
 	 */

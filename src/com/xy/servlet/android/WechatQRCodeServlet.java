@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.xy.bean.PayConfig;
+import com.xy.dao.PayConfigDao;
 import com.xy.utils.DateTimeUtils;
 import com.xy.utils.WeChatUtils;
 import com.xy.utils.WechatConfig;
@@ -28,6 +30,8 @@ public class WechatQRCodeServlet extends HttpServlet {
 	private String filePath;
 
 	private String folderPath;
+	
+	private PayConfigDao configDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -64,9 +68,10 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String price = Double.parseDouble(order_price)+"";
 		System.out.println("-----order_price in wechat: "+price);
 		storeId = (String) request.getParameter("store_id");
+		PayConfig config = configDao.getPayconfig(Integer.parseInt(storeId));
 		String orderNo = System.currentTimeMillis()+""; 
 
-		String code = utils.createQRCode(orderNo,body,deviceNo,price);
+		String code = utils.createQRCode(orderNo,body,deviceNo,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
 		folderPath = "/picture";
 		if (code!=null) {
 			File file = new File(request.getRealPath("/")+folderPath);

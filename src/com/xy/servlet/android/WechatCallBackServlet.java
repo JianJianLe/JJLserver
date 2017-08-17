@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 
 import com.xy.bean.JJLBillQuery;
+import com.xy.bean.PayConfig;
 import com.xy.common.Config;
 import com.xy.dao.JJLBillQueryDao;
+import com.xy.dao.PayConfigDao;
 import com.xy.utils.DateTimeUtils;
 import com.xy.utils.GetWxOrderno;
 import com.xy.utils.RequestHandler;
@@ -79,10 +81,13 @@ public class WechatCallBackServlet extends HttpServlet {
 	public void query(String out_trade_no,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		JJLBillQueryDao dao = new JJLBillQueryDao();
-		String appid = Config.WECHAT_APP_ID;
+		PayConfigDao configDao = new PayConfigDao();
+		String storeID=request.getParameter("store_id");
+		PayConfig config = configDao.getPayconfig(Integer.parseInt(storeID));
+		String appid = config.getWechatAppID();
 		String appsecret = "";
-		String mch_id = Config.WECHAT_MCH_ID;//邮件里给的
-		String pkey = Config.WECHAT_API_KEY;//商户平台里自己设的密钥
+		String mch_id = config.getWechatMchID();//邮件里给的
+		String pkey = config.getWechatPrivateKey();//商户平台里自己设的密钥
 		String url="https://api.mch.weixin.qq.com/pay/orderquery";
 		String currTime = TenpayUtil.getCurrTime();
 		// 8位日期

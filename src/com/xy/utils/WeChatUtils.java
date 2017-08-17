@@ -30,8 +30,8 @@ import com.xy.common.Config;
 
 public class WeChatUtils {
 
-	public String createQRCode(String orderNO,String description,String deviceNo,String price){
-		return httpOrder(createOrderInfo(orderNO,description,deviceNo,price));
+	public String createQRCode(String orderNO,String description,String deviceNo,String price,String appId,String mchId,String key){
+		return httpOrder(createOrderInfo(orderNO,description,deviceNo,price,appId, mchId, key));
 	}
 
 	/** 
@@ -39,11 +39,11 @@ public class WeChatUtils {
 	 * @param orderId 
 	 * @return 
 	 */  
-	private String createOrderInfo(String orderNO,String description,String deviceNo,String price) {  
+	private String createOrderInfo(String orderNO,String description,String deviceNo,String price,String appId,String mchId,String key) {  
 		//生成订单对象  
 		UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();  
-		unifiedOrderRequest.setAppid(Config.WECHAT_APP_ID);//公众账号ID
-		unifiedOrderRequest.setMch_id(Config.WECHAT_MCH_ID);//商户号 
+		unifiedOrderRequest.setAppid(appId);//公众账号ID
+		unifiedOrderRequest.setMch_id(mchId);//商户号 
 		unifiedOrderRequest.setNonce_str(UUID.randomUUID().toString().substring(0, 32));//随机字符串
 		try {
 			unifiedOrderRequest.setBody(URLEncoder.encode(description, "UTF-8"));
@@ -59,7 +59,7 @@ public class WeChatUtils {
 		unifiedOrderRequest.setSpbill_create_ip("192.168.0.1");//终端IP 
 		unifiedOrderRequest.setNotify_url("xxxxxxxxxxxxxx");//通知地址 
 		unifiedOrderRequest.setTrade_type("NATIVE");//JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付  
-		unifiedOrderRequest.setSign(createSign(unifiedOrderRequest));//签名
+		unifiedOrderRequest.setSign(createSign(unifiedOrderRequest,key));//签名
 	//将订单对象转为xml格式  
 		XStream xStream = new XStream(new XppDriver(new XmlFriendlyNameCoder("_-", "_")));
 		xStream.alias("xml", UnifiedOrderRequest.class);//根元素名需要是xml  
@@ -127,7 +127,7 @@ public class WeChatUtils {
 	 * @param out_trade_no  
 	 * @return 
 	 */  
-	private String createSign(UnifiedOrderRequest unifiedOrderRequest) {  
+	private String createSign(UnifiedOrderRequest unifiedOrderRequest,String key) {  
 		//根据规则创建可排序的map集合  
 		SortedMap<String, String> packageParams = new TreeMap<String, String>();  
 		packageParams.put("appid", unifiedOrderRequest.getAppid());  
@@ -154,7 +154,7 @@ public class WeChatUtils {
 			}  
 		}  
 		//第二步拼接key，key设置路径：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置  
-		sb.append("key=" +"r4mzgJUrdI8nTEGsENSr1kdEpxo8bJhk");  
+		sb.append("key=" +key);  
 		String sign = MD5Util.MD5Encode(sb.toString(), "UTF-8")  
 				.toUpperCase();//MD5加密  
 		return sign;  
