@@ -26,7 +26,7 @@ public class PayConfigDao extends BaseDao {
 				                       + "wechatPrivateKey,"
 				                       + "alipayMchID,"
 				                       + "alipayAppID,"
-				                       + "alipayPrivateKey"
+				                       + "alipayPrivateKey) "
 				                       + "values(?,?,?,?,?,?,?,?)";
 		try{
 			connection = getCon();
