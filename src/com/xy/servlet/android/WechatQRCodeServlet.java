@@ -31,7 +31,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 
 	private String folderPath;
 	
-	private PayConfigDao configDao;
+	private PayConfigDao configDao=new PayConfigDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -68,7 +68,8 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String price = Double.parseDouble(order_price)+"";
 		System.out.println("-----order_price in wechat: "+price);
 		storeId = (String) request.getParameter("store_id");
-		PayConfig config = configDao.getPayconfig(Integer.parseInt(storeId));
+		int storeIDnumber= Integer.parseInt(storeId);
+		PayConfig config = configDao.getPayconfig(storeIDnumber);
 		String orderNo = System.currentTimeMillis()+""; 
 
 		String code = utils.createQRCode(orderNo,body,deviceNo,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
