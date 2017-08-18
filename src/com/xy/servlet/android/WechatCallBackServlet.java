@@ -82,7 +82,7 @@ public class WechatCallBackServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JJLBillQueryDao dao = new JJLBillQueryDao();
 		PayConfigDao configDao = new PayConfigDao();
-		String storeID=request.getParameter("store_id");
+		String storeID=request.getParameter("user_id");
 		PayConfig config = configDao.getPayconfig(Integer.parseInt(storeID));
 		String appid = config.getWechatAppID();
 		String appsecret = "";
