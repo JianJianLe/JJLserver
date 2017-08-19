@@ -96,6 +96,7 @@ public class WeChatUtils {
 			XStream xStream = new XStream(new XppDriver(new XmlFriendlyNameCoder("_-", "_")));
 			//将请求返回的内容通过xStream转换为UnifiedOrderRespose对象 
 			xStream.alias("xml", UnifiedOrderRespose.class);  
+			//System.out.println("sb.tostring= " + sb.toString());
 			UnifiedOrderRespose unifiedOrderRespose = (UnifiedOrderRespose) xStream.fromXML(sb.toString());  
 			//System.out.println(unifiedOrderRespose.toString());
 			//根据微信文档return_code 和result_code都为SUCCESS的时候才会返回code_url   
