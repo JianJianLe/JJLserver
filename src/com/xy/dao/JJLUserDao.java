@@ -224,6 +224,8 @@ public class JJLUserDao extends BaseDao {
 		closeAll();
 		return flag;
 	}
+ 
+	
 	/**
 	 * 用户登陆
 	 * 
@@ -366,11 +368,17 @@ public class JJLUserDao extends BaseDao {
 		resultSet = execQuery(sql, new Object[] { userid });
 		try {
 			if (resultSet.next()) {
-				user = new JJLUser();
-				user.setUserID(Integer.toString(resultSet.getInt("userid")));
+				user = new JJLUser(); 
+				user.setUserID(userid); 
 				user.setUserName(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
-				user.setAddTime(resultSet.getString("addTime"));
+				user.setShopName(resultSet.getString("shopname"));
+				user.setAuthority(resultSet.getString("authority"));
+				user.setIDcard(resultSet.getString("IDcard"));
+				user.setPhoneNumber(resultSet.getString("phoneNumber"));
+				user.setRegion(resultSet.getString("region"));
+				user.setAddress(resultSet.getString("address"));
+				user.setDeviceNO(resultSet.getString("DeviceNO"));
 				if (user.getUserID() != userid) {
 					return null;
 				}

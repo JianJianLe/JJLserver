@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.xy.bean.JJLUser;
 import com.xy.bean.PayConfig;
+import com.xy.dao.JJLUserDao;
 import com.xy.dao.PayConfigDao;
 import com.xy.utils.DateTimeUtils;
 import com.xy.utils.WeChatUtils;
@@ -32,6 +34,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 	private String folderPath;
 	
 	private PayConfigDao configDao=new PayConfigDao();
+	private JJLUserDao userDao=new JJLUserDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -64,15 +67,19 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String body = (String) request.getParameter("body");
 		String subject =(String) request.getParameter("subject");
 		String order_price = (String) request.getParameter("order_price");
-		String deviceNo = request.getRemoteAddr();
+		String remoteAddr = request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)+"";
-		System.out.println("-----order_price in wechat: "+price);
+		//System.out.println("-----order_price in wechat: "+price);
+		
 		storeId = (String) request.getParameter("store_id");
-		int storeIDnumber= Integer.parseInt(storeId);
-		PayConfig config = configDao.getPayconfig(storeIDnumber);
+		//int storeIDnumber= Integer.parseInt(storeId);
+		JJLUser user=new JJLUser();
+		user=userDao.getUserByUserid(storeId);
+		String deviceNo=user.getDeviceNO();
+		PayConfig config = configDao.getPayconfig(deviceNo);
 		String orderNo = System.currentTimeMillis()+""; 
 
-		String code = utils.createQRCode(orderNo,body,deviceNo,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
+		String code = utils.createQRCode(orderNo,body,remoteAddr,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
 		folderPath = "/picture";
 		if (code!=null) {
 			File file = new File(request.getRealPath("/")+folderPath);

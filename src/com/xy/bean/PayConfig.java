@@ -2,11 +2,11 @@ package com.xy.bean;
 
 public class PayConfig {
 	private int id;
-	private int storeID;
+	//private int storeID;
+	private String deviceNO;
 	private String wechatMchID;
 	private String wechatAppID;
-	private String wechatPrivateKey;
-	
+	private String wechatPrivateKey;  
 	private String alipayMchID;
 	private String alipayAppID;
 	private String alipayPrivateKey;
@@ -25,14 +25,14 @@ public class PayConfig {
 
 
 
-	public int getStoreID() {
-		return storeID;
+	public String getDeviceNO() {
+		return deviceNO;
 	}
 
 
 
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
+	public void setDeviceNO(String deviceNO) {
+		this.deviceNO = deviceNO;
 	}
 
 
@@ -111,7 +111,7 @@ public class PayConfig {
 
 	@Override
 	public String toString() {
-		return "PayConfig [storeID=" + storeID + ", wechatMchID=" + wechatMchID + ", wechatAppID=" + wechatAppID
+		return "PayConfig [deviceNO=" + deviceNO + ", wechatMchID=" + wechatMchID + ", wechatAppID=" + wechatAppID
 				+ ", wechatPrivateKey=" + wechatPrivateKey + ", alipayMchID=" + alipayMchID + ", alipayAppID="
 				+ alipayAppID + ", alipayPrivateKey=" + alipayPrivateKey + "]";
 	}

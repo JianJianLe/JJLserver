@@ -79,11 +79,18 @@ public class WechatCallBackServlet extends HttpServlet {
 	}
 
 	public void query(String out_trade_no,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String deviceno=request.getParameter("deviceNo");
+		String shopname=request.getParameter("shopName");
+		String region=request.getParameter("region");
+		String ticketType=request.getParameter("ticketType");
+		//String storeID=request.getParameter("user_id");
+		
 		PrintWriter out = response.getWriter();
 		JJLBillQueryDao dao = new JJLBillQueryDao();
 		PayConfigDao configDao = new PayConfigDao();
-		String storeID=request.getParameter("user_id");
-		PayConfig config = configDao.getPayconfig(Integer.parseInt(storeID));
+		 
+		PayConfig config = configDao.getPayconfig(deviceno);
 		String appid = config.getWechatAppID();
 		String appsecret = "";
 		String mch_id = config.getWechatMchID();//邮件里给的
@@ -135,10 +142,7 @@ public class WechatCallBackServlet extends HttpServlet {
 			try {
 				String daoResult = dao.getQuery(out_trade_no);
 				if (daoResult.equals("[]")) {
-					String deviceno=request.getParameter("deviceNo");
-					String shopname=request.getParameter("shopName");
-					String region=request.getParameter("region");
-					String ticketType=request.getParameter("ticketType");
+					
 					//shopname=new String(shopname.getBytes("iso-8859-1"),"utf-8");
 					//region=new String(region.getBytes("iso-8859-1"),"utf-8");
 					query.setOrderNo(out_trade_no);

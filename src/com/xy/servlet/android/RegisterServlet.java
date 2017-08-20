@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.xy.bean.JJLUser;
+import com.xy.bean.PayConfig;
+import com.xy.common.Config;
 import com.xy.dao.JJLUserDao;
+import com.xy.dao.PayConfigDao;
 
 /**
  * 注册
@@ -37,6 +40,9 @@ public class RegisterServlet extends HttpServlet {
 				
 		JJLUserDao userDao = new JJLUserDao();
 		JJLUser user=null;
+		
+		PayConfigDao configDao=new PayConfigDao();
+		PayConfig payConfig=new PayConfig();
 		
 		PrintWriter out = response.getWriter();
 		
@@ -65,6 +71,13 @@ public class RegisterServlet extends HttpServlet {
 		user.setAddTime(addtime);
 		user.setLoginTime(logintime);
 		
+		//-----2017-08-20
+		payConfig.setDeviceNO(deviceno);
+		payConfig.setWechatAppID(Config.WECHAT_APP_ID);
+		payConfig.setWechatMchID(Config.WECHAT_MCH_ID);
+		payConfig.setWechatPrivateKey(Config.WECHAT_API_KEY);
+		
+		
 		// 判断登陆
 		try{
 			
@@ -75,6 +88,7 @@ public class RegisterServlet extends HttpServlet {
 				flag=3;//设备号已存在
 			}else{
 				userid=userDao.addUser(user);//添加用户
+				configDao.addConfig(payConfig);
 				flag=2;
 			}
 			

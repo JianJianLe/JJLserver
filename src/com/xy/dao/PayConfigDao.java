@@ -20,25 +20,25 @@ public class PayConfigDao extends BaseDao {
 	public String addConfig(PayConfig payConfig){
 		Connection connection;
 		PreparedStatement ps;
-		String sql = "insert into payConfig(storeID,"
+		String sql = "insert into payConfig(deviceNO,"
 				                       + "wechatMchID,"
 				                       + "wechatAppID,"
 				                       + "wechatPrivateKey,"
 				                       + "alipayMchID,"
 				                       + "alipayAppID,"
 				                       + "alipayPrivateKey) "
-				                       + "values(?,?,?,?,?,?,?,?)";
+				                       + "values(?,?,?,?,?,?,?)";
 		try{
 			connection = getCon();
 			ps = connection.prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
-			ps.setInt(0, payConfig.getStoreID());
-			ps.setString(1, payConfig.getWechatMchID());
-			ps.setString(2, payConfig.getWechatAppID());
-			ps.setString(3, payConfig.getWechatPrivateKey());
-			ps.setString(4, payConfig.getAlipayMchID());
-			ps.setString(5, payConfig.getAlipayAppID());
-			ps.setString(6, payConfig.getAlipayPrivateKey());
+			ps.setString(1, payConfig.getDeviceNO());
+			ps.setString(2, payConfig.getWechatMchID());
+			ps.setString(3, payConfig.getWechatAppID());
+			ps.setString(4, payConfig.getWechatPrivateKey());
+			ps.setString(5, payConfig.getAlipayMchID());
+			ps.setString(6, payConfig.getAlipayAppID());
+			ps.setString(7, payConfig.getAlipayPrivateKey());
 			int row = ps.executeUpdate();
 			resultSet = ps.getGeneratedKeys();
 			if (row > 0) {
@@ -66,16 +66,16 @@ public class PayConfigDao extends BaseDao {
 	 * @param userName
 	 * @return
 	 */
-	public PayConfig getPayconfig(int storeID) {
+	public PayConfig getPayconfig(String deviceNO) {
 		PayConfig config = null;
 		getCon();
-		String sql = "select * from payConfig where storeID=?";
-		resultSet = execQuery(sql, new Object[] { storeID });
+		String sql = "select * from payConfig where deviceNO=?";
+		resultSet = execQuery(sql, new Object[] { deviceNO });
 		try {
 			if (resultSet.next()) {
 				config = new PayConfig();
 				config.setId(resultSet.getInt("id"));
-				config.setStoreID(resultSet.getInt("storeID"));
+				config.setDeviceNO(resultSet.getString("deviceNO"));
 				config.setWechatAppID(resultSet.getString("wechatAppID"));
 				config.setWechatMchID(resultSet.getString("wechatMchID"));
 				config.setWechatPrivateKey(resultSet.getString("wechatPrivateKey"));
@@ -100,7 +100,7 @@ public class PayConfigDao extends BaseDao {
 	public boolean updatePayconfig(PayConfig config) {
 		boolean result = true;
 		Connection connection;
-		String sql = "UPDATE payConfig SET wechatMchID='"+config.getWechatMchID()+"' where storeID='"+config.getStoreID()+"';";
+		String sql = "UPDATE payConfig SET wechatMchID='"+config.getWechatMchID()+"' where deviceNO='"+config.getDeviceNO()+"';";
 		try {
 			connection = getCon();
 			Statement ps = connection.createStatement();

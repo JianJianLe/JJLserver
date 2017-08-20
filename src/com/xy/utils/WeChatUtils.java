@@ -52,8 +52,8 @@ public class WeChatUtils {
 			e.printStackTrace();
 		}//商品描述  
 		unifiedOrderRequest.setOut_trade_no(orderNO);//商户订单号 
-		//price = (int)Double.parseDouble(price)+"";  
-		price = (int)Double.parseDouble(price)*100+""; //金额需要扩大100倍:1代表支付时是0.01 
+		price = (int)Double.parseDouble(price)+"";  
+		//price = (int)Double.parseDouble(price)*100+""; //金额需要扩大100倍:1代表支付时是0.01 
 		//System.out.println("price="+price);
 		unifiedOrderRequest.setTotal_fee(price);  //金额需要扩大100倍:1代表支付时是0.01 
 		unifiedOrderRequest.setSpbill_create_ip("192.168.0.1");//终端IP 
