@@ -306,4 +306,17 @@
     <servlet-name>SaveOrderServlet</servlet-name>
     <url-pattern>/servlet/SaveOrderServlet</url-pattern>
   </servlet-mapping>
+  
+    
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteQRServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.DeleteQRServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteQRServlet</servlet-name>
+    <url-pattern>/servlet/DeleteQRServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

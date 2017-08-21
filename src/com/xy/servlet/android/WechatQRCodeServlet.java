@@ -91,10 +91,10 @@ public class WechatQRCodeServlet extends HttpServlet {
 			file=new File(filePath);
 			if(file.exists()){
 				file.delete();
-				System.out.println("Wechat QR delete!");
+				System.out.println("WechatQRCodeServlet Wechat QR delete!");
 			}
 			utils.encoderQRCode(code, filePath, "png");
-			DateTimeUtils.delay(2000); 
+			//DateTimeUtils.delay(2000); 
 		}
 
 		response.setContentType("text/html; charset=utf-8");
@@ -108,7 +108,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("send to app:"+object.toString());
+		//System.out.println("send to app:"+object.toString());
 		out.print(object);
 		out.flush();
 		out.close();
