@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
+import org.json.JSONException;
+
 import com.xy.bean.JJLUser;
 import com.xy.bean.PayConfig;
+import com.xy.utils.ResultSetUtils;
 
 public class PayConfigDao extends BaseDao {
 	int configID;
@@ -113,5 +116,31 @@ public class PayConfigDao extends BaseDao {
 		}
 		closeAll();
 		return result;
+	}
+	
+	public String getWechatConfigList(String deviceno) throws SQLException, JSONException{
+		getCon();
+		String sql = "select * from payconfig where deviceNO=?";
+		System.out.println(sql);
+		resultSet = execQuery(sql, new Object[] {deviceno});
+		String result = ResultSetUtils.resultSetToJson(resultSet);
+		return result;
+	}
+	
+	public boolean queryDeviceNo(String deviceNo) {
+		boolean flag=false;
+		getCon();
+		String sql = "select * from payConfig where deviceNO=?";
+		resultSet = execQuery(sql, new Object[] { deviceNo });
+		try {
+			if (resultSet.next()) {
+				flag=true;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+		}
+		closeAll();
+		return flag;
 	}
 }

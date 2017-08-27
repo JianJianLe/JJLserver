@@ -52,9 +52,11 @@ public class DeleteQRServlet extends HttpServlet {
 		String wechatfilePath = request.getRealPath("/")+folderPath + "/wechat"+storeID+".png";
 		String alipayfilePath = request.getRealPath("/")+folderPath + "/alipay"+storeID+".png";
 		if(folder.exists()){
-			DeleteFile(wechatfilePath);
-			DeleteFile(alipayfilePath);
-			flag=1;
+			if(DeleteFile(wechatfilePath)) flag++;
+			if(DeleteFile(alipayfilePath)) flag++;
+			if(flag==1){
+				DateTimeUtils.delay(1500); 
+			} 
 		}
 		 
 		response.setContentType("text/html; charset=utf-8");
@@ -76,12 +78,15 @@ public class DeleteQRServlet extends HttpServlet {
 
 	}
 	
-	private void DeleteFile(String filepath){
+	private boolean DeleteFile(String filepath){
 		File file=new File(filepath);
 		if(file.exists()){
 			file.delete();
-			DateTimeUtils.delay(1000); 
+			DateTimeUtils.delay(1500); 
 			System.out.println("WechatDeleteQRServlet QR delete! path=" + filepath); 
+			return true;
+		}else{
+			return false;
 		}
 	}
 }

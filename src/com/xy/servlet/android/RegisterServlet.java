@@ -88,7 +88,9 @@ public class RegisterServlet extends HttpServlet {
 				flag=3;//设备号已存在
 			}else{
 				userid=userDao.addUser(user);//添加用户
-				configDao.addConfig(payConfig);
+				if(!configDao.queryDeviceNo(deviceno)){
+					configDao.addConfig(payConfig);
+				} 
 				flag=2;
 			}
 			

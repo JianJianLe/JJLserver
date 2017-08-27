@@ -319,4 +319,29 @@
     <url-pattern>/servlet/DeleteQRServlet</url-pattern>
   </servlet-mapping>
   
+  
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateWeChatPayConfigServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.UpdateWeChatPayConfigServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateWeChatPayConfigServlet</servlet-name>
+    <url-pattern>/servlet/UpdateWeChatPayConfigServlet</url-pattern>
+  </servlet-mapping>
+   
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetWechatConfigServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.GetWechatConfigServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetWechatConfigServlet</servlet-name>
+    <url-pattern>/servlet/GetWechatConfigServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
