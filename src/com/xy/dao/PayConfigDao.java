@@ -103,7 +103,7 @@ public class PayConfigDao extends BaseDao {
 	public boolean updatePayconfig(PayConfig config) {
 		boolean result = true;
 		Connection connection;
-		String sql = "UPDATE payConfig SET wechatMchID='"+config.getWechatMchID()+"' where deviceNO='"+config.getDeviceNO()+"';";
+		String sql = "UPDATE payConfig SET wechatMchID='"+config.getWechatMchID()+"', wechatAppID='"+config.getWechatAppID()+"' where deviceNO='"+config.getDeviceNO()+"';";
 		try {
 			connection = getCon();
 			Statement ps = connection.createStatement();
