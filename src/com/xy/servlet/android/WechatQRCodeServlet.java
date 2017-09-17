@@ -88,13 +88,17 @@ public class WechatQRCodeServlet extends HttpServlet {
 			}
 			filePath = request.getRealPath("/")+folderPath + "/wechat"+storeId+".png";
 			//System.out.println(filePath);
-			file=new File(filePath);
-			if(file.exists()){
-				file.delete();
-				System.out.println("WechatQRCodeServlet Wechat QR delete!");
+//			file=new File(filePath);
+//			if(file.exists()){
+//				file.delete();
+//				//System.out.println("WechatQRCodeServlet Wechat QR delete!");
+//			}
+			
+			if(CheckFile(filePath)){
+				DeleteFile(filePath);
 			}
 			utils.encoderQRCode(code, filePath, "png");
-			//DateTimeUtils.delay(2000); 
+			//DateTimeUtils.delay(3000); 
 		}
 
 		response.setContentType("text/html; charset=utf-8");
@@ -102,7 +106,11 @@ public class WechatQRCodeServlet extends HttpServlet {
 		JSONObject object = new JSONObject();
 		try {
 			object.put("wechat_order", orderNo);
-			object.put("filePath", folderPath+"/wechat"+storeId+".png");
+			if(CheckFile(filePath)){ 
+				object.put("filePath", folderPath+"/wechat"+storeId+".png");
+			}else{ 
+				object.put("filePath", "Nothing");
+			}
 			//System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -113,6 +121,22 @@ public class WechatQRCodeServlet extends HttpServlet {
 		out.flush();
 		out.close();
 
+	}
+	
+	private boolean CheckFile(String filePath){
+		boolean flag=false;
+		
+		File file=new File(filePath);
+		if(file.exists()){
+			flag=true;
+		}
+		
+		return flag;
+	}
+	
+	private void DeleteFile(String filePath){
+		File file=new File(filePath);
+		file.delete(); 
 	}
 
 }

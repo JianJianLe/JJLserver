@@ -34,8 +34,8 @@ public class UpdateAPKServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		
-		String path = config.getServletContext().getRealPath("/");
-		path=path.replace("JJLserver\\", "")+"APK\\";
+		String path = config.getServletContext().getRealPath("/"); 
+		path=path.replace("JJLserver", "")+"APK";
 		
 		Gson gson = new Gson(); 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -45,7 +45,6 @@ public class UpdateAPKServlet extends HttpServlet {
 			map.put("flag", "1");  
 		}else{ 
 			map.put("flag", "0"); 
-			
 		}
 		String resultNOJson = gson.toJson(map);
 		out.print(resultNOJson); 

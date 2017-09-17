@@ -121,7 +121,7 @@ public class PayConfigDao extends BaseDao {
 	public String getWechatConfigList(String deviceno) throws SQLException, JSONException{
 		getCon();
 		String sql = "select * from payconfig where deviceNO=?";
-		System.out.println(sql);
+		//System.out.println(sql);
 		resultSet = execQuery(sql, new Object[] {deviceno});
 		String result = ResultSetUtils.resultSetToJson(resultSet);
 		return result;

@@ -12,18 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.opensymphony.xwork2.inject.util.Function;
-import com.xy.utils.DateTimeUtils;
- 
-public class DeleteQRServlet extends HttpServlet {
-	
+public class JJLRequestServlet extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
  
  
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteQRServlet() {
+	public JJLRequestServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,50 +41,51 @@ public class DeleteQRServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		
-		int flag=0;
-		String storeID=(String) request.getParameter("store_id");
-		String folderPath="/picture";
-		File folder = new File(request.getRealPath("/")+folderPath);
-		String wechatfilePath = request.getRealPath("/")+folderPath + "/wechat"+storeID+".png";
-		String alipayfilePath = request.getRealPath("/")+folderPath + "/alipay"+storeID+".png";
-		if(folder.exists()){
-			if(DeleteFile(wechatfilePath)) flag++;
-			if(DeleteFile(alipayfilePath)) flag++;
-			if(flag==1){
-				DateTimeUtils.delay(1500); 
-			} 
-		}
-		 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		JSONObject object = new JSONObject(); 		
-		try { 
-			if(flag==1){
-				object.put("file", "delete successfully");
-			}else{
-				object.put("file", "null");
-			} 
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		out.print(object);
+		
+		String typeStr=(String) request.getParameter("type");
+		//---
+		if(typeStr.equals("deleteQR")){
+			String storeID=(String) request.getParameter("store_id");
+			try {
+				if(checkDeleteQR(request,storeID)){
+					object.put("flag", "1");
+				}else{
+					object.put("flag", "0");
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace(); 
+			}
+		}
+		//---
+		out.print(object); 
 		out.flush();
 		out.close();
 
 	}
 	
-	private boolean DeleteFile(String filepath){
-		File file=new File(filepath);
-		if(file.exists()){
-			file.delete();
-			
-			DateTimeUtils.delay(1800); 
-			//System.out.println("WechatDeleteQRServlet QR delete! path=" + filepath); 
-			return true;
+	private boolean checkDeleteQR(HttpServletRequest request,String storeID){
+		boolean flag=false;
+		
+		String folderPath="/picture";
+		File folder = new File(request.getRealPath("/")+folderPath);
+		String wechatfilePath = request.getRealPath("/")+folderPath + "/wechat"+storeID+".png";
+		String alipayfilePath = request.getRealPath("/")+folderPath + "/alipay"+storeID+".png";
+		if(folder.exists()){ 
+			File wechatfile=new File(wechatfilePath);
+			File alipayfile=new File(alipayfilePath); 
+			if(wechatfile.exists() || alipayfile.exists()){
+				flag=false;
+			}else{
+				flag=true;
+			}
 		}else{
-			return false;
+			flag=true;
 		}
+		return flag;
 	}
+	 
 }
