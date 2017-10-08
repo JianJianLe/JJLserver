@@ -83,7 +83,7 @@ public class DeleteQRServlet extends HttpServlet {
 		if(file.exists()){
 			file.delete();
 			
-			DateTimeUtils.delay(1800); 
+			DateTimeUtils.delay(1500); 
 			//System.out.println("WechatDeleteQRServlet QR delete! path=" + filepath); 
 			return true;
 		}else{
