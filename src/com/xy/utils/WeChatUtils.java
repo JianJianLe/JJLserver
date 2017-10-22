@@ -44,13 +44,15 @@ public class WeChatUtils {
 		UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();  
 		unifiedOrderRequest.setAppid(appId);//公众账号ID
 		unifiedOrderRequest.setMch_id(mchId);//商户号 
-		unifiedOrderRequest.setNonce_str(UUID.randomUUID().toString().substring(0, 32));//随机字符串
-		try {
-			unifiedOrderRequest.setBody(URLEncoder.encode(description, "UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//商品描述  
+		unifiedOrderRequest.setNonce_str(UUID.randomUUID().toString().substring(0, 32));//随机字符串 
+		unifiedOrderRequest.setBody(description);
+//		try {
+//			unifiedOrderRequest.setBody(URLEncoder.encode(description, "iso8859-1")); //iso8859-1  UTF-8
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}//商品描述  
+		
 		unifiedOrderRequest.setOut_trade_no(orderNO);//商户订单号 
 		//price = (int)Double.parseDouble(price)+"";  
 		price = (int)Double.parseDouble(price)*100+""; //金额需要扩大100倍:1代表支付时是0.01 
@@ -98,7 +100,7 @@ public class WeChatUtils {
 			xStream.alias("xml", UnifiedOrderRespose.class);  
 			//System.out.println("sb.tostring= " + sb.toString());
 			UnifiedOrderRespose unifiedOrderRespose = (UnifiedOrderRespose) xStream.fromXML(sb.toString());  
-			//System.out.println(unifiedOrderRespose.toString());
+			System.out.println(unifiedOrderRespose.toString());
 			//根据微信文档return_code 和result_code都为SUCCESS的时候才会返回code_url   
 			if(null!=unifiedOrderRespose   
 					&& "SUCCESS".equals(unifiedOrderRespose.getReturn_code())   

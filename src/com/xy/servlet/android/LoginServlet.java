@@ -38,14 +38,14 @@ public class LoginServlet extends HttpServlet {
 		String userid=null;
 		// 判断登陆
 		try{
-			
+			System.out.println(password);
 			user = userDao.login(userName, password);
 			userid=user.getUserID();
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		 
 		Gson gson = new Gson();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
 			map.put("authority", user.getAutority());
 			userDao.updateLoginAddTime(userName, addTime); 
 		}
+		
 		String resultOKJson = gson.toJson(map);
 		out.print(resultOKJson); 
 		out.flush();

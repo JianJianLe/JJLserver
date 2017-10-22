@@ -355,4 +355,20 @@
     <servlet-name>JJLRequestServlet</servlet-name>
     <url-pattern>/servlet/JJLRequestServlet</url-pattern>
   </servlet-mapping>
+  
+  <!-- add log4j 20171023 Star -->
+   <servlet>  
+        <servlet-name>log4jInit</servlet-name>  
+        <servlet-class>com.xy.utils.Log4jInit</servlet-class>  
+        <init-param>  
+            <param-name>log4j_init_path</param-name>  
+            <param-value>WEB-INF/classes/log4j.properties</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>log4j_file_path</param-name>  
+            <param-value>Logs\</param-value>  
+        </init-param>  
+        <load-on-startup>0</load-on-startup>  
+    </servlet> 
+    
 </web-app>

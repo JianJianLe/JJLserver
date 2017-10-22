@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +37,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 	private PayConfigDao configDao=new PayConfigDao();
 	private JJLUserDao userDao=new JJLUserDao();
 
+	private Logger log = Logger.getLogger(WechatQRCodeServlet.class);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -64,7 +66,9 @@ public class WechatQRCodeServlet extends HttpServlet {
 		WeChatUtils utils = new WeChatUtils();
 		//获取参数
 		String pruduct_id = (String) request.getParameter("product_id");;
-		String body = (String) request.getParameter("body");
+		String body = (String) request.getParameter("body");// new String(body.getBytes("ISO-8859-1") ,"UTF-8")
+		//body="JJL";
+		String bodyNew=new String(body.getBytes("ISO-8859-1"),"UTF-8");
 		String subject =(String) request.getParameter("subject");
 		String order_price = (String) request.getParameter("order_price");
 		String remoteAddr = request.getRemoteAddr();
@@ -78,9 +82,15 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String deviceNo=user.getDeviceNO();
 		PayConfig config = configDao.getPayconfig(deviceNo);
 		String orderNo = System.currentTimeMillis()+""; 
-
-		String code = utils.createQRCode(orderNo,body,remoteAddr,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
+		
+		log.info("----------");
+		log.info("User name:" + user.getUserName());
+		log.info("User device NO:" + user.getDeviceNO());
+		log.info("Price:" + price);
+		
+		String code = utils.createQRCode(orderNo,bodyNew,remoteAddr,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
 		folderPath = "/picture";
+		
 		if (code!=null) {
 			File file = new File(request.getRealPath("/")+folderPath);
 			if(!file.exists()){
@@ -93,6 +103,10 @@ public class WechatQRCodeServlet extends HttpServlet {
 //				file.delete();
 //				//System.out.println("WechatQRCodeServlet Wechat QR delete!");
 //			}
+			
+			filePath=filePath.replace("//", "/");
+			
+			log.info("WechatQRpath:"+filePath); 
 			
 			if(CheckFile(filePath)){
 				DeleteFile(filePath);
@@ -125,7 +139,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 	
 	private boolean CheckFile(String filePath){
 		boolean flag=false;
-		
+		//System.out.println(filePath);
 		File file=new File(filePath);
 		if(file.exists()){
 			flag=true;
