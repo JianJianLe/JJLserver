@@ -67,8 +67,8 @@ public class WechatQRCodeServlet extends HttpServlet {
 		//获取参数
 		String pruduct_id = (String) request.getParameter("product_id");;
 		String body = (String) request.getParameter("body");// new String(body.getBytes("ISO-8859-1") ,"UTF-8")
-		//body="JJL";
-		String bodyNew=new String(body.getBytes("ISO-8859-1"),"UTF-8");
+		body="JJL";
+		//String bodyNew=new String(body.getBytes("ISO-8859-1"),"UTF-8");
 		String subject =(String) request.getParameter("subject");
 		String order_price = (String) request.getParameter("order_price");
 		String remoteAddr = request.getRemoteAddr();
@@ -88,7 +88,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 		log.info("User device NO:" + user.getDeviceNO());
 		log.info("Price:" + price);
 		
-		String code = utils.createQRCode(orderNo,bodyNew,remoteAddr,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
+		String code = utils.createQRCode(orderNo,body,remoteAddr,price,config.getWechatAppID(),config.getWechatMchID(),config.getWechatPrivateKey());
 		folderPath = "/picture";
 		
 		if (code!=null) {
