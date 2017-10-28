@@ -114,19 +114,11 @@ public class JJLCharsDao extends BaseDao {
 	 * @param storeId
 	 * @return
 	 */
-	public String deleteCharListByContent(String title,String content){
+	public int deleteCharListByContent(String title,String content){
 		//开启数据库连接
 		getCon();
 		String sql = "delete from jjlchars where title=? and content=? ";
-		resultSet = execQuery(sql, new Object[] {title,content});
-		String result = null;
-		try {
-			result = ResultSetUtils.resultSetToJson(resultSet);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			closeAll();
-		}
+		int result = execUpdate(sql, new Object[] {title,content});
 		return result;
 	}
 	
