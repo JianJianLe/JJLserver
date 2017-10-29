@@ -96,14 +96,7 @@ public class WechatQRCodeServlet extends HttpServlet {
 			if(!file.exists()){
 				file.mkdirs();
 			}
-			filePath = request.getRealPath("/")+folderPath + "/wechat"+storeId+".png";
-			//System.out.println(filePath);
-//			file=new File(filePath);
-//			if(file.exists()){
-//				file.delete();
-//				//System.out.println("WechatQRCodeServlet Wechat QR delete!");
-//			}
-			
+			filePath = request.getRealPath("/")+folderPath + "/wechat"+storeId+".png"; 
 			filePath=filePath.replace("//", "/");
 			
 			log.info("WechatQRpath:"+filePath); 
@@ -112,7 +105,6 @@ public class WechatQRCodeServlet extends HttpServlet {
 				DeleteFile(filePath);
 			}
 			utils.encoderQRCode(code, filePath, "png");
-			//DateTimeUtils.delay(3000); 
 		}
 
 		response.setContentType("text/html; charset=utf-8");
@@ -120,15 +112,19 @@ public class WechatQRCodeServlet extends HttpServlet {
 		JSONObject object = new JSONObject();
 		try {
 			object.put("wechat_order", orderNo);
+			object.put("storeid", storeId);
 			if(CheckFile(filePath)){ 
 				object.put("filePath", folderPath+"/wechat"+storeId+".png");
+				log.info("Response filePath:" + folderPath+"/wechat"+storeId+".png");
 			}else{ 
 				object.put("filePath", "Nothing");
+				log.info("Response filePath: Nothing");
 			}
 			//System.out.println(object.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.info("Response Error:" + e.getMessage());
 		}
 		//System.out.println("send to app:"+object.toString());
 		out.print(object);
