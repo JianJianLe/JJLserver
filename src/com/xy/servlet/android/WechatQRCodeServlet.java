@@ -27,13 +27,7 @@ import com.xy.utils.WechatConfig;
  */
 public class WechatQRCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private String storeId;
-
-	private String filePath;
-
-	private String folderPath;
-	
+ 
 	private PayConfigDao configDao=new PayConfigDao();
 	private JJLUserDao userDao=new JJLUserDao();
 
@@ -59,6 +53,9 @@ public class WechatQRCodeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String filePath=null; 
+		String folderPath=null;
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -74,8 +71,8 @@ public class WechatQRCodeServlet extends HttpServlet {
 		String remoteAddr = request.getRemoteAddr();
 		String price = Double.parseDouble(order_price)+"";
 		//System.out.println("-----order_price in wechat: "+price);
-		
-		storeId = (String) request.getParameter("store_id");
+		 
+		String storeId = (String) request.getParameter("store_id");
 		//int storeIDnumber= Integer.parseInt(storeId);
 		JJLUser user=new JJLUser();
 		user=userDao.getUserByUserid(storeId);
