@@ -371,4 +371,45 @@
         <load-on-startup>0</load-on-startup>  
     </servlet> 
     
+     <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CharListServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.CharListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CharListServlet</servlet-name>
+    <url-pattern>/servlet/CharListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CharsAddServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.CharsAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CharsAddServlet</servlet-name>
+    <url-pattern>/servlet/CharsAddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetCharsShopListServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.GetCharsShopListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCharsShopListServlet</servlet-name>
+    <url-pattern>/servlet/GetCharsShopListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteCharServlet</servlet-name>
+    <servlet-class>com.xy.servlet.android.DeleteCharServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCharServlet</servlet-name>
+    <url-pattern>/servlet/DeleteCharServlet</url-pattern>
+  </servlet-mapping>
+    
 </web-app>

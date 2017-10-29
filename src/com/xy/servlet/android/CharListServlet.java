@@ -3,31 +3,24 @@ package com.xy.servlet.android;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 
-import com.google.gson.Gson;
-import com.xy.bean.JJLChars;
-import com.xy.bean.JJLUser;
+import com.xy.dao.JJLBillQueryDao;
 import com.xy.dao.JJLCharsDao;
-import com.xy.dao.JJLUserDao;
-import com.xy.service.CharsService;
 
-public class UpdateCharsServlet extends HttpServlet{
+public class CharListServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public UpdateCharsServlet() {
+	public CharListServlet() {
 		super();
 	}
 
@@ -37,7 +30,7 @@ public class UpdateCharsServlet extends HttpServlet{
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
-	}
+	} 
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -51,65 +44,24 @@ public class UpdateCharsServlet extends HttpServlet{
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
+		System.out.println("charListServlet");
 		
-		PrintWriter out = response.getWriter();		
-//		JJLCharsDao charsDao = new JJLCharsDao();
-//		JJLChars chars=new JJLChars();
-//		JJLUser user=new JJLUser();
-//		JJLUserDao userDao=new JJLUserDao();
-//		
-//		String shopname = request.getParameter("shopname");
-//		String title=request.getParameter("title");
-//		String content=request.getParameter("content");
-//		String addtime=request.getParameter("addtime");
-		
-//		String userid=null;
-//		user=userDao.getUseridByShopName(shopname);
-//		userid=user.getUserID();
-//		
-//		chars.setUserID(userid);
-//		chars.setTitle(title);
-//		chars.setContent(content);
-//		chars.setAddTime(addtime);
-//		
-//		boolean flag=false;
-//		try {
-//			if(!charsDao.queryChars(chars)){
-//				charsDao.addJJLChars(chars);
-//				flag=true;
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		Gson gson = new Gson(); 
-//		Map<String, Object> mapJson = new HashMap<String, Object>();
-//		String resultNOJson=null;
-//		if(flag){
-//			mapJson.put("flag", "1");//添加成功  
-//			
-//		}else{
-//			mapJson.put("flag", "0");//已存在  
-//		}
-		
-//		resultNOJson = gson.toJson(mapJson);
-//		out.print(resultNOJson);
-
-		String requestBean = request.getParameter("requestBean");
-		CharsService service = new CharsService();
-		String result = service.updateChar(requestBean);
+		PrintWriter out = response.getWriter();
+		JJLCharsDao dao = new JJLCharsDao();
+		String result = null;
+		try {
+			result = dao.queryCharList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		out.print(result);
 		out.flush();
 		out.close();
- 
 	}
 
 	/**
@@ -136,4 +88,5 @@ public class UpdateCharsServlet extends HttpServlet{
 	public void init() throws ServletException {
 		// Put your code here
 	}
+
 }

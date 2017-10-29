@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import org.json.JSONException;
 
 import com.xy.bean.JJLChars;
+import com.xy.utils.ResultSetUtils;
 
 public class JJLCharsDao extends BaseDao {
 
@@ -43,6 +44,108 @@ public class JJLCharsDao extends BaseDao {
 		
 		return result;
  
+	}
+	
+	/**
+	 * 根据storeId找出所有的广告
+	 * @param storeId
+	 * @return
+	 */
+	public String queryCharsByUserId(String storeId){
+		//开启数据库连接
+		getCon();
+		String sql = "select * from jjlchars where userid=?";
+		resultSet = execQuery(sql, new Object[] {storeId});
+		String result = null;
+		try {
+			result = ResultSetUtils.resultSetToJson(resultSet);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			closeAll();
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据找出所有不重复的广告
+	 * @param storeId
+	 * @return
+	 */
+	public String queryCharList(){
+		//开启数据库连接
+		getCon();
+		String sql = "select distinct title,content from jjlchars";
+		resultSet = execQuery(sql, new Object[] {});
+		String result = null;
+		try {
+			result = ResultSetUtils.resultSetToJson(resultSet);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			closeAll();
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据找出所有不重复的广告
+	 * @param storeId
+	 * @return
+	 */
+	public String queryCharListByContent(String title,String content){
+		//开启数据库连接
+		getCon();
+		String sql = "select * from jjlchars where title=? and content=? ";
+		resultSet = execQuery(sql, new Object[] {title,content});
+		String result = null;
+		try {
+			result = ResultSetUtils.resultSetToJson(resultSet);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			closeAll();
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据内容删除广告
+	 * @param storeId
+	 * @return
+	 */
+	public int deleteCharListByContent(String title,String content){
+		//开启数据库连接
+		getCon();
+		String sql = "delete from jjlchars where title=? and content=? ";
+		int result = execUpdate(sql, new Object[] {title,content});
+		return result;
+	}
+	
+	/**
+	 * 根据storeId找出所有的广告
+	 * @param storeId
+	 * @return
+	 */
+	public void deleteCharsById(String title,String content,int id){
+		//开启数据库连接
+		getCon();
+		String sql = "UPDATE jjlchars SET title=? , content=? WHERE id=?";
+		execUpdate(sql,  new Object[] {title,content,id});
+		closeAll();
+	}
+	
+	/**
+	 * 根据storeId找出所有的广告
+	 * @param storeId
+	 * @return
+	 */
+	public void updateCharsById(int id){
+		//开启数据库连接
+		getCon();
+		String sql = "DELETE FROM jjlchars WHERE id=?";
+		execUpdate(sql,  new Object[] {id});
+		closeAll();
 	}
 	
 	public boolean queryChars(JJLChars chars){
