@@ -20,4 +20,6 @@ public class Config {
 
 	public static String ALIPAY_PAY_URL = "weixin://wxpay/bizpayurl?";
 	public static String ALIPAY_NOTIFY_URL = "http://80.20.1.195:8080/wpay/Re_notify";//回调地址
+	
+	public static String ALIPAY_FOLDER_PATH="C://alipay config/";
 }
